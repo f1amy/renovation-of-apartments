@@ -1,4 +1,4 @@
-FROM php:7.3.4-cli
+FROM php:7.3.4-fpm
 
 RUN apt-get update && apt-get install -y \
   libmagickwand-dev \

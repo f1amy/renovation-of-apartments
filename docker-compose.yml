@@ -1,9 +1,39 @@
-version: '2'
+version: '3.7'
+
 services:
-  php:
-    image: yiisoftware/yii2-php:7.1-apache
-    volumes:
-      - ~/.composer-docker/cache:/root/.composer/cache:delegated
-      - ./:/app:delegated
+  server:
+    image: nginx:1.15.12
+    container_name: server
     ports:
-      - '8000:80'
+      - '80:80'
+
+  web:
+    build: ./.docker/php-fpm
+    container_name: app
+    entrypoint: php ./yii serve 0.0.0.0
+    ports:
+      - '8080:8080'
+    environment:
+      YII_ENV: dev
+    depends_on:
+      - db
+    volumes:
+      - ./:/usr/src/app
+
+  db:
+    image: mysql:8.0.15
+    container_name: db
+    ports:
+      - '3306:3306'
+    expose:
+      - '3306'
+    volumes:
+      - db-vol:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: 234451
+      MYSQL_DATABASE: renovation_of_apartments
+      MYSQL_USER: webapp_user
+      MYSQL_PASSWORD: 157266
+
+volumes:
+  db-vol:
