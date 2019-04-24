@@ -15,9 +15,6 @@ nbproject
 # windows thumbnail cache
 Thumbs.db
 
-# composer vendor dir
-/vendor
-
 # composer itself is not needed
 composer.phar
 
@@ -34,6 +31,3 @@ tests/_support/_generated
 
 #vagrant folder
 /.vagrant
-
-#mysql data
-.mysql-data

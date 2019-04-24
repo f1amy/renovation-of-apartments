@@ -1,39 +1,50 @@
 version: '3.7'
 
 services:
-  server:
-    image: nginx:1.15.12
+  nginx:
+    image: nginx:1.15
     container_name: server
+    depends_on:
+      - php-fpm
+    volumes:
+      - ./:/var/www/html
+      - ./docker/nginx/config:/etc/nginx/conf.d:ro
+      - ./docker/nginx/log:/var/log/nginx
     ports:
       - '80:80'
 
-  web:
-    build: ./.docker/php-fpm
-    container_name: app
-    entrypoint: php ./yii serve 0.0.0.0
-    ports:
-      - '8080:8080'
-    environment:
-      YII_ENV: dev
+  php-fpm:
+    build: ./docker/php-fpm
+    #image: my-php:7.3-fpm
+    container_name: php
     depends_on:
-      - db
+      - mysql
     volumes:
-      - ./:/usr/src/app
+      - ./:/var/www/html
+      - ./docker/php-fpm/config/cgi.ini:/usr/local/etc/php/conf.d/cgi.ini:ro
+      - ./docker/php-fpm/config/xdebug.ini:/usr/local/etc/php/conf.d/xdebug.ini:ro
+      #- ./logs/php-fpm:/var/log/php-fpm
+    ports:
+      - '9000:9000'
 
-  db:
-    image: mysql:8.0.15
+  mysql:
+    image: mysql:8.0
     container_name: db
+    command: --default-authentication-plugin=mysql_native_password
+    volumes:
+      - ./docker/mysql/data:/var/lib/mysql
     ports:
       - '3306:3306'
-    expose:
-      - '3306'
-    volumes:
-      - db-vol:/var/lib/mysql
     environment:
       MYSQL_ROOT_PASSWORD: 234451
       MYSQL_DATABASE: renovation_of_apartments
-      MYSQL_USER: webapp_user
+      MYSQL_USER: mysql
       MYSQL_PASSWORD: 157266
 
-volumes:
-  db-vol:
+  #phpmyadmin:
+  #  image: phpmyadmin/phpmyadmin
+  #  container_name: db-admin
+  #  depends_on:
+  #    - mysql
+  #  ports:
+  #    - '8080:80'
