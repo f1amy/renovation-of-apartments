@@ -3,36 +3,34 @@ version: '3.7'
 services:
   nginx:
     image: nginx:1.15
-    container_name: server
+    container_name: nginx
     depends_on:
       - php-fpm
     volumes:
       - ./:/var/www/html
-      - ./docker/nginx/config:/etc/nginx/conf.d:ro
+      - ./docker/nginx/config:/etc/nginx/conf.d
       - ./docker/nginx/log:/var/log/nginx
     ports:
       - '80:80'
 
   php-fpm:
     build: ./docker/php-fpm
-    #image: my-php:7.3-fpm
-    container_name: php
+    image: reofap-php-fpm
+    container_name: php-fpm
     depends_on:
       - mysql
     volumes:
       - ./:/var/www/html
-      - ./docker/php-fpm/config/cgi.ini:/usr/local/etc/php/conf.d/cgi.ini:ro
-      - ./docker/php-fpm/config/xdebug.ini:/usr/local/etc/php/conf.d/xdebug.ini:ro
-      #- ./logs/php-fpm:/var/log/php-fpm
-    ports:
-      - '9000:9000'
+      - ./docker/php-fpm/config/general.ini:/usr/local/etc/php/conf.d/general.ini
+      - ./docker/php-fpm/config/xdebug.ini:/usr/local/etc/php/conf.d/xdebug.ini
+    #  - ./docker/php-fpm/xdebug/log/remote.log:/var/log/xdebug/remote.log
 
   mysql:
     image: mysql:8.0
-    container_name: db
+    container_name: mysql
     command: --default-authentication-plugin=mysql_native_password
     volumes:
-      - ./docker/mysql/data:/var/lib/mysql
+      - mysql-data-vol:/var/lib/mysql
     ports:
       - '3306:3306'
     environment:
@@ -41,10 +39,10 @@ services:
       MYSQL_USER: mysql
       MYSQL_PASSWORD: 157266
 
-  #phpmyadmin:
-  #  image: phpmyadmin/phpmyadmin
-  #  container_name: db-admin
-  #  depends_on:
-  #    - mysql
-  #  ports:
-  #    - '8080:80'
+networks:
+  default:
+    name: reofap-net
+
+volumes:
+  mysql-data-vol:
+    name: mysql-data-vol

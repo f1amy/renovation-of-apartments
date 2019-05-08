@@ -46,6 +46,10 @@ class SiteController extends Controller
             'error' => [
                 'class' => 'yii\web\ErrorAction',
             ],
+            'captcha' => [
+                'class' => 'yii\captcha\CaptchaAction',
+                'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
+            ],
         ];
     }
 
@@ -57,7 +61,8 @@ class SiteController extends Controller
     public function actionIndex()
     {
         if (Yii::$app->user->isGuest) {
-            return $this->render('guestIndex');
+            return $this->redirect(['site/login']);
+            //return $this->render('guestIndex');
         } else if (Yii::$app->user->can('brigadeWorker')) {
             return $this->render('brigadeWorkerIndex');
         } else if (Yii::$app->user->can('headOfAccounting')) {

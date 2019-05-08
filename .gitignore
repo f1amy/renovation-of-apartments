@@ -1,9 +1,6 @@
 # phpstorm project files
 .idea
 
-# vscode project files
-.vscode
-
 # netbeans project files
 nbproject
 
@@ -14,6 +11,9 @@ nbproject
 
 # windows thumbnail cache
 Thumbs.db
+
+# composer vendor dir
+/vendor
 
 # composer itself is not needed
 composer.phar

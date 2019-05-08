@@ -4,6 +4,8 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
 
+use rmrevin\yii\fontawesome\FAS;
+
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\table\search\WorkTaskSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -29,15 +31,15 @@ if (\Yii::$app->user->can('brigadeWorker')) {
     <p>
         <?php
         if (!\Yii::$app->user->can('brigadeWorker')) {
-            echo Html::a(Html::tag('span', '', ['class' => 'glyphicon glyphicon-plus', 'aria-hidden' => 'true']) .
+            echo Html::a(FAS::icon('plus') .
                 ' Создать рабочую задачу', ['create'], ['class' => 'btn btn-success']);
         }
         ?>
-        <?php // echo Html::button('Поиск', ['class' => 'btn btn-primary',
-            // 'data-toggle' => 'collapse', 'data-target' => '#search-collapse']) ?>
+        <?php /* echo Html::button('Поиск', ['class' => 'btn btn-primary',
+            'data-toggle' => 'collapse', 'data-target' => '#search-collapse']) */ ?>
     </p>
 
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+    <?php /* echo $this->render('_search', ['model' => $searchModel]); */ ?>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,

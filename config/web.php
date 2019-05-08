@@ -12,7 +12,7 @@ $config = [
     'bootstrap' => ['log'],
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
-        '@npm' => '@vendor/npm-asset',
+        '@npm'   => '@vendor/npm-asset',
     ],
     'components' => [
         'request' => [
@@ -28,6 +28,13 @@ $config = [
         ],
         'errorHandler' => [
             'errorAction' => 'site/error',
+        ],
+        'mailer' => [
+            'class' => 'yii\swiftmailer\Mailer',
+            // send all mails to a file by default. You have to set
+            // 'useFileTransport' to false and configure a transport
+            // for the mailer to send real emails.
+            'useFileTransport' => true,
         ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
@@ -51,8 +58,8 @@ $config = [
             ],
             'rules' => [
                 //url => action
-                'table/<tableName>' => 'table/<tableName>/index',
-                'table/<tableName>/<action:(create|view|update|delete)>' => 'table/<tableName>/<action>',
+                'table/<name>' => 'table/<name>/index',
+                'table/<name>/<action:(create|view|update|delete)>' => 'table/<name>/<action>',
                 'form/<name>/<action:(create|view|update|delete)>' => 'form/<name>/<action>',
                 '' => 'site/index',
                 'login' => 'site/login',

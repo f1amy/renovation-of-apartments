@@ -3,6 +3,9 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
+
+use rmrevin\yii\fontawesome\FAS;
+
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\table\search\ContractSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -17,12 +20,12 @@ $this->title = 'Договоры';
 
     <h1><?= Html::encode($this->title) ?></h1>
     <?php Pjax::begin(); ?>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+    <?php /* echo $this->render('_search', ['model' => $searchModel]); */ ?>
 
     <p>
-        <?= Html::a(Html::tag('span', '', ['class' => 'glyphicon glyphicon-plus', 'aria-hidden' => 'true']) .
+        <?= Html::a(FAS::icon('plus') .
             ' Создать договор', ['create'], ['class' => 'btn btn-success']) ?>
-        <?= Html::a(Html::tag('span', '', ['class' => 'glyphicon glyphicon-file', 'aria-hidden' => 'true']) .
+        <?= Html::a(FAS::icon('file') .
             ' Форма создания заказа', ['form/order/create'], ['class' => 'btn btn-info']) ?>
     </p>
 

@@ -2,7 +2,8 @@
 
 use yii\helpers\Html;
 //use yii\widgets\ActiveForm;
-use yii\bootstrap\ActiveForm;
+//use yii\bootstrap\ActiveForm;
+use yii\bootstrap4\ActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\table\Employee */
@@ -18,7 +19,7 @@ use yii\bootstrap\ActiveForm;
         'pattern' => '^[А-Я][а-я]+ [А-Я][а-я]+ [А-Я][а-я]+$',
         'placeholder' => 'Фамилия Имя Отчество'
     ]) ?>
-    
+
     <?= $form->field($model, 'phone_number')->widget(
         \yii\widgets\MaskedInput::className(),
         [

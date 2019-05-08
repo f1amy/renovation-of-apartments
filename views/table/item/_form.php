@@ -2,7 +2,8 @@
 
 use yii\helpers\Html;
 //use yii\widgets\ActiveForm;
-use yii\bootstrap\ActiveForm;
+//use yii\bootstrap\ActiveForm;
+use yii\bootstrap4\ActiveForm;
 use yii\helpers\ArrayHelper;
 
 use app\models\table\Warehouse;
@@ -16,13 +17,18 @@ use app\models\table\Warehouse;
 
     <?php $form = ActiveForm::begin(['layout' => 'horizontal']); ?>
 
-    <?= $form->field($model, 'warehouse_id')->dropDownList(ArrayHelper::map(
-        Warehouse::find()/*->orderBy('id')*/->all(),
-        'id',
-        function ($model) {
-            return 'Код ' . $model->id . ' - ' . $model->name;
-        }
-    ), ['prompt' => 'Выберите значение...']) ?>
+    <?= $form->field($model, 'warehouse_id')->dropDownList(
+        ArrayHelper::map(
+            //Warehouse::find()/*->orderBy('id')*/->all(),
+            Warehouse::find()->all(),
+            Warehouse::find() ->all(),
+            'id',
+            function ($model) {
+                return 'Код ' . $model->id . ' - ' . $model->name;
+            }
+        ),
+        ['prompt' => 'Выберите значение...']
+    ) ?>
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 

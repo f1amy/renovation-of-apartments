@@ -40,9 +40,11 @@ class OrderController extends \yii\web\Controller
         $customer = new Customer();
         $workObject = new WorkObject();
 
-        if ($contract->load(Yii::$app->request->post()) &&
+        if (
+            $contract->load(Yii::$app->request->post()) &&
             $customer->load(Yii::$app->request->post()) &&
-            $workObject->load(Yii::$app->request->post())) {
+            $workObject->load(Yii::$app->request->post())
+        ) {
 
             $isValid = $contract->validate() && $customer->validate() &&
                 $workObject->validate();
@@ -83,9 +85,11 @@ class OrderController extends \yii\web\Controller
         $customer = Customer::findOne($order->customer_id);
         $workObject = WorkObject::findOne($order->work_object_id);
 
-        if ($contract->load(Yii::$app->request->post()) &&
+        if (
+            $contract->load(Yii::$app->request->post()) &&
             $customer->load(Yii::$app->request->post()) &&
-            $workObject->load(Yii::$app->request->post())) {
+            $workObject->load(Yii::$app->request->post())
+        ) {
 
             $isValid = $contract->validate() && $customer->validate() &&
                 $workObject->validate();

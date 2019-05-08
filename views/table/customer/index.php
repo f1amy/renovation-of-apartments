@@ -3,7 +3,10 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
-use app\models\table\Order;
+
+use rmrevin\yii\fontawesome\FAS;
+
+//use app\models\table\Order; // ??? it was here
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\table\search\CustomerSearch */
@@ -19,12 +22,12 @@ $this->title = 'Заказчики';
 
     <h1><?= Html::encode($this->title) ?></h1>
     <?php Pjax::begin(); ?>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+    <?php /* echo $this->render('_search', ['model' => $searchModel]); */ ?>
 
     <p>
-        <?= Html::a(Html::tag('span', '', ['class' => 'glyphicon glyphicon-plus', 'aria-hidden' => 'true']) .
+        <?= Html::a(FAS::icon('plus') .
             ' Создать заказчика', ['create'], ['class' => 'btn btn-success']) ?>
-        <?= Html::a(Html::tag('span', '', ['class' => 'glyphicon glyphicon-file', 'aria-hidden' => 'true']) .
+        <?= Html::a(FAS::icon('file') .
             ' Форма создания заказа', ['form/order/create'], ['class' => 'btn btn-info']) ?>
     </p>
 

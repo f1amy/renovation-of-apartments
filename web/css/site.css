@@ -93,7 +93,7 @@ a.desc:after {
 
 /* align the logout "link" (button in form) of the navbar */
 .nav li > form > button.logout {
-  padding: 15px;
+  /* padding: 15px; */
   border: none;
 }
 
@@ -122,17 +122,7 @@ a.desc:after {
   justify-content: space-around;
 }
 
-.navbar-inverse {
-  background-color: #343a40;
-  border-color: black;
-}
-
-.navbar-inverse a,
-.navbar-inverse button {
-  color: white !important;
-}
-
-.nav-pills > li.active > a {
+/* .nav-pills > li.active > a {
   background-color: #007bff;
   border-color: #007bff;
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
@@ -148,10 +138,6 @@ a.desc:after {
   color: #fff;
   background-color: #0069d9;
   border-color: #0062cc;
-}
-
-a {
-  color: #007bff;
 }
 
 .btn-success {
@@ -214,7 +200,7 @@ a {
 
 .has-success .help-block {
   color: #28a745;
-}
+} */
 
 .breadcrumb {
   padding: 0.75rem 1rem;
@@ -224,7 +210,7 @@ a {
   border-radius: 0.25rem;
 }
 
-.has-error .form-control:focus {
+/* .has-error .form-control:focus {
   border-color: #801f28;
   outline: 0;
   box-shadow: 0 0 0 0.2rem rgba(255, 0, 0, 0.25);
@@ -319,7 +305,7 @@ a:hover {
   color: #fff;
   background-color: #007bff;
   border-color: #007bff;
-}
+} */
 
 a.asc:after {
   content: url(../icons/sort-alpha-up-solid.svg);
@@ -359,7 +345,7 @@ a.desc:after {
   height: 20px !important;
 }
 
-.alert {
+/* .alert {
   position: relative;
   border: 1px solid transparent;
   border-radius: 0.5rem;
@@ -369,7 +355,7 @@ a.desc:after {
   color: #721c24;
   background-color: #f8d7da;
   border-color: #f5c6cb;
-}
+} */
 
 .glyphicon-plus:before {
   content: url(../icons/plus-solid.svg);
@@ -391,15 +377,10 @@ span.glyphicon-plus {
   width: 1%;
 }
 
-.navbar {
-  border-radius: 0;
-  margin-bottom: 15px;
-}
-
 .wrap {
   display: flex;
   flex-direction: row;
-  min-height: calc(100% - 67px);
+  min-height: calc(100% - 61px);
 }
 
 .wrap > .container {
@@ -415,7 +396,7 @@ span.glyphicon-plus {
 
 .side-nav {
   box-sizing: content-box;
-  padding-left: 15px;
+  padding: 15px 0 15px 15px;
   width: 200px;
 }
 
@@ -430,7 +411,7 @@ span.glyphicon-plus {
   }
 } */
 
-a.list-group-item {
+/* a.list-group-item {
   color: #007bff;
 }
 
@@ -451,4 +432,8 @@ a.list-group-item:active {
   color: #212529;
   text-decoration: none;
   background-color: #e9ecef;
+} */
+
+.side-nav h4 {
+  margin-top: 0.5rem;
 }

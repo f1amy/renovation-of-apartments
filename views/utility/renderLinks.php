@@ -11,7 +11,7 @@ function renderLinks($links)
     $markup = '';
 
     foreach ($links as $link) {
-        $classes = 'list-group-item';
+        $classes = 'list-group-item list-group-item-action';
 
         if ($currentUrl == $link['link']) {
             $classes .= ' active';

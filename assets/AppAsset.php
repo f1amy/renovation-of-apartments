@@ -1,5 +1,4 @@
 <?php
-
 /**
  * @link http://www.yiiframework.com/
  * @copyright Copyright (c) 2008 Yii Software LLC
@@ -26,6 +25,8 @@ class AppAsset extends AssetBundle
     public $js = [];
     public $depends = [
         'yii\web\YiiAsset',
-        'yii\bootstrap\BootstrapAsset',
+        //'yii\bootstrap\BootstrapAsset',
+        'yii\bootstrap4\BootstrapAsset',
+        'rmrevin\yii\fontawesome\CdnFreeAssetBundle',
     ];
 }

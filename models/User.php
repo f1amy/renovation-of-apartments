@@ -27,8 +27,7 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
      * {@inheritdoc}
      */
     public static function findIdentityByAccessToken($token, $type = null)
-    {
-    }
+    { }
 
     /**
      * Finds user by username
@@ -45,15 +44,13 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
      * {@inheritdoc}
      */
     public function getAuthKey()
-    {
-    }
+    { }
 
     /**
      * {@inheritdoc}
      */
     public function validateAuthKey($authKey)
-    {
-    }
+    { }
 
     /**
      * Validates password
