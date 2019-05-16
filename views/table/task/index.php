@@ -1,7 +1,8 @@
 <?php
 
 use yii\helpers\Html;
-use yii\grid\GridView;
+//use yii\grid\GridView;
+use kartik\grid\GridView;
 use yii\widgets\Pjax;
 
 use rmrevin\yii\fontawesome\FAS;
@@ -35,15 +36,14 @@ $this->title = 'Задачи';
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn', 'headerOptions' => ['rowspan' => 2]],
+            ['class' => 'kartik\grid\SerialColumn', /* 'headerOptions' => ['rowspan' => 2] */],
 
             'id',
             'text',
             ['attribute' => 'cost', 'label' => 'Стоимость услуги, руб.'],
 
             [
-                'class' => 'yii\grid\ActionColumn',
-                'template' => '<div class="wrap-align-cell">{view}{update}{delete}</div>',
+                'class' => 'kartik\grid\ActionColumn',
                 'header' => 'Действия', 'headerOptions' => ['rowspan' => 2]
             ],
         ],

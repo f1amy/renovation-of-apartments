@@ -26,10 +26,10 @@ body {
   background-color: transparent;
 }
 
-.jumbotron .btn {
+/* .jumbotron .btn {
   font-size: 21px;
   padding: 14px 24px;
-}
+} */
 
 .not-set {
   color: #c55;
@@ -37,7 +37,7 @@ body {
 }
 
 /* add sorting icons to gridview sort links */
-a.asc:after,
+/* a.asc:after,
 a.desc:after {
   position: relative;
   top: 1px;
@@ -50,11 +50,11 @@ a.desc:after {
 }
 
 a.asc:after {
-  content: /*"\e113"*/ '\e151';
+  content: '\e151';
 }
 
 a.desc:after {
-  content: /*"\e114"*/ '\e152';
+  content: '\e152';
 }
 
 .sort-numerical a.asc:after {
@@ -75,7 +75,7 @@ a.desc:after {
 
 .grid-view th {
   white-space: nowrap;
-}
+} */
 
 .hint-block {
   display: block;
@@ -92,10 +92,9 @@ a.desc:after {
 }
 
 /* align the logout "link" (button in form) of the navbar */
-.nav li > form > button.logout {
-  /* padding: 15px; */
+/* .nav li > form > button.logout {
   border: none;
-}
+} */
 
 @media (max-width: 767px) {
   .nav li > form > button.logout {
@@ -117,10 +116,10 @@ a.desc:after {
 
 /* my code starts from here */
 
-.grid-view table tbody .wrap-align-cell {
+/* .grid-view table tbody .wrap-align-cell {
   display: flex;
   justify-content: space-around;
-}
+} */
 
 /* .nav-pills > li.active > a {
   background-color: #007bff;
@@ -202,13 +201,13 @@ a.desc:after {
   color: #28a745;
 } */
 
-.breadcrumb {
+/* .breadcrumb {
   padding: 0.75rem 1rem;
   margin-bottom: 1rem;
   list-style: none;
   background-color: #e9ecef;
   border-radius: 0.25rem;
-}
+} */
 
 /* .has-error .form-control:focus {
   border-color: #801f28;
@@ -307,7 +306,7 @@ a:hover {
   border-color: #007bff;
 } */
 
-a.asc:after {
+/* a.asc:after {
   content: url(../icons/sort-alpha-up-solid.svg);
 }
 
@@ -343,7 +342,7 @@ a.desc:after {
 
 .wrap-align-cell {
   height: 20px !important;
-}
+}*/
 
 /* .alert {
   position: relative;
@@ -357,25 +356,25 @@ a.desc:after {
   border-color: #f5c6cb;
 } */
 
-.glyphicon-plus:before {
+/* .glyphicon-plus:before {
   content: url(../icons/plus-solid.svg);
 }
 
 span.glyphicon-plus {
   top: 2px;
   width: 13px !important;
-}
+} */
 
-.grid-view thead tr:last-child td:first-child,
+/* .grid-view thead tr:last-child td:first-child,
 .grid-view thead tr:last-child td:last-child {
   display: none;
-}
+} */
 
-.grid-view thead tr:first-child th:first-child,
+/* .grid-view thead tr:first-child th:first-child,
 .grid-view thead tr:first-child th:last-child {
   vertical-align: middle;
   width: 1%;
-}
+} */
 
 .wrap {
   display: flex;
@@ -435,5 +434,10 @@ a.list-group-item:active {
 } */
 
 .side-nav h4 {
-  margin-top: 0.5rem;
+  margin-top: 0.75rem;
+}
+
+.side-nav .fas {
+  width: 20px;
+  text-align: center;
 }

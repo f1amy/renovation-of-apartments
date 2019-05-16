@@ -1,7 +1,8 @@
 <?php
 
 use yii\helpers\Html;
-use yii\grid\GridView;
+//use yii\grid\GridView;
+use kartik\grid\GridView;
 use yii\widgets\Pjax;
 
 use rmrevin\yii\fontawesome\FAS;
@@ -35,7 +36,7 @@ $this->title = 'Заказчики';
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn', 'headerOptions' => ['rowspan' => 2]],
+            ['class' => 'kartik\grid\SerialColumn', /* 'headerOptions' => ['rowspan' => 2] */],
 
             'id',
             'full_name',
@@ -43,9 +44,8 @@ $this->title = 'Заказчики';
             'email_address:email',
 
             [
-                'class' => 'yii\grid\ActionColumn',
-                'template' => '<div class="wrap-align-cell">{view}{update}{delete}</div>',
-                'header' => 'Действия', 'headerOptions' => ['rowspan' => 2],
+                'class' => 'kartik\grid\ActionColumn',
+                'header' => 'Действия', /* 'headerOptions' => ['rowspan' => 2], */
             ],
         ],
     ]); ?>

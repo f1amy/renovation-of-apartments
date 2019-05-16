@@ -1,7 +1,8 @@
 <?php
 
 use yii\helpers\Html;
-use yii\grid\GridView;
+//use yii\grid\GridView;
+use kartik\grid\GridView;
 use yii\widgets\Pjax;
 
 use rmrevin\yii\fontawesome\FAS;
@@ -33,23 +34,24 @@ $this->title = 'Договоры';
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn', 'headerOptions' => ['rowspan' => 2]],
+            ['class' => 'kartik\grid\SerialColumn', /* 'headerOptions' => ['rowspan' => 2] */],
 
             'id',
             'number',
             'date',
 
             [
-                'class' => 'yii\grid\ActionColumn',
-                'template' => '<div class="wrap-align-cell">{view}{update}{formUpdate}{delete}</div>',
-                'header' => 'Действия', 'headerOptions' => ['rowspan' => 2],
+                'class' => 'kartik\grid\ActionColumn',
+                'template' => '{view} {update} {formUpdate} {delete}',
+                'header' => 'Действия', /* 'headerOptions' => ['rowspan' => 2], */
                 'buttons' => [
                     'formUpdate' => function ($url, $model) {
                         return Html::a(
-                            '<span class="glyphicon glyphicon-file"></span>',
+                            FAS::icon('file'),
                             yii\helpers\Url::to(['form/order/update', 'id' => $model->order->id]),
                             [
-                                'title' => 'Редактировать на форме',
+                                'title' => 'Изменить на форме',
+                                'aria-label' => 'Изменить на форме',
                                 'data-pjax' => '0',
                             ]
                         );

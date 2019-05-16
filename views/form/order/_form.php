@@ -4,7 +4,8 @@ use yii\helpers\Html;
 //use yii\widgets\ActiveForm;
 //use yii\bootstrap\ActiveForm;
 use yii\bootstrap4\ActiveForm;
-use dosamigos\datetimepicker\DateTimePicker;
+//use dosamigos\datetimepicker\DateTimePicker;
+use kartik\datetime\DateTimePicker;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\table\Contract */
@@ -22,9 +23,9 @@ use dosamigos\datetimepicker\DateTimePicker;
         <?= $form->field($contract, 'number')->input('number', ['step' => '1', 'min' => '0']) ?>
 
         <?= $form->field($contract, 'date')->widget(DateTimePicker::className(), [
-            'language' => 'ru',
-            'template' => '{button}{reset}{input}',
-            'clientOptions' => [
+            /* 'language' => 'ru',
+            'template' => '{button}{reset}{input}', */
+            'pluginOptions' => [
                 'autoclose' => true,
                 'format' => 'yyyy-mm-dd',
                 'minView' => 2,

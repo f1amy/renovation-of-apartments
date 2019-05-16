@@ -13,6 +13,7 @@ use yii\helpers\Url;
 use yii\helpers\Html;
 //use yii\widgets\Breadcrumbs;
 use yii\bootstrap4\Breadcrumbs;
+use rmrevin\yii\fontawesome\FAS;
 
 AppAsset::register($this);
 ?>
@@ -39,6 +40,7 @@ AppAsset::register($this);
             ' class="d-inline-block align-top" alt="logo">'
             . ' ' . Yii::$app->name,
         'brandUrl' => Yii::$app->homeUrl,
+        'innerContainerOptions' => ['class' => 'container-fluid'],
         //'brandImage' => '/favicon.png',
         'options' => [
             'class' => 'navbar navbar-expand-lg navbar-dark bg-dark',
@@ -49,13 +51,15 @@ AppAsset::register($this);
         'options' => ['class' => 'navbar-nav ml-auto'],
         'items' => [
             //['label' => 'Домашняя страница', 'url' => [Url::home()]],
-            Yii::$app->user->isGuest ? ([
-                'label' => 'Вход',
-                'url' => [Url::to(['site/login'])]
-            ]) : ('<li class="nav-item">'
+            Yii::$app->user->isGuest ? (Html::a(
+                FAS::icon('sign-in-alt') . ' ' . 'Вход',
+                Url::to(['site/login']),
+                ['class' => 'nav-link']
+            )) : ('<li class="nav-item">'
                 . Html::beginForm([Url::to(['site/logout'])], 'post')
                 . Html::submitButton(
-                    'Выйти (' . Yii::$app->user->identity->username . ')',
+                    'Выйти ( ' . FAS::icon('user-circle') . ' ' .
+                        Yii::$app->user->identity->username . ' )',
                     ['class' => 'btn btn-link nav-link logout']
                 )
                 . Html::endForm()

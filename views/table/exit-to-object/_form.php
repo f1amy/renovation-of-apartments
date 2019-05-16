@@ -6,7 +6,8 @@ use yii\helpers\Html;
 use yii\bootstrap4\ActiveForm;
 
 use yii\helpers\ArrayHelper;
-use dosamigos\datetimepicker\DateTimePicker;
+//use dosamigos\datetimepicker\DateTimePicker;
+use kartik\datetime\DateTimePicker;
 
 use app\models\table\Order;
 
@@ -28,11 +29,11 @@ use app\models\table\Order;
     ) ?>
 
     <?= $form->field($model, 'brigade_gathering_datetime')->widget(DateTimePicker::className(), [
-        'language' => 'ru',
-        'template' => '{button}{reset}{input}',
-        'clientOptions' => [
+        /* 'language' => 'ru',
+        'template' => '{button}{reset}{input}', */
+        'pluginOptions' => [
             'autoclose' => true,
-            'format' => 'yyyy-mm-dd hh:ii:ss', // yyyy-mm-dd hh:ii:ss
+            'format' => 'yyyy-mm-dd hh:ii:ss',
             'todayBtn' => true,
         ]
     ]) ?>

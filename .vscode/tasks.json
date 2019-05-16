@@ -6,7 +6,7 @@
     {
       "label": "docker compose build",
       "type": "shell",
-      "command": "docker-compose build --pull",
+      "command": "docker-compose build --pull --no-cache --force-rm --compress",
       "problemMatcher": [],
       "group": {
         "kind": "build",

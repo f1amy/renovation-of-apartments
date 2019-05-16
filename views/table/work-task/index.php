@@ -1,7 +1,8 @@
 <?php
 
 use yii\helpers\Html;
-use yii\grid\GridView;
+//use yii\grid\GridView;
+use kartik\grid\GridView;
 use yii\widgets\Pjax;
 
 use rmrevin\yii\fontawesome\FAS;
@@ -45,7 +46,7 @@ if (\Yii::$app->user->can('brigadeWorker')) {
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn', 'headerOptions' => ['rowspan' => 2]],
+            ['class' => 'kartik\grid\SerialColumn', /* 'headerOptions' => ['rowspan' => 2] */],
 
             'id',
             'task_id',
@@ -62,7 +63,7 @@ if (\Yii::$app->user->can('brigadeWorker')) {
             ],
 
             [
-                'class' => 'yii\grid\ActionColumn',
+                'class' => 'kartik\grid\ActionColumn',
                 'template' => $actionsTemplate,
                 'header' => 'Действия', 'headerOptions' => ['rowspan' => 2]
             ],

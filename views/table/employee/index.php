@@ -1,6 +1,7 @@
 <?php
 
-use yii\grid\GridView;
+//use yii\grid\GridView;
+use kartik\grid\GridView;
 use yii\helpers\Html;
 use yii\widgets\Pjax;
 
@@ -35,7 +36,7 @@ $this->title = 'Сотрудники';
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn', 'headerOptions' => ['rowspan' => 2]],
+            ['class' => 'kartik\grid\SerialColumn', /* 'headerOptions' => ['rowspan' => 2] */],
 
             'id',
             'full_name',
@@ -44,8 +45,7 @@ $this->title = 'Сотрудники';
             'position',
 
             [
-                'class' => 'yii\grid\ActionColumn',
-                'template' => '<div class="wrap-align-cell">{view}{update}{delete}</div>',
+                'class' => 'kartik\grid\ActionColumn',
                 'header' => 'Действия', 'headerOptions' => ['rowspan' => 2]
             ],
         ],
