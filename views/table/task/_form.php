@@ -12,7 +12,7 @@ use yii\bootstrap4\ActiveForm;
 
 <div class="task-form">
 
-    <?php $form = ActiveForm::begin(['options' => ['class' => 'col-sm-6']]); ?>
+    <?php $form = ActiveForm::begin(['options' => ['class' => 'col-lg-6']]); ?>
 
     <?= $form->field($model, 'text')->textInput(['maxlength' => true]) ?>
 

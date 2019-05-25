@@ -19,7 +19,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php $form = ActiveForm::begin([
         'id' => 'login-form',
         'options' => [
-            'class' => 'col-sm-6'
+            'class' => 'col-lg-6'
         ]
     ]); ?>
 

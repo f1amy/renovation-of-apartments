@@ -13,7 +13,7 @@ $this->params['breadcrumbs'][] = 'Редактировать';
 
 <div class="employee-update">
 
-    <div>
+    <div class="col-lg-6">
         <h1><?= Html::encode($this->title) ?></h1>
     </div>
 

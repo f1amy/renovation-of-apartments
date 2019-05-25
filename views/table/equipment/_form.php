@@ -16,7 +16,7 @@ use app\models\table\ExitToObject;
 
 <div class="equipment-form">
 
-    <?php $form = ActiveForm::begin(['options' => ['class' => 'col-sm-6']]); ?>
+    <?php $form = ActiveForm::begin(['options' => ['class' => 'col-lg-6']]); ?>
 
     <?= $form->field($model, 'item_id')->dropDownList(ArrayHelper::map(
         Item::find()->all(),

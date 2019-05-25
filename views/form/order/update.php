@@ -12,7 +12,7 @@ $this->params['breadcrumbs'][] = 'Редактировать';
 
 <div class="order-form-update">
 
-    <div>
+    <div class="col-lg-6">
         <h1><?= Html::encode($this->title) ?></h1>
     </div>
 

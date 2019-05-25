@@ -54,7 +54,7 @@ $config = [
             'normalizer' => [
                 'class' => 'yii\web\UrlNormalizer',
                 // use temporary redirection instead of permanent for debugging
-                'action' => yii\web\UrlNormalizer::ACTION_REDIRECT_TEMPORARY,
+                //'action' => yii\web\UrlNormalizer::ACTION_REDIRECT_TEMPORARY,
             ],
             'rules' => [
                 //url => action
@@ -70,9 +70,9 @@ $config = [
         'authManager' => [
             'class' => 'yii\rbac\DbManager',
         ],
-        /* 'assetManager' => [
+        'assetManager' => [
             'appendTimestamp' => true,
-            'bundles' => [
+            /* 'bundles' => [
                 'all' => [
                     'class' => 'yii\web\AssetBundle',
                     'basePath' => '@webroot/assets',
@@ -80,8 +80,8 @@ $config = [
                     'css' => ['all-xyz.css'],
                     'js' => ['all-xyz.js'],
                 ],
-            ],
-        ], */
+            ], */
+        ],
         /* 'formatter' => [
             'datetimeFormat' => 'php:d.m.Y H:i:s',
         ], */

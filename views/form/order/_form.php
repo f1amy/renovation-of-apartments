@@ -14,7 +14,7 @@ use kartik\datetime\DateTimePicker;
 
 <div class="contract-form">
 
-    <?php $form = ActiveForm::begin(['options' => ['class' => 'col-sm-6']]); ?>
+    <?php $form = ActiveForm::begin(['options' => ['class' => 'col-lg-6']]); ?>
 
     <div class="row">
         <h3>Договор</h3>
