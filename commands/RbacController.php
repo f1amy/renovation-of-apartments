@@ -26,8 +26,5 @@ class RbacController extends Controller
         $auth->assign($brigadeWorker, 5);
         $auth->assign($brigadeWorker, 6);
         $auth->assign($brigadeWorker, 7);
-
-        // php ./yii migrate --migrationPath=@yii/rbac/migrations
-        // php ./yii rbac/init
     }
 }

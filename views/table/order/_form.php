@@ -17,7 +17,7 @@ use app\models\table\WorkObject;
 
 <div class="order-form">
 
-    <?php $form = ActiveForm::begin(['layout' => 'horizontal']); ?>
+    <?php $form = ActiveForm::begin(['options' => ['class' => 'col-sm-6']]); ?>
 
     <?= $form->field($model, 'contract_id')->dropDownList(ArrayHelper::map(
         Contract::find()->all(),
@@ -47,7 +47,7 @@ use app\models\table\WorkObject;
 
     <div class="form-group">
         <?= Html::submitButton('Сохранить', [
-            'class' => 'btn btn-success col-sm-1 col-sm-offset-3'
+            'class' => 'btn btn-success'
         ]) ?>
     </div>
 

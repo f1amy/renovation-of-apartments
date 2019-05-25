@@ -18,7 +18,7 @@ use app\models\table\Order;
 
 <div class="exit-to-object-form">
 
-    <?php $form = ActiveForm::begin(['layout' => 'horizontal']); ?>
+    <?php $form = ActiveForm::begin(['options' => ['class' => 'col-sm-6']]); ?>
 
     <?= $form->field($model, 'order_id')->dropDownList(
         ArrayHelper::map(Order::find()->all(), 'id', function ($model) {
@@ -40,7 +40,7 @@ use app\models\table\Order;
 
     <div class="form-group">
         <?= Html::submitButton('Сохранить', [
-            'class' => 'btn btn-success col-sm-1 col-sm-offset-3'
+            'class' => 'btn btn-success'
         ]) ?>
     </div>
 

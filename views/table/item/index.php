@@ -36,7 +36,7 @@ $this->title = 'Вещи на складах';
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-            ['class' => 'kartik\grid\SerialColumn', /* 'headerOptions' => ['rowspan' => 2] */],
+            ['class' => 'kartik\grid\SerialColumn', /* 'headerOptions' => ['rowspan' => 2] */ ],
 
             [
                 'label' => 'Код (инв. номер)',
@@ -55,7 +55,8 @@ $this->title = 'Вещи на складах';
 
             [
                 'class' => 'kartik\grid\ActionColumn',
-                'header' => 'Действия', 'headerOptions' => ['rowspan' => 2]
+                'header' => 'Действия', /* 'headerOptions' => ['rowspan' => 2] */
+                'template' => '{update} {delete}',
             ],
         ],
     ]); ?>

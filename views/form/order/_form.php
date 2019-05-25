@@ -14,10 +14,10 @@ use kartik\datetime\DateTimePicker;
 
 <div class="contract-form">
 
-    <?php $form = ActiveForm::begin(['layout' => 'horizontal']); ?>
+    <?php $form = ActiveForm::begin(['options' => ['class' => 'col-sm-6']]); ?>
 
     <div class="row">
-        <h3 class="col-sm-3 col-sm-offset-3">Договор</h3>
+        <h3>Договор</h3>
     </div>
     <div class="form-group">
         <?= $form->field($contract, 'number')->input('number', ['step' => '1', 'min' => '0']) ?>
@@ -35,7 +35,7 @@ use kartik\datetime\DateTimePicker;
     </div>
 
     <div class="row">
-        <h3 class="col-sm-3 col-sm-offset-3">Заказчик</h3>
+        <h3>Заказчик</h3>
     </div>
     <div class="form-group">
         <?= $form->field($customer, 'full_name')->textInput([
@@ -59,7 +59,7 @@ use kartik\datetime\DateTimePicker;
     </div>
 
     <div class="row">
-        <h3 class="col-sm-3 col-sm-offset-3">Рабочий объект</h3>
+        <h3>Рабочий объект</h3>
     </div>
     <div class="form-group">
         <?= $form->field($workObject, 'house_address')->textInput(['maxlength' => true]) ?>
@@ -73,7 +73,7 @@ use kartik\datetime\DateTimePicker;
 
     <div class="form-group">
         <?= Html::submitButton('Сохранить', [
-            'class' => 'btn btn-success col-sm-1 col-sm-offset-3'
+            'class' => 'btn btn-success'
         ]) ?>
     </div>
 

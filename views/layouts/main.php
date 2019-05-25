@@ -34,57 +34,60 @@ AppAsset::register($this);
 <body>
     <?php $this->beginBody(); ?>
 
-    <?php
-    NavBar::begin([
-        'brandLabel' => '<img src="/icons/room.png" width="34" height="34" ' .
-            ' class="d-inline-block align-top" alt="logo">'
-            . ' ' . Yii::$app->name,
-        'brandUrl' => Yii::$app->homeUrl,
-        'innerContainerOptions' => ['class' => 'container-fluid'],
-        //'brandImage' => '/favicon.png',
-        'options' => [
-            'class' => 'navbar navbar-expand-lg navbar-dark bg-dark',
-        ],
-    ]);
+    <header>
+        <?php
+        NavBar::begin([
+            'brandLabel' => '<img src="/icons/room.png" width="34" height="34" ' .
+                ' class="d-inline-block align-top" alt="logo">'
+                . ' ' . Yii::$app->name,
+            'brandUrl' => Yii::$app->homeUrl,
+            'innerContainerOptions' => ['class' => 'container-fluid'],
+            //'brandImage' => '/favicon.png',
+            'options' => [
+                'class' => 'navbar navbar-expand-lg navbar-dark bg-dark',
+            ],
+        ]);
+        echo Nav::widget([
+            'options' => ['class' => 'navbar-nav ml-auto'],
+            'items' => [
+                //['label' => 'Домашняя страница', 'url' => [Url::home()]],
+                Yii::$app->user->isGuest ? (Html::a(
+                    FAS::icon('sign-in-alt') . ' ' . 'Вход',
+                    Url::to(['site/login']),
+                    ['class' => 'nav-link']
+                )) : ('<li class="nav-item">'
+                    . Html::beginForm([Url::to(['site/logout'])], 'post')
+                    . Html::submitButton(
+                        FAS::icon('user-circle') . ' ' .
+                            Yii::$app->user->identity->username . ' (Выйти)',
+                        ['class' => 'btn btn-link nav-link logout']
+                    )
+                    . Html::endForm()
+                    . '</li>'),
+            ],
+        ]);
+        NavBar::end();
+        ?>
+    </header>
 
-    echo Nav::widget([
-        'options' => ['class' => 'navbar-nav ml-auto'],
-        'items' => [
-            //['label' => 'Домашняя страница', 'url' => [Url::home()]],
-            Yii::$app->user->isGuest ? (Html::a(
-                FAS::icon('sign-in-alt') . ' ' . 'Вход',
-                Url::to(['site/login']),
-                ['class' => 'nav-link']
-            )) : ('<li class="nav-item">'
-                . Html::beginForm([Url::to(['site/logout'])], 'post')
-                . Html::submitButton(
-                    'Выйти ( ' . FAS::icon('user-circle') . ' ' .
-                        Yii::$app->user->identity->username . ' )',
-                    ['class' => 'btn btn-link nav-link logout']
-                )
-                . Html::endForm()
-                . '</li>'),
-        ],
-    ]);
-    NavBar::end();
+    <?php
+    if (Yii::$app->user->isGuest) {
+        $this->beginContent("@app/views/sideNav/guestSideNav.php");
+        $this->endContent();
+    } else if (Yii::$app->user->can('headOfAccounting')) {
+        $this->beginContent("@app/views/sideNav/headOfAccountingSideNav.php");
+        $this->endContent();
+    } else if (Yii::$app->user->can('brigadier')) {
+        $this->beginContent("@app/views/sideNav/brigadierSideNav.php");
+        $this->endContent();
+    } else if (Yii::$app->user->can('brigadeWorker')) {
+        $this->beginContent("@app/views/sideNav/brigadeWorkerSideNav.php");
+        $this->endContent();
+    }
     ?>
 
-    <div class="wrap">
-
-        <?php
-        if (Yii::$app->user->can('headOfAccounting')) {
-            $this->beginContent("@app/views/sideNav/headOfAccountingSideNav.php");
-            $this->endContent();
-        } else if (Yii::$app->user->can('brigadier')) {
-            $this->beginContent("@app/views/sideNav/brigadierSideNav.php");
-            $this->endContent();
-        } else if (Yii::$app->user->can('brigadeWorker')) {
-            $this->beginContent("@app/views/sideNav/brigadeWorkerSideNav.php");
-            $this->endContent();
-        }
-        ?>
-
-        <div class="container">
+    <div class="wrap bg-light">
+        <main class="container border-left border-right bg-white">
             <?= Breadcrumbs::widget([
                 'homeLink' => [
                     'label' => 'Домашняя страница',
@@ -95,15 +98,8 @@ AppAsset::register($this);
             ]) ?>
             <?= Alert::widget() ?>
             <?= $content ?>
-        </div>
+        </main>
     </div>
-
-    <footer class="footer">
-        <div class="container">
-            <p class="float-left">&copy; Про-ремонт <?= date('Y') ?> г.</p>
-            <p class="float-right"><?= Yii::powered() ?></p>
-        </div>
-    </footer>
 
     <?php $this->endBody(); ?>
 </body>

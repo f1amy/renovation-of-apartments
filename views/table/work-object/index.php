@@ -26,7 +26,7 @@ $this->title = 'Рабочие объекты';
     <p>
         <?= Html::a(FAS::icon('plus') .
             ' Создать рабочий объект', ['create'], ['class' => 'btn btn-success']) ?>
-        <?= Html::a(FAS::icon('file') .
+        <?= Html::a(FAS::icon('file-alt') .
             ' Форма создания заказа', ['form/order/create'], ['class' => 'btn btn-info']) ?>
     </p>
 
@@ -34,7 +34,7 @@ $this->title = 'Рабочие объекты';
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-            ['class' => 'kartik\grid\SerialColumn', /* 'headerOptions' => ['rowspan' => 2] */],
+            ['class' => 'kartik\grid\SerialColumn', /* 'headerOptions' => ['rowspan' => 2] */ ],
 
             'id',
             'house_address',
@@ -44,7 +44,21 @@ $this->title = 'Рабочие объекты';
 
             [
                 'class' => 'kartik\grid\ActionColumn',
+                'template' => '{formUpdate} {update} {delete}',
                 'header' => 'Действия', /* 'headerOptions' => ['rowspan' => 2], */
+                'buttons' => [
+                    'formUpdate' => function ($url, $model) {
+                        return Html::a(
+                            FAS::icon('file-alt'),
+                            yii\helpers\Url::to(['form/order/update', 'id' => $model->id]),
+                            [
+                                'title' => 'Изменить на форме',
+                                'aria-label' => 'Изменить на форме',
+                                'data-pjax' => '0',
+                            ]
+                        );
+                    }
+                ],
             ],
         ],
     ]); ?>

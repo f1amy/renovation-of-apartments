@@ -26,7 +26,7 @@ $this->title = 'Заказы';
     <p>
         <?= Html::a(FAS::icon('plus') .
             ' Создать заказ', ['create'], ['class' => 'btn btn-success']) ?>
-        <?= Html::a(FAS::icon('file') .
+        <?= Html::a(FAS::icon('file-alt') .
             ' Форма создания заказа', ['form/order/create'], ['class' => 'btn btn-info']) ?>
         <?php /* echo Html::button('Поиск', ['class' => 'btn btn-primary',
             'data-toggle' => 'collapse', 'data-target' => '#search-collapse']) */ ?>
@@ -38,7 +38,7 @@ $this->title = 'Заказы';
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-            ['class' => 'kartik\grid\SerialColumn', /* 'headerOptions' => ['rowspan' => 2] */],
+            ['class' => 'kartik\grid\SerialColumn', /* 'headerOptions' => ['rowspan' => 2] */ ],
 
             'id',
             'contract_id',
@@ -52,12 +52,12 @@ $this->title = 'Заказы';
 
             [
                 'class' => 'kartik\grid\ActionColumn',
-                'template' => '{view} {update} {formUpdate} {delete}',
+                'template' => '{formUpdate} {update} {delete}',
                 'header' => 'Действия', /* 'headerOptions' => ['rowspan' => 2], */
                 'buttons' => [
                     'formUpdate' => function ($url, $model) {
                         return Html::a(
-                            FAS::icon('file'),
+                            FAS::icon('file-alt'),
                             yii\helpers\Url::to(['form/order/update', 'id' => $model->id]),
                             [
                                 'title' => 'Изменить на форме',

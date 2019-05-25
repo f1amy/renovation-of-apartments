@@ -13,4 +13,4 @@ RUN pecl install imagick-3.4.4 \
   && pecl install memcached-3.1.3 \
   && pecl install xdebug-2.7.2
 
-RUN docker-php-ext-enable xdebug imagick memcached
+RUN docker-php-ext-enable imagick memcached xdebug

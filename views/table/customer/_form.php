@@ -12,7 +12,7 @@ use yii\bootstrap4\ActiveForm;
 
 <div class="customer-form">
 
-    <?php $form = ActiveForm::begin(['layout' => 'horizontal']); ?>
+    <?php $form = ActiveForm::begin(['options' => ['class' => 'col-sm-6']]); ?>
 
     <?= $form->field($model, 'full_name')->textInput([
         'maxlength' => true,
@@ -35,7 +35,7 @@ use yii\bootstrap4\ActiveForm;
 
     <div class="form-group">
         <?= Html::submitButton('Сохранить', [
-            'class' => 'btn btn-success col-sm-1 col-sm-offset-3'
+            'class' => 'btn btn-success'
         ]) ?>
     </div>
 

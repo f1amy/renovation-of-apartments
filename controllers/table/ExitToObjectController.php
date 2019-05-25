@@ -23,16 +23,16 @@ class ExitToObjectController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['index', 'view', 'create', 'update', 'delete'],
+                'only' => ['index', 'create', 'update', 'delete'],
                 'rules' => [
                     [
                         'allow' => true,
-                        'actions' => ['index', 'view', 'create', 'update', 'delete'],
+                        'actions' => ['index', 'create', 'update', 'delete'],
                         'roles' => ['headOfAccounting', 'brigadier'],
                     ],
                     [
                         'allow' => true,
-                        'actions' => ['index', 'view'],
+                        'actions' => ['index'],
                         'roles' => ['brigadeWorker'],
                     ],
                 ],
@@ -84,7 +84,7 @@ class ExitToObjectController extends Controller
         $model = new ExitToObject();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['index']);
         }
 
         return $this->render('create', [
@@ -104,7 +104,7 @@ class ExitToObjectController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['index']);
         }
 
         return $this->render('update', [

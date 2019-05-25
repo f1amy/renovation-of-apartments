@@ -26,6 +26,12 @@ $this->title = 'Задачи';
     <p>
         <?= Html::a(FAS::icon('plus') .
             ' Создать задачу', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a(
+            FAS::icon('chart-bar') .
+                ' Отчет по задачам',
+            ['report/task/index'],
+            ['class' => 'btn btn-primary']
+        ) ?>
         <?php /* echo Html::button('Поиск', ['class' => 'btn btn-primary',
             'data-toggle' => 'collapse', 'data-target' => '#search-collapse']) */ ?>
     </p>
@@ -44,7 +50,8 @@ $this->title = 'Задачи';
 
             [
                 'class' => 'kartik\grid\ActionColumn',
-                'header' => 'Действия', 'headerOptions' => ['rowspan' => 2]
+                'header' => 'Действия', /* 'headerOptions' => ['rowspan' => 2] */
+                'template' => '{update} {delete}',
             ],
         ],
     ]); ?>

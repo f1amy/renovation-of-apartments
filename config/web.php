@@ -61,6 +61,7 @@ $config = [
                 'table/<name>' => 'table/<name>/index',
                 'table/<name>/<action:(create|view|update|delete)>' => 'table/<name>/<action>',
                 'form/<name>/<action:(create|view|update|delete)>' => 'form/<name>/<action>',
+                'report/<name>' => 'report/<name>/index',
                 '' => 'site/index',
                 'login' => 'site/login',
                 'logout' => 'site/logout',
@@ -69,6 +70,18 @@ $config = [
         'authManager' => [
             'class' => 'yii\rbac\DbManager',
         ],
+        /* 'assetManager' => [
+            'appendTimestamp' => true,
+            'bundles' => [
+                'all' => [
+                    'class' => 'yii\web\AssetBundle',
+                    'basePath' => '@webroot/assets',
+                    'baseUrl' => '@web/assets',
+                    'css' => ['all-xyz.css'],
+                    'js' => ['all-xyz.js'],
+                ],
+            ],
+        ], */
         /* 'formatter' => [
             'datetimeFormat' => 'php:d.m.Y H:i:s',
         ], */

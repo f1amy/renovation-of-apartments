@@ -18,15 +18,9 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?php $form = ActiveForm::begin([
         'id' => 'login-form',
-        'layout' => 'horizontal',
-        'fieldConfig' => [
-            //'template' => "{label}\n<div class=\"col-lg-3\">{input}</div>\n<div class=\"col-lg-8\">{error}</div>",
-            //'labelOptions' => ['class' => 'col-lg-1 control-label'],
-            'horizontalCssClasses' => [
-                'label' => 'col-sm-1',
-                'wrapper' => 'col-sm-4',
-            ],
-        ],
+        'options' => [
+            'class' => 'col-sm-6'
+        ]
     ]); ?>
 
     <?= $form->field($model, 'username')->textInput(['autofocus' => true])->label('Логин') ?>
@@ -37,14 +31,10 @@ $this->params['breadcrumbs'][] = $this->title;
         'template' => "<div class=\"col-lg-offset-1 col-lg-3\">{input} {label}</div>\n<div class=\"col-lg-8\">{error}</div>",
     ]) */ ?>
 
-    <div class="form-group">
-        <div class="offset-sm-1">
-            <?= Html::submitButton('Войти', [
-                'class' => 'btn btn-primary',
-                'name' => 'login-button'
-            ]) ?>
-        </div>
-    </div>
+    <?= Html::submitButton('Войти', [
+        'class' => 'btn btn-primary',
+        'name' => 'login-button'
+    ]) ?>
 
     <?php ActiveForm::end(); ?>
 

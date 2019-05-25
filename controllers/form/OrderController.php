@@ -62,7 +62,7 @@ class OrderController extends \yii\web\Controller
 
                 $order->save();
 
-                return $this->redirect(['table/order/view', 'id' => $order->id]);
+                return $this->redirect(['table/order/index']);
             }
         }
 
@@ -99,7 +99,7 @@ class OrderController extends \yii\web\Controller
                 $customer->save(false);
                 $workObject->save(false);
 
-                return $this->redirect(['table/order/view', 'id' => $order->id]);
+                return $this->redirect(['table/order/index']);
             }
         }
 

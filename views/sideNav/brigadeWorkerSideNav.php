@@ -7,21 +7,21 @@ use yii\helpers\Url;
 /* @var $this yii\web\View */
 ?>
 
-<div class="side-nav">
-    <h3>Навигация</h3>
-    <div class="list-group">
+<nav class="side-nav border-right">
+    <h6>Навигация</h6>
+    <section class="list-group list-group-flush">
         <?= renderLinks(
             [['label' => 'Начальная', 'link' => Url::home()]]
         ); ?>
-    </div>
+    </section>
 
-    <h4>Выходы на объекты</h4>
-    <div class="list-group">
+    <h6>Выходы на объекты</h6>
+    <section class="list-group list-group-flush border-bottom">
         <?= renderLinks([
             ['label' => 'Выходы на объекты', 'link' => Url::to(['table/exit-to-object'])],
             ['label' => 'Снаряжения', 'link' => Url::to(['table/equipment'])],
             ['label' => 'Рабочие задачи', 'link' => Url::to(['table/work-task'])],
             ['label' => 'Ремонтные бригады', 'link' => Url::to(['table/renovating-brigade'])],
         ]); ?>
-    </div>
-</div>
+    </section>
+</nav>
