@@ -1,6 +1,6 @@
 <?php
 
-include Yii::getAlias('@app/views/utility/renderLinks.php');
+include Yii::getAlias('@app/views/utility/renderSideNavLinks.php');
 
 use yii\helpers\Url;
 

@@ -1,6 +1,6 @@
 <?php
 
-include Yii::getAlias('@app/views/utility/renderLinks.php');
+include Yii::getAlias('@app/views/utility/renderSideNavLinks.php');
 
 use yii\helpers\Url;
 
@@ -10,14 +10,14 @@ use yii\helpers\Url;
 <nav class="side-nav border-right">
     <h6>Навигация</h6>
     <section class="list-group list-group-flush">
-        <?= renderLinks(
+        <?= renderSideNavLinks(
             [['label' => 'Начальная', 'link' => Url::home()]]
         ); ?>
     </section>
 
     <h6>Выходы на объекты</h6>
     <section class="list-group list-group-flush border-bottom">
-        <?= renderLinks([
+        <?= renderSideNavLinks([
             ['label' => 'Выходы на объекты', 'link' => Url::to(['table/exit-to-object'])],
             ['label' => 'Снаряжения', 'link' => Url::to(['table/equipment'])],
             ['label' => 'Рабочие задачи', 'link' => Url::to(['table/work-task'])],
