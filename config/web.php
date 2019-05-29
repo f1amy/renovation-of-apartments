@@ -72,15 +72,6 @@ $config = [
         ],
         'assetManager' => [
             'appendTimestamp' => true,
-            /* 'bundles' => [
-                'all' => [
-                    'class' => 'yii\web\AssetBundle',
-                    'basePath' => '@webroot/assets',
-                    'baseUrl' => '@web/assets',
-                    'css' => ['all-xyz.css'],
-                    'js' => ['all-xyz.js'],
-                ],
-            ], */
         ],
         /* 'formatter' => [
             'datetimeFormat' => 'php:d.m.Y H:i:s',
@@ -88,13 +79,8 @@ $config = [
     ],
     'params' => $params,
     'modules' => [
-        'gridview' =>  [
-            'class' => '\kartik\grid\Module'
-            // enter optional module parameters below - only if you need to  
-            // use your own export download action or custom translation 
-            // message source
-            // 'downloadAction' => 'gridview/export/download',
-            // 'i18n' => []
+        'gridview' => [
+            'class' => '\kartik\grid\Module',
         ]
     ],
 ];
