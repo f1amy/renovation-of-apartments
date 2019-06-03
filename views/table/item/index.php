@@ -39,10 +39,10 @@ $this->title = 'Вещи на складах';
             ['class' => 'kartik\grid\SerialColumn', /* 'headerOptions' => ['rowspan' => 2] */ ],
 
             [
-                'label' => 'Код (инв. номер)',
+                'label' => 'Инв. номер',
                 'attribute' => 'id',
             ],
-            'warehouse_id',
+            //'warehouse_id',
             [
                 'attribute' => 'warehouse',
                 'value' => 'warehouse.name',

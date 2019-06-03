@@ -44,7 +44,7 @@ $this->title = 'Склады';
         'columns' => [
             ['class' => 'kartik\grid\SerialColumn', /* 'headerOptions' => ['rowspan' => 2] */],
 
-            'id',
+            //'id',
             'name',
             'address',
 

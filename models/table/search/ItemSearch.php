@@ -69,7 +69,7 @@ class ItemSearch extends Item
 
         // grid filtering conditions
         $query->andFilterWhere([
-            'id' => $this->id,
+            'item.id' => $this->id,
             'warehouse_id' => $this->warehouse_id,
             'quantity' => $this->quantity,
             'purchase_price' => $this->purchase_price,

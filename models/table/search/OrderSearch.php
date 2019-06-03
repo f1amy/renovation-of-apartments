@@ -11,6 +11,10 @@ use app\models\table\Order;
  */
 class OrderSearch extends Order
 {
+    public $contract;
+    public $customer;
+    public $workObject;
+
     /**
      * {@inheritdoc}
      */
@@ -18,6 +22,7 @@ class OrderSearch extends Order
     {
         return [
             [['id', 'contract_id', 'customer_id', 'work_object_id'], 'integer'],
+            [['customer', 'workObject', 'contract'], 'safe'],
         ];
     }
 
@@ -41,11 +46,28 @@ class OrderSearch extends Order
     {
         $query = Order::find();
 
+        $query->joinWith(['contract', 'customer', 'workObject']);
+
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
+
+        $dataProvider->sort->attributes['contract'] = [
+            'asc' => ['contract.number' => SORT_ASC],
+            'desc' => ['contract.number' => SORT_DESC],
+        ];
+
+        $dataProvider->sort->attributes['customer'] = [
+            'asc' => ['customer.full_name' => SORT_ASC],
+            'desc' => ['customer.full_name' => SORT_DESC],
+        ];
+
+        $dataProvider->sort->attributes['workObject'] = [
+            'asc' => ['work_object.house_address' => SORT_ASC],
+            'desc' => ['work_object.house_address' => SORT_DESC],
+        ];
 
         $this->load($params);
 
@@ -61,7 +83,11 @@ class OrderSearch extends Order
             'contract_id' => $this->contract_id,
             'customer_id' => $this->customer_id,
             'work_object_id' => $this->work_object_id,
+            'contract.number' => $this->contract,
         ]);
+
+        $query->andFilterWhere(['like', 'customer.full_name', $this->customer])
+            ->andFilterWhere(['like', 'work_object.house_address', $this->workObject]);
 
         return $dataProvider;
     }

@@ -48,7 +48,7 @@ if (\Yii::$app->user->can('brigadeWorker')) {
         'columns' => [
             ['class' => 'kartik\grid\SerialColumn', /* 'headerOptions' => ['rowspan' => 2] */ ],
 
-            'id',
+            //'id',
             'order_id',
             [
                 'attribute' => 'brigade_gathering_datetime',

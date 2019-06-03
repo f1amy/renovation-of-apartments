@@ -36,7 +36,7 @@ $this->title = 'Рабочие объекты';
         'columns' => [
             ['class' => 'kartik\grid\SerialColumn', /* 'headerOptions' => ['rowspan' => 2] */ ],
 
-            'id',
+            //'id',
             'house_address',
             'apartment_number',
             'entrance_number',

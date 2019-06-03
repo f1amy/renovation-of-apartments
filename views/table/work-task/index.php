@@ -48,14 +48,14 @@ if (\Yii::$app->user->can('brigadeWorker')) {
         'columns' => [
             ['class' => 'kartik\grid\SerialColumn', /* 'headerOptions' => ['rowspan' => 2] */ ],
 
-            'id',
-            'task_id',
+            //'id',
+            //'task_id',
             [
                 'attribute' => 'task',
                 'value' => 'task.text',
                 'label' => 'Текст задачи',
             ],
-            'exit_to_object_id',
+            //'exit_to_object_id',
             [
                 'attribute' => 'exitToObject',
                 'value' => 'exitToObject.brigade_gathering_datetime',

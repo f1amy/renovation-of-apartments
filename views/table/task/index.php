@@ -44,7 +44,7 @@ $this->title = 'Задачи';
         'columns' => [
             ['class' => 'kartik\grid\SerialColumn', /* 'headerOptions' => ['rowspan' => 2] */],
 
-            'id',
+            //'id',
             'text',
             ['attribute' => 'cost', 'label' => 'Стоимость услуги, руб.'],
 

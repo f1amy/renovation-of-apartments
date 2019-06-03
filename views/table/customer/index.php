@@ -38,7 +38,7 @@ $this->title = 'Заказчики';
         'columns' => [
             ['class' => 'kartik\grid\SerialColumn', /* 'headerOptions' => ['rowspan' => 2] */ ],
 
-            'id',
+            //'id',
             'full_name',
             'phone_number',
             'email_address:email',

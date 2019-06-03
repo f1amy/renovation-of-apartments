@@ -40,10 +40,25 @@ $this->title = 'Заказы';
         'columns' => [
             ['class' => 'kartik\grid\SerialColumn', /* 'headerOptions' => ['rowspan' => 2] */ ],
 
-            'id',
-            'contract_id',
-            'customer_id',
-            'work_object_id',
+            //'id',
+            //'contract_id',
+            [
+                'attribute' => 'contract',
+                'value' => 'contract.number',
+                'label' => 'Номер договора',
+            ],
+            //'customer_id',
+            [
+                'attribute' => 'customer',
+                'value' => 'customer.full_name',
+                'label' => 'ФИО заказчика',
+            ],
+            //'work_object_id',
+            [
+                'attribute' => 'workObject',
+                'value' => 'workObject.house_address',
+                'label' => 'Адрес дома',
+            ],
             [
                 'attribute' => 'totalCost',
                 'label' => 'Общая стоимость, руб.',

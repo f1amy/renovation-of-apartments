@@ -143,6 +143,6 @@ class OrderController extends Controller
             return $model;
         }
 
-        throw new NotFoundHttpException('Запрашиваемая страница не существует.');
+        throw new NotFoundHttpException('Запрашиваемая страница не найдена.');
     }
 }

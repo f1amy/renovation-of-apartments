@@ -36,7 +36,7 @@ $this->title = 'Договоры';
         'columns' => [
             ['class' => 'kartik\grid\SerialColumn', /* 'headerOptions' => ['rowspan' => 2] */ ],
 
-            'id',
+            //'id',
             'number',
             'date',
 
