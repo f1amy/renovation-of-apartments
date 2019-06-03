@@ -14,7 +14,9 @@ services:
       - '80:80'
 
   php-fpm:
-    build: ./docker/php-fpm
+    build:
+      context: ./
+      dockerfile: php-fpm.dev.dockerfile
     image: reofap-php-fpm
     container_name: php-fpm
     depends_on:
@@ -24,6 +26,14 @@ services:
       - ./docker/php-fpm/config/general.ini:/usr/local/etc/php/conf.d/general.ini
       - ./docker/php-fpm/config/xdebug.ini:/usr/local/etc/php/conf.d/xdebug.ini
     #  - ./docker/php-fpm/xdebug/log/remote.log:/var/log/xdebug/remote.log
+  
+  memcached:
+    image: memcached:1.5
+    container_name: memcached
+    ports:
+    - '11211:11211'
+    depends_on:
+      - nginx
 
   mysql:
     image: mysql:8.0

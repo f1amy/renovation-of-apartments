@@ -20,7 +20,15 @@ $config = [
             'cookieValidationKey' => 'KP1oqdJGvkD0RTozjPbkZ8XNY6cV5Gfr',
         ],
         'cache' => [
-            'class' => 'yii\caching\FileCache',
+            'class' => 'yii\caching\MemCache', //FileCache
+            'useMemcached' => true,
+            'servers' => [
+                [
+                    'host' => 'memcached',
+                    'port' => 11211,
+                    'weight' => 100,
+                ],
+            ],
         ],
         'user' => [
             'identityClass' => 'app\models\User',
