@@ -16,60 +16,67 @@ $this->title = 'Отчет по складу';
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <p>Этот отчет позволяет определить загруженность складов.</p>
+    <p>Этот отчет позволяет оценить загруженность складов.</p>
 
     <?= HighCharts::widget([
         'clientOptions' => [
             'chart' => [
-                'type' => 'bar'
+                'type' => 'column'
             ],
             'title' => [
                 'text' => 'Загруженность складов'
             ],
             'xAxis' => [
-                'categories' => [
-                    'Материал',
-                    'Инструмент'
-                ]
+                'categories' => $categories = array_values(
+                    ArrayHelper::map(
+                        Warehouse::find()->all(),
+                        'id',
+                        function ($model) {
+                            return $model->name;
+                        }
+                    )
+                )
             ],
             'yAxis' => [
                 'title' => [
                     'text' => 'Количество вещи на складе'
                 ]
             ],
-            'series' => array_values(ArrayHelper::map(
-                Warehouse::find()->all(),
-                'id',
-                function ($model) {
-                    $materialsStock = (int)Item::find()->where(
-                        [
-                            'warehouse_id' => $model->id,
-                            'type' => 'Материал'
-                        ]
-                    )->count();
+            'series' => array_values(
+                ArrayHelper::map(
+                    Item::find()->all(),
+                    'id',
+                    function ($model) {
+                        $categories = array_values(ArrayHelper::map(
+                            Warehouse::find()->all(),
+                            'id',
+                            function ($model) {
+                                return $model->name;
+                            }
+                        ));
+                        $data = [];
 
-                    $instrumentsStock = (int)Item::find()->where(
-                        [
-                            'warehouse_id' => $model->id,
-                            'type' => 'Инструмент'
-                        ]
-                    )->count();
+                        foreach ($categories as $category) {
+                            if ($model->warehouse->name == $category) {
+                                array_push($data, (int)$model->quantity);
+                            } else {
+                                array_push($data, 0);
+                            }
+                        }
 
-                    $name = $model->name;
+                        $name = $model->name;
 
-                    if (mb_strlen($name) > 20) {
-                        $name = trim(mb_substr($name, 0, 17)) . '...';
+                        if (mb_strlen($name) > 20) {
+                            $name = trim(mb_substr($name, 0, 17)) . '...';
+                        }
+
+                        return [
+                            'name' => $name,
+                            'data' => $data
+                        ];
                     }
-
-                    return [
-                        'name' => $name,
-                        'data' => [
-                            $materialsStock,
-                            $instrumentsStock
-                        ]
-                    ];
-                }
-            ))
+                )
+            )
         ]
     ]);
     ?>
