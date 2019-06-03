@@ -7,7 +7,7 @@ $this->title = 'Домашняя страница';
 
 <div class="site-index">
 
-    <div class="jumbotron">
+    <div class="jumbotron text-center bg-transparent">
 
         <h1>Здравствуйте!</h1>
         <p class="lead">Для продолжения, пожалуйста, пройдите аутентификацию.</p>

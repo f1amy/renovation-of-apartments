@@ -9,7 +9,7 @@ $this->title = 'Домашняя страница';
 
     <div class="container">
 
-        <div class="jumbotron">
+        <div class="jumbotron text-center bg-transparent">
             <h2>Добро пожаловать, <?= Yii::$app->user->identity->username; ?>.</h2>
             <h2><small>Перейдите на вкладку слева ←, чтобы начать работу.</small></h2>
         </div>

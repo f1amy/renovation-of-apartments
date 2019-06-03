@@ -3,35 +3,13 @@ body {
   height: 100vh;
 }
 
-button.logout {
-  border: none;
-}
-
-footer {
-  height: 60px;
-  background-color: #f5f5f5;
-  border-top: 1px solid #ddd;
-  padding-top: 20px;
-}
-
-.jumbotron {
-  text-align: center;
-  background-color: transparent;
-}
-
 main {
-  margin: 0 auto;
   padding: 15px;
   min-height: calc(100vh - 60px);
 }
 
-main > .container div[class$='-index'] > h1:first-child {
-  margin-top: 0;
-}
-
 .wrap {
   min-height: calc(100vh - 60px);
-  overflow-x: hidden;
   position: fixed;
   top: 60px;
   left: 225px;
@@ -61,14 +39,6 @@ main > .container div[class$='-index'] > h1:first-child {
   text-align: center;
 }
 
-header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 1030;
-}
-
 .side-nav p {
   padding: 12px 16px;
   margin: 0;
@@ -81,7 +51,7 @@ header {
 
 .side-nav h6 {
   padding: 12px 16px;
-  margin: 0;
+  margin-bottom: 0;
   text-transform: uppercase;
 }
 
@@ -91,7 +61,6 @@ header {
 
 .card {
   width: 19rem;
-  margin-bottom: 15px;
 }
 
 @media (min-width: 992px) {

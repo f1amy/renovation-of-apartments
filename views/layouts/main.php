@@ -34,7 +34,7 @@ AppAsset::register($this);
 <body>
     <?php $this->beginBody(); ?>
 
-    <header>
+    <header class="fixed-top">
         <?php
         NavBar::begin([
             'brandLabel' => '<img src="/icons/room.png" width="34" height="34" ' .
@@ -60,7 +60,7 @@ AppAsset::register($this);
                     . Html::submitButton(
                         FAS::icon('user-circle') . ' ' .
                             Yii::$app->user->identity->username . ' (Выйти)',
-                        ['class' => 'btn btn-link nav-link logout']
+                        ['class' => 'btn btn-link nav-link logout border-0']
                     )
                     . Html::endForm()
                     . '</li>'),
@@ -86,8 +86,8 @@ AppAsset::register($this);
     }
     ?>
 
-    <div class="wrap bg-light">
-        <main class="container border-left border-right bg-white">
+    <div class="wrap bg-light overflow-hidden">
+        <main class="container border-left border-right bg-white mx-auto">
             <?= Breadcrumbs::widget([
                 'homeLink' => [
                     'label' => 'Домашняя страница',

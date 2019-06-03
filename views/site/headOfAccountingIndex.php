@@ -12,7 +12,7 @@ $this->title = 'Домашняя страница';
 
     <div class="container">
 
-        <div class="jumbotron">
+        <div class="jumbotron text-center bg-transparent">
             <h2>Добро пожаловать, <?= Yii::$app->user->identity->username; ?>.</h2>
             <h2><small>Перейдите на вкладку слева ← <br>
                     или на ссылку снизу ↓, чтобы начать работу.</small></h2>
@@ -20,7 +20,7 @@ $this->title = 'Домашняя страница';
         </div>
 
         <div class="row justify-content-around">
-            <div class="card">
+            <div class="card mb-3">
                 <div class="card-body">
                     <h5 class="card-title">Формы</h5>
                     <p class="card-text">Формы позволяют быстро создать информацию
@@ -44,7 +44,7 @@ $this->title = 'Домашняя страница';
                 </div>
             </div>
 
-            <div class="card">
+            <div class="card mb-3">
                 <div class="card-body">
                     <h5 class="card-title">Отчеты</h5>
                     <p class="card-text">С помощью отчетов можно визуализировать
