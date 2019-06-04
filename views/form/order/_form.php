@@ -20,9 +20,7 @@ use kartik\datetime\DateTimePicker;
         <h3>Договор</h3>
     </div>
     <div class="form-group">
-        <?= $form->field($contract, 'number')->input('number', ['step' => '1', 'min' => '0']) ?>
-
-        <?= $form->field($contract, 'date')->widget(DateTimePicker::className(), [
+        <?= $form->field($order, 'contract_date')->widget(DateTimePicker::className(), [
             /* 'language' => 'ru',
             'template' => '{button}{reset}{input}', */
             'pluginOptions' => [

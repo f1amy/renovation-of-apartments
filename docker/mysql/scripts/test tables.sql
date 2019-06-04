@@ -132,38 +132,6 @@ insert into item (
     3200
 );
 
-insert into contract (
-    number,
-    date
-) values (
-    1,
-    '2018-11-28'
-);
-
-insert into contract (
-    number,
-    date
-) values (
-    2,
-    '2018-11-27'
-);
-
-insert into contract (
-    number,
-    date
-) values (
-    3,
-    '2018-11-29'
-);
-
-insert into contract (
-    number,
-    date
-) values (
-    4,
-    '2018-11-25'
-);
-
 insert into customer (
     full_name,
     phone_number
@@ -243,41 +211,41 @@ insert into work_object (
 );
 
 insert into `order` (
-    contract_id,
+    contract_date,
     customer_id,
     work_object_id
 ) values (
-    1,
+    '2018-11-28',
     1,
     1
 );
 
 insert into `order` (
-    contract_id,
+    contract_date,
     customer_id,
     work_object_id
 ) values (
-    2,
+    '2018-11-27',
     2,
     2
 );
 
 insert into `order` (
-    contract_id,
+    contract_date,
     customer_id,
     work_object_id
 ) values (
-    3,
+    '2018-11-29',
     3,
     3
 );
 
 insert into `order` (
-    contract_id,
+    contract_date,
     customer_id,
     work_object_id
 ) values (
-    4,
+    '2018-11-25',
     4,
     4
 );

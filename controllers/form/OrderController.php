@@ -2,7 +2,6 @@
 
 namespace app\controllers\form;
 
-use app\models\table\Contract;
 use app\models\table\Customer;
 use app\models\table\WorkObject;
 use app\models\table\Order;
@@ -36,38 +35,33 @@ class OrderController extends \yii\web\Controller
 
     public function actionCreate()
     {
-        $contract = new Contract();
+        $order = new Order();
         $customer = new Customer();
         $workObject = new WorkObject();
 
         if (
-            $contract->load(Yii::$app->request->post()) &&
+            $order->load(Yii::$app->request->post()) &&
             $customer->load(Yii::$app->request->post()) &&
             $workObject->load(Yii::$app->request->post())
         ) {
-
-            $isValid = $contract->validate() && $customer->validate() &&
-                $workObject->validate();
+            $isValid = $order->validate(['contract_date']) &&
+                $customer->validate() && $workObject->validate();
 
             if ($isValid) {
-                $contract->save();
-                $customer->save();
-                $workObject->save();
+                $customer->save(false);
+                $workObject->save(false);
 
-                $order = new Order();
-
-                $order->contract_id = $contract->id;
                 $order->customer_id = $customer->id;
                 $order->work_object_id = $workObject->id;
 
-                $order->save();
+                $order->save(false);
 
                 return $this->redirect(['table/order/index']);
             }
         }
 
         return $this->render('create', [
-            'contract' => $contract,
+            'order' => $order,
             'customer' => $customer,
             'workObject' => $workObject,
         ]);
@@ -81,21 +75,19 @@ class OrderController extends \yii\web\Controller
             throw new NotFoundHttpException("Заказ не найден.");
         }
 
-        $contract = Contract::findOne($order->contract_id);
         $customer = Customer::findOne($order->customer_id);
         $workObject = WorkObject::findOne($order->work_object_id);
 
         if (
-            $contract->load(Yii::$app->request->post()) &&
+            $order->load(Yii::$app->request->post()) &&
             $customer->load(Yii::$app->request->post()) &&
             $workObject->load(Yii::$app->request->post())
         ) {
-
-            $isValid = $contract->validate() && $customer->validate() &&
-                $workObject->validate();
+            $isValid = $order->validate(['contract_date']) &&
+                $customer->validate() && $workObject->validate();
 
             if ($isValid) {
-                $contract->save(false);
+                $order->save(false);
                 $customer->save(false);
                 $workObject->save(false);
 
@@ -105,7 +97,6 @@ class OrderController extends \yii\web\Controller
 
         return $this->render('update', [
             'order' => $order,
-            'contract' => $contract,
             'customer' => $customer,
             'workObject' => $workObject,
         ]);

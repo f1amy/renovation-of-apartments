@@ -2,7 +2,7 @@ FROM composer:1.8 AS build
 
 RUN composer global require hirak/prestissimo
 
-VOLUME /tmp
+#VOLUME /tmp
 
 WORKDIR /build
 
@@ -30,4 +30,4 @@ COPY /docker/php-fpm/config/general.ini /usr/local/etc/php/conf.d
 
 COPY --from=build /build /var/www/html
 
-VOLUME /var/www/html/web/assets
+#VOLUME /var/www/html/web/assets

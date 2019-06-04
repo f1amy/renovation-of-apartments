@@ -8,12 +8,11 @@ use Yii;
  * This is the model class for table "order".
  *
  * @property int $id
- * @property int $contract_id
+ * @property string $contract_date
  * @property int $customer_id
  * @property int $work_object_id
  *
  * @property ExitToObject[] $exitToObjects
- * @property Contract $contract
  * @property Customer $customer
  * @property WorkObject $workObject
  */
@@ -33,13 +32,21 @@ class Order extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['contract_id', 'customer_id', 'work_object_id'], 'required'],
-            [['contract_id', 'customer_id', 'work_object_id'], 'integer', 'min' => 0],
-            [['contract_id'], 'unique'],
-            [['contract_id'], 'exist', 'skipOnError' => true, 'targetClass' => Contract::className(), 'targetAttribute' => ['contract_id' => 'id']],
+            [['contract_date', 'customer_id', 'work_object_id'], 'required'],
+            [['contract_date'], 'date', 'format' => 'php:Y-m-d'],
+            [['customer_id', 'work_object_id'], 'integer', 'min' => 0],
             [['customer_id'], 'exist', 'skipOnError' => true, 'targetClass' => Customer::className(), 'targetAttribute' => ['customer_id' => 'id']],
             [['work_object_id'], 'exist', 'skipOnError' => true, 'targetClass' => WorkObject::className(), 'targetAttribute' => ['work_object_id' => 'id']],
         ];
+    }
+
+    public function init()
+    {
+        if (!method_exists($this, 'search')) {
+            $this->contract_date = date('Y-m-d');
+        }
+
+        parent::init();
     }
 
     /**
@@ -48,8 +55,8 @@ class Order extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'Код',
-            'contract_id' => 'Код договора',
+            'id' => 'Номер договора',
+            'contract_date' => 'Дата заключения договора',
             'customer_id' => 'Код заказчика',
             'work_object_id' => 'Код рабочего объекта',
             'totalCost' => 'Общая сумма',
@@ -83,14 +90,6 @@ class Order extends \yii\db\ActiveRecord
     public function getExitToObjects()
     {
         return $this->hasMany(ExitToObject::className(), ['order_id' => 'id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getContract()
-    {
-        return $this->hasOne(Contract::className(), ['id' => 'contract_id']);
     }
 
     /**

@@ -22,8 +22,7 @@ use app\models\table\Order;
 
     <?= $form->field($model, 'order_id')->dropDownList(
         ArrayHelper::map(Order::find()->all(), 'id', function ($model) {
-            return 'Код ' . $model->id . ' - Договор №' . $model->contract->number .
-                ' от ' . $model->contract->date;
+            return 'Код ' . $model->id . ' - От ' . $model->contract_date;
         }),
         ['prompt' => 'Выберите значение...']
     ) ?>

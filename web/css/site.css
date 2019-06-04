@@ -9,6 +9,7 @@ main {
 }
 
 .wrap {
+  overflow-x: hidden;
   min-height: calc(100vh - 60px);
   position: fixed;
   top: 60px;

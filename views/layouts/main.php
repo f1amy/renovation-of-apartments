@@ -86,7 +86,7 @@ AppAsset::register($this);
     }
     ?>
 
-    <div class="wrap bg-light overflow-hidden">
+    <div class="wrap bg-light">
         <main class="container border-left border-right bg-white mx-auto">
             <?= Breadcrumbs::widget([
                 'homeLink' => [

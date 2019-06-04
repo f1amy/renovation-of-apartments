@@ -30,14 +30,6 @@ create table if not exists item (
     unique key (warehouse_id, name)
 );
 
-create table if not exists contract (
-    id integer not null auto_increment,
-    number integer not null,
-    date date not null,
-    primary key (id),
-    unique key (number)
-);
-
 create table if not exists customer (
     id integer not null auto_increment,
     full_name varchar(64) not null,
@@ -60,17 +52,14 @@ create table if not exists work_object (
 
 create table if not exists `order` (
     id integer not null auto_increment,
-    contract_id integer not null,
+    contract_date date not null,
     customer_id integer not null,
     work_object_id integer not null,
     primary key (id),
-    foreign key (contract_id)
-        references contract (id),
     foreign key (customer_id)
         references customer (id),
     foreign key (work_object_id)
-        references work_object (id),
-    unique key (contract_id)
+        references work_object (id)
 );
 
 create table if not exists employee (

@@ -18,7 +18,6 @@ $this->params['breadcrumbs'][] = 'Редактировать';
 
     <?= $this->render('_form', [
         'order' => $order,
-        'contract' => $contract,
         'customer' => $customer,
         'workObject' => $workObject,
     ]) ?>

@@ -21,7 +21,6 @@ use rmrevin\yii\fontawesome\FAS;
     <section class="list-group list-group-flush">
         <?= renderSideNavLinks([
             ['label' => FAS::icon('shopping-cart') . ' ' . 'Заказы', 'link' => Url::to(['table/order'])],
-            ['label' => FAS::icon('file-contract') . ' ' . 'Договоры', 'link' => Url::to(['table/contract'])],
             ['label' => FAS::icon('users') . ' ' . 'Заказчики', 'link' => Url::to(['table/customer'])],
             ['label' => FAS::icon('briefcase') . ' ' . 'Рабочие объекты', 'link' => Url::to(['table/work-object'])],
         ]); ?>

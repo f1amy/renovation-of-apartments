@@ -40,13 +40,9 @@ $this->title = 'Заказы';
         'columns' => [
             ['class' => 'kartik\grid\SerialColumn', /* 'headerOptions' => ['rowspan' => 2] */ ],
 
-            //'id',
+            'id',
             //'contract_id',
-            [
-                'attribute' => 'contract',
-                'value' => 'contract.number',
-                'label' => 'Номер договора',
-            ],
+            'contract_date',
             //'customer_id',
             [
                 'attribute' => 'customer',
