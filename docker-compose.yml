@@ -26,7 +26,7 @@ services:
       - ./docker/php-fpm/config/general.ini:/usr/local/etc/php/conf.d/general.ini
       - ./docker/php-fpm/config/xdebug.ini:/usr/local/etc/php/conf.d/xdebug.ini
     #  - ./docker/php-fpm/xdebug/log/remote.log:/var/log/xdebug/remote.log
-  
+
   memcached:
     image: memcached:1.5
     container_name: memcached

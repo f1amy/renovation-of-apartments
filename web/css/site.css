@@ -69,3 +69,13 @@ main {
     float: right !important;
   }
 }
+
+.input-group ~ .invalid-feedback {
+  display: block;
+}
+
+@media (max-width: 768px) {
+  label#submit-button-fix {
+    display: none !important;
+  }
+}

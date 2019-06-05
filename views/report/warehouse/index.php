@@ -6,8 +6,6 @@ use yii\helpers\ArrayHelper;
 use app\models\table\Warehouse;
 use app\models\table\Item;
 
-use rmrevin\yii\fontawesome\FAS;
-
 /* @var $this yii\web\View */
 
 $this->title = 'Отчет по складу';
@@ -64,14 +62,8 @@ $this->title = 'Отчет по складу';
                             }
                         }
 
-                        $name = $model->name;
-
-                        if (mb_strlen($name) > 20) {
-                            $name = trim(mb_substr($name, 0, 17)) . '...';
-                        }
-
                         return [
-                            'name' => $name,
+                            'name' => $model->name,
                             'data' => $data
                         ];
                     }

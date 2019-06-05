@@ -1,12 +1,13 @@
 <?php
 
-use yii\helpers\Html;
 use dosamigos\highcharts\HighCharts;
 use yii\helpers\ArrayHelper;
 use app\models\table\Employee;
 use app\models\table\RenovatingBrigade;
-
-use rmrevin\yii\fontawesome\FAS;
+use yii\bootstrap4\ActiveForm;
+use kartik\datetime\DateTimePicker;
+use yii\helpers\Url;
+use yii\bootstrap4\Html;
 
 /* @var $this yii\web\View */
 
@@ -16,54 +17,137 @@ $this->title = 'Отчет по сотрудникам';
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <p>Этот отчет покажет кто сколько раз выходил в этом месяце и поможет
-        рассчитать заработную плату сотрудникам.</p>
+    <p>Этот отчет покажет кто сколько раз выходил в выбранный промежуток
+        времени и поможет рассчитать заработную плату сотрудникам.</p>
 
-    <?= HighCharts::widget([
-        'clientOptions' => [
-            'chart' => [
-                'type' => 'bar'
-            ],
-            'title' => [
-                'text' => 'Выезды рабочих'
-            ],
-            'xAxis' => [
-                'categories' => [
-                    'Выезд',
+    <?php $form = ActiveForm::begin([
+        'method' => 'get',
+        'action' => Url::to(['report/employee/index']),
+        'options' => ['class' => 'col-lg-9'],
+        'fieldConfig' => ['options' => ['class' => 'form-group col-md']],
+    ]); ?>
+
+    <div class="form-row">
+        <?= $form->field($model, 'start_date')->widget(
+            DateTimePicker::className(),
+            [
+                'pluginOptions' => [
+                    'autoclose' => true,
+                    'format' => 'yyyy-mm-dd',
+                    'minView' => 2,
+                    'todayBtn' => true,
                 ]
-            ],
-            'yAxis' => [
-                'title' => [
-                    'text' => 'Количество выездов рабочего бригады'
+            ]
+        ) ?>
+        <?= $form->field($model, 'end_date')->widget(
+            DateTimePicker::className(),
+            [
+                'pluginOptions' => [
+                    'autoclose' => true,
+                    'format' => 'yyyy-mm-dd',
+                    'minView' => 2,
+                    'todayBtn' => true,
                 ]
-            ],
-            'series' => array_values(ArrayHelper::map(
-                Employee::find()->where(['position' => 'Рабочий'])
-                    ->orWhere(['position' => 'Бригадир'])->all(),
-                'id',
-                function ($model) {
-                    $exits = (int)RenovatingBrigade::find()->where(
+            ]
+        ) ?>
+        <div class="form-group col-md-auto">
+            <label id="submit-button-fix" class="d-block">&nbsp;</label>
+            <?= Html::submitButton('Показать', [
+                'class' => 'btn btn-success'
+            ]) ?>
+        </div>
+    </div>
+
+    <?php ActiveForm::end(); ?>
+
+    <?php
+    if ($reportDates !== null) {
+        $endDate = date('Y-m-d', strtotime($reportDates['end_date'] . ' +1 day'));
+
+        $series = array_values(ArrayHelper::map(
+            Employee::find()->where(['position' => 'Рабочий'])
+                ->orWhere(['position' => 'Бригадир'])->all(),
+            'id',
+            function ($model) use ($reportDates, $endDate) {
+                $exits = (int)RenovatingBrigade::find()
+                    ->joinWith('exitToObject')->where(
                         [
-                            'employee_id' => $model->id
+                            'employee_id' => $model->id,
                         ]
-                    )->count();
+                    )->andWhere([
+                        'between',
+                        'brigade_gathering_datetime',
+                        $reportDates['start_date'],
+                        $endDate
+                    ])->count();
 
-                    $full_name = $model->full_name;
+                return [
+                    'name' => $model->full_name,
+                    'data' => [
+                        $exits
+                    ]
+                ];
+            }
+        ));
 
-                    if (mb_strlen($full_name) > 20) {
-                        $full_name = trim(mb_substr($full_name, 0, 17)) . '...';
-                    }
+        $exitsCount = 0;
 
-                    return [
-                        'name' => $full_name,
-                        'data' => [
-                            $exits
+        foreach ($series as $value) {
+            $exitsCount += $value['data'][0];
+        }
+
+        if ($exitsCount > 0) {
+            echo Html::tag(
+                'h5',
+                'Всего совершено выходов на объект рабочими: '
+                    . $exitsCount . '.',
+                ['class' => 'mt-2 text-center']
+            );
+
+            $startDateFriendly = date(
+                "d.m.Y",
+                strtotime($reportDates['start_date'])
+            );
+            $endDateFriendly = date(
+                "d.m.Y",
+                strtotime($reportDates['end_date'])
+            );
+
+            echo HighCharts::widget([
+                'clientOptions' => [
+                    'chart' => [
+                        'type' => 'bar'
+                    ],
+                    'title' => [
+                        'text' => 'Выезды рабочих c ' . $startDateFriendly .
+                            ' по ' . $endDateFriendly
+                    ],
+                    'xAxis' => [
+                        'categories' => [
+                            'Выезд',
                         ]
-                    ];
-                }
-            ))
-        ]
-    ]);
+                    ],
+                    'yAxis' => [
+                        'title' => [
+                            'text' => 'Количество выездов рабочего бригады'
+                        ]
+                    ],
+                    'series' => $series
+                ]
+            ]);
+        } else {
+            echo Html::tag(
+                'h5',
+                'Не найдено ни одного выхода на объект в выбранном диапазоне дат.',
+                ['class' => 'mt-2 text-center']
+            );
+        }
+    } else {
+        echo Html::tag(
+            'h5',
+            'Пожалуйста, выберите диапазон дат.',
+            ['class' => 'mt-2 text-center']
+        );
+    }
     ?>
-
 </div>

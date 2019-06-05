@@ -6,8 +6,6 @@ use yii\helpers\ArrayHelper;
 use app\models\table\Task;
 use app\models\table\WorkTask;
 
-use rmrevin\yii\fontawesome\FAS;
-
 /* @var $this yii\web\View */
 
 $this->title = 'Отчет по задачам';
@@ -46,14 +44,8 @@ $this->title = 'Отчет по задачам';
                         ]
                     )->count();
 
-                    $taskText = $model->text;
-
-                    if (mb_strlen($taskText) > 20) {
-                        $taskText = trim(mb_substr($taskText, 0, 17)) . '...';
-                    }
-
                     return [
-                        'name' => $taskText,
+                        'name' => $model->text,
                         'data' => [
                             $demand
                         ]

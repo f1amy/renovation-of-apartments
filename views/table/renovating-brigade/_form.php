@@ -19,7 +19,8 @@ use app\models\table\ExitToObject;
     <?php $form = ActiveForm::begin(['options' => ['class' => 'col-lg-6']]); ?>
 
     <?= $form->field($model, 'employee_id')->dropDownList(ArrayHelper::map(
-        Employee::find()->all(),
+        Employee::find()->where(['position' => 'Рабочий'])
+        ->orWhere(['position' => 'Бригадир'])->all(),
         'id',
         function ($model) {
             return 'Код ' . $model->id . ' - ' . $model->full_name;

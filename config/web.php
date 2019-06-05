@@ -81,9 +81,11 @@ $config = [
         'assetManager' => [
             'appendTimestamp' => true,
         ],
-        /* 'formatter' => [
-            'datetimeFormat' => 'php:d.m.Y H:i:s',
-        ], */
+        'formatter' => [
+            'defaultTimeZone' => 'Asia/Yekaterinburg',
+            //'timeZone' => 'Asia/Yekaterinburg',
+            //'datetimeFormat' => 'php:d.m.Y H:i:s',
+        ],
     ],
     'params' => $params,
     'modules' => [
