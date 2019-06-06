@@ -57,19 +57,6 @@ class ItemController extends Controller
     }
 
     /**
-     * Displays a single Item model.
-     * @param integer $id
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    public function actionView($id)
-    {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
-    }
-
-    /**
      * Creates a new Item model.
      * If creation is successful, the browser will be redirected to the 'index' page.
      * @return mixed

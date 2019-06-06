@@ -76,10 +76,10 @@ class OrderSearch extends Order
             'id' => $this->id,
             'customer_id' => $this->customer_id,
             'work_object_id' => $this->work_object_id,
+            'contract_date' => $this->contract_date
         ]);
 
-        $query->andFilterWhere(['like', 'contract_date', $this->contract_date])
-            ->andFilterWhere(['like', 'customer.full_name', $this->customer])
+        $query->andFilterWhere(['like', 'customer.full_name', $this->customer])
             ->andFilterWhere(['like', 'work_object.house_address', $this->workObject]);
 
         return $dataProvider;

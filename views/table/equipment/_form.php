@@ -20,19 +20,25 @@ use app\models\table\ExitToObject;
         Item::find()->all(),
         'id',
         function ($model) {
-            return 'Код ' . $model->id . ' - ' . $model->name;
+            return 'Инв. №' . $model->id . ' - ' . $model->name .
+                ' - Остаток ' . $model->quantity . ' шт.';
         }
-    ), ['prompt' => 'Выберите значение...']) ?>
+    ), ['prompt' => 'Выберите значение...'])->label('Вещь') ?>
 
-    <?= $form->field($model, 'exit_to_object_id')->dropDownList(ArrayHelper::map(
-        ExitToObject::find()->all(),
-        'id',
-        function ($model) {
-            return 'Код ' . $model->id . ' - ' . $model->brigade_gathering_datetime;
-        }
-    ), ['prompt' => 'Выберите значение...']) ?>
+    <?= $form->field($model, 'exit_to_object_id')->dropDownList(
+        ArrayHelper::map(
+            ExitToObject::find()->all(),
+            'id',
+            function ($model) {
+                return 'Дата выхода ' . $model->brigade_gathering_datetime .
+                    ' - Место ' . $model->order->workObject->house_address;
+            }
+        ),
+        ['prompt' => 'Выберите значение...']
+    )->label('Выход на объект') ?>
 
-    <?= $form->field($model, 'item_quantity')->input('number', ['step' => '1', 'min' => '0']) ?>
+    <?= $form->field($model, 'item_quantity')
+        ->input('number', ['step' => '1', 'min' => '0']) ?>
 
     <div class="form-group">
         <?= Html::submitButton('Сохранить', [

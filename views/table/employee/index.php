@@ -16,18 +16,23 @@ $this->title = 'Сотрудники';
 <div class="employee-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
-    <?php Pjax::begin(); ?>
 
     <p>
         <?= Html::a(FAS::icon('plus') .
-            ' Создать сотрудника', ['create'], ['class' => 'btn btn-success']) ?>
+            ' Создать сотрудника', ['create'], [
+            'class' => 'btn btn-success',
+        ]) ?>
         <?= Html::a(
             FAS::icon('chart-bar') .
                 ' Отчет по сотрудникам',
             ['report/employee/index'],
-            ['class' => 'btn btn-primary']
+            [
+                'class' => 'btn btn-primary',
+            ]
         ) ?>
     </p>
+
+    <?php Pjax::begin(); ?>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,

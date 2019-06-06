@@ -62,19 +62,6 @@ class EquipmentController extends Controller
     }
 
     /**
-     * Displays a single Equipment model.
-     * @param integer $id
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    public function actionView($id)
-    {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
-    }
-
-    /**
      * Creates a new Equipment model.
      * If creation is successful, the browser will be redirected to the 'index' page.
      * @return mixed
@@ -84,6 +71,10 @@ class EquipmentController extends Controller
         $model = new Equipment();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            $item = $model->item;
+            $item->quantity -= $model->item_quantity;
+            $item->save();
+
             return $this->redirect(['index']);
         }
 
@@ -103,7 +94,21 @@ class EquipmentController extends Controller
     {
         $model = $this->findModel($id);
 
+        $oldItem = $model->item;
+        $oldModelItemQuantity = $model->item_quantity;
+
+        $model->scenario = Equipment::SCENARIO_UPDATE;
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            $oldItem->quantity += $oldModelItemQuantity;
+            $oldItem->save();
+
+            $model->refresh();
+
+            $newItem = $model->item;
+            $newItem->quantity -= $model->item_quantity;
+            $newItem->save();
+
             return $this->redirect(['index']);
         }
 
@@ -121,16 +126,13 @@ class EquipmentController extends Controller
      */
     public function actionDelete($id)
     {
-        try {
-            $this->findModel($id)->delete();
-        } catch (yii\db\IntegrityException $e) {
-            if (strpos($e->errorInfo[2], 'a foreign key constraint fails') !== false) {
-                Yii::$app->session->setFlash('error', 'Невозможно удалить запись ' .
-                    'которая используется в других таблицах.');
-            } else {
-                throw $e;
-            }
-        }
+        $equipment = $this->findModel($id);
+        
+        $item = $equipment->item;
+        $item->quantity += $equipment->item_quantity;
+        $item->save();
+
+        $equipment->delete();
 
         return $this->redirect(['index']);
     }

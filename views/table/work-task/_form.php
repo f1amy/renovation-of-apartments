@@ -21,19 +21,20 @@ use app\models\table\ExitToObject;
             Task::find()->all(),
             'id',
             function ($model) {
-                return 'Код ' . $model->id . ' - ' . $model->text;
+                return $model->text;
             }
         ),
         ['prompt' => 'Выберите значение...']
-    ) ?>
+    )->label('Задача') ?>
 
     <?= $form->field($model, 'exit_to_object_id')->dropDownList(ArrayHelper::map(
         ExitToObject::find()->all(),
         'id',
         function ($model) {
-            return 'Код ' . $model->id . ' - ' . $model->brigade_gathering_datetime;
+            return 'Дата выхода ' . $model->brigade_gathering_datetime .
+                ' - Место ' . $model->order->workObject->house_address;
         }
-    ), ['prompt' => 'Выберите значение...']) ?>
+    ), ['prompt' => 'Выберите значение...'])->label('Выход на объект') ?>
 
     <div class="form-group">
         <?= Html::submitButton('Сохранить', [

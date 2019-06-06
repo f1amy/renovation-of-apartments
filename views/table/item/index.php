@@ -16,12 +16,15 @@ $this->title = 'Вещи на складах';
 <div class="item-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
-    <?php Pjax::begin(); ?>
 
     <p>
         <?= Html::a(FAS::icon('plus') .
-            ' Создать вещь', ['create'], ['class' => 'btn btn-success']) ?>
+            ' Создать вещь', ['create'], [
+            'class' => 'btn btn-success',
+        ]) ?>
     </p>
+
+    <?php Pjax::begin(); ?>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,

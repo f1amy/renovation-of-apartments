@@ -16,14 +16,19 @@ $this->title = 'Заказы';
 <div class="order-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
-    <?php Pjax::begin(); ?>
 
     <p>
         <?= Html::a(FAS::icon('plus') .
-            ' Создать заказ', ['create'], ['class' => 'btn btn-success']) ?>
+            ' Создать заказ', ['create'], [
+            'class' => 'btn btn-success',
+        ]) ?>
         <?= Html::a(FAS::icon('file-alt') .
-            ' Форма создания заказа', ['form/order/create'], ['class' => 'btn btn-info']) ?>
+            ' Форма создания заказа', ['form/order/create'], [
+            'class' => 'btn btn-info',
+        ]) ?>
     </p>
+
+    <?php Pjax::begin(); ?>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -45,8 +50,8 @@ $this->title = 'Заказы';
             ],
             [
                 'attribute' => 'totalCost',
-                'label' => 'Общая стоимость, руб.',
-                'format' => ['decimal', 2],
+                'label' => 'Общая стоимость',
+                'format' => ['currency', 'RUB'],
             ],
 
             [

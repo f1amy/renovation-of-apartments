@@ -17,6 +17,8 @@ use Yii;
  */
 class Equipment extends \yii\db\ActiveRecord
 {
+    const SCENARIO_UPDATE = 'update';
+
     /**
      * {@inheritdoc}
      */
@@ -32,11 +34,42 @@ class Equipment extends \yii\db\ActiveRecord
     {
         return [
             [['item_id', 'exit_to_object_id', 'item_quantity'], 'required'],
-            [['item_id', 'exit_to_object_id', 'item_quantity'], 'integer', 'min' => 0],
+            [['item_id', 'exit_to_object_id'], 'integer', 'min' => 0],
+            ['item_quantity', 'integer', 'min' => 1],
+            ['item_quantity', 'validateItemQuantity', 'on' => self::SCENARIO_DEFAULT],
+            ['item_quantity', 'validateItemQuantityOnUpdate', 'on' => self::SCENARIO_UPDATE],
             [['item_id', 'exit_to_object_id'], 'unique', 'targetAttribute' => ['item_id', 'exit_to_object_id']],
             [['item_id'], 'exist', 'skipOnError' => true, 'targetClass' => Item::className(), 'targetAttribute' => ['item_id' => 'id']],
             [['exit_to_object_id'], 'exist', 'skipOnError' => true, 'targetClass' => ExitToObject::className(), 'targetAttribute' => ['exit_to_object_id' => 'id']],
         ];
+    }
+
+    public function validateItemQuantity($attribute)
+    {
+        if ($this->item_quantity > $this->item->quantity) {
+            $this->addError($attribute, 'Значение «Количество вещей» ' .
+                'должно быть меньше или равно остатка вещи «' .
+                $this->item->name . '».');
+        }
+    }
+
+    public function validateItemQuantityOnUpdate($attribute)
+    {
+        $oldEquipment = Equipment::findOne(['id' => $this->id]);
+
+        if ($oldEquipment->item_id == $this->item_id) {
+            if ($this->item_quantity > ($this->item->quantity + $oldEquipment->item_quantity)) {
+                $this->addError($attribute, 'Значение «Количество вещей» ' .
+                    'должно быть меньше или равно остатка вещи «' .
+                    $this->item->name . '».');
+            }
+        } else {
+            if ($this->item_quantity > $this->item->quantity) {
+                $this->addError($attribute, 'Значение «Количество вещей» ' .
+                    'должно быть меньше или равно остатка вещи «' .
+                    $this->item->name . '».');
+            }
+        }
     }
 
     /**

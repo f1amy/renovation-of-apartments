@@ -21,17 +21,18 @@ use app\models\table\ExitToObject;
         ->orWhere(['position' => 'Бригадир'])->all(),
         'id',
         function ($model) {
-            return 'Код ' . $model->id . ' - ' . $model->full_name;
+            return $model->full_name . ' - ' . $model->position;
         }
-    ), ['prompt' => 'Выберите значение...']) ?>
+    ), ['prompt' => 'Выберите значение...'])->label('Сотрудник') ?>
 
     <?= $form->field($model, 'exit_to_object_id')->dropDownList(ArrayHelper::map(
         ExitToObject::find()->all(),
         'id',
         function ($model) {
-            return 'Код ' . $model->id . ' - ' . $model->brigade_gathering_datetime;
+            return 'Дата выхода ' . $model->brigade_gathering_datetime .
+                ' - Место ' . $model->order->workObject->house_address;
         }
-    ), ['prompt' => 'Выберите значение...']) ?>
+    ), ['prompt' => 'Выберите значение...'])->label('Выход на объект') ?>
 
     <div class="form-group">
         <?= Html::submitButton('Сохранить', [

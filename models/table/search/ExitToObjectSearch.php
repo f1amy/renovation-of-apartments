@@ -60,9 +60,8 @@ class ExitToObjectSearch extends ExitToObject
         $query->andFilterWhere([
             'id' => $this->id,
             'order_id' => $this->order_id,
+            'brigade_gathering_datetime' => $this->brigade_gathering_datetime
         ]);
-
-        $query->andFilterWhere(['like', 'brigade_gathering_datetime', $this->brigade_gathering_datetime]);
 
         return $dataProvider;
     }

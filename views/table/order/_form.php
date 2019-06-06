@@ -30,18 +30,18 @@ use app\models\table\WorkObject;
         Customer::find()->all(),
         'id',
         function ($model) {
-            return 'Код ' . $model->id . ' - ' . $model->full_name;
+            return $model->full_name;
         }
-    ), ['prompt' => 'Выберите значение...']) ?>
+    ), ['prompt' => 'Выберите значение...'])->label('Заказчик') ?>
 
     <?= $form->field($model, 'work_object_id')->dropDownList(ArrayHelper::map(
         WorkObject::find()->all(),
         'id',
         function ($model) {
-            return 'Код ' . $model->id . ' - ' . $model->house_address .
-                ', кв. ' . $model->apartment_number;
+            return $model->house_address .
+                ' -  Кв. ' . $model->apartment_number;
         }
-    ), ['prompt' => 'Выберите значение...']) ?>
+    ), ['prompt' => 'Выберите значение...'])->label('Рабочий объект') ?>
 
     <div class="form-group">
         <?= Html::submitButton('Сохранить', [

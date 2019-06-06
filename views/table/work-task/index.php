@@ -22,16 +22,19 @@ if (\Yii::$app->user->can('brigadeWorker')) {
 <div class="work-task-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
-    <?php Pjax::begin(); ?>
 
     <p>
         <?php
         if (!\Yii::$app->user->can('brigadeWorker')) {
             echo Html::a(FAS::icon('plus') .
-                ' Создать рабочую задачу', ['create'], ['class' => 'btn btn-success']);
+                ' Создать рабочую задачу', ['create'], [
+                'class' => 'btn btn-success',
+            ]);
         }
         ?>
     </p>
+
+    <?php Pjax::begin(); ?>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,

@@ -7,7 +7,7 @@ use yii\helpers\Html;
 
 $this->title = 'Редактировать выход на объект: ' . $model->id;
 $this->params['breadcrumbs'][] = ['label' => 'Выходы на объекты', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
+$this->params['breadcrumbs'][] = ['label' => $model->id];
 $this->params['breadcrumbs'][] = 'Редактировать';
 ?>
 

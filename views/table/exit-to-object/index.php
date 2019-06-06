@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use kartik\grid\GridView;
 use yii\widgets\Pjax;
+use kartik\datetime\DateTimePicker;
 
 use rmrevin\yii\fontawesome\FAS;
 
@@ -22,16 +23,19 @@ if (\Yii::$app->user->can('brigadeWorker')) {
 <div class="exit-to-object-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
-    <?php Pjax::begin(); ?>
 
     <p>
         <?php
         if (!\Yii::$app->user->can('brigadeWorker')) {
             echo Html::a(FAS::icon('plus') .
-                ' Создать выход на объект', ['create'], ['class' => 'btn btn-success']);
+                ' Создать выход на объект', ['create'], [
+                'class' => 'btn btn-success',
+            ]);
         }
         ?>
     </p>
+
+    <?php Pjax::begin(); ?>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -43,6 +47,14 @@ if (\Yii::$app->user->can('brigadeWorker')) {
             [
                 'attribute' => 'brigade_gathering_datetime',
                 'format' => ['datetime', 'php:Y-m-d H:i'],
+                'filter' => DateTimePicker::widget([
+                    'name' => 'ExitToObjectSearch[brigade_gathering_datetime]',
+                    'pluginOptions' => [
+                        'autoclose' => true,
+                        'format' => 'yyyy-mm-dd hh:ii:ss',
+                        'todayBtn' => true,
+                    ]
+                ])
             ],
 
             [

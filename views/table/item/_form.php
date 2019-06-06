@@ -20,11 +20,10 @@ use app\models\table\Warehouse;
             Warehouse::find()->all(),
             'id',
             function ($model) {
-                return 'Код ' . $model->id . ' - ' . $model->name;
-            }
-        ),
+                return $model->name . ' - Адрес ' . $model->address;
+            }),
         ['prompt' => 'Выберите значение...']
-    ) ?>
+    )->label('Склад') ?>
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 

@@ -62,19 +62,6 @@ class RenovatingBrigadeController extends Controller
     }
 
     /**
-     * Displays a single RenovatingBrigade model.
-     * @param integer $id
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    public function actionView($id)
-    {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
-    }
-
-    /**
      * Creates a new RenovatingBrigade model.
      * If creation is successful, the browser will be redirected to the 'index' page.
      * @return mixed
@@ -121,16 +108,7 @@ class RenovatingBrigadeController extends Controller
      */
     public function actionDelete($id)
     {
-        try {
-            $this->findModel($id)->delete();
-        } catch (yii\db\IntegrityException $e) {
-            if (strpos($e->errorInfo[2], 'a foreign key constraint fails') !== false) {
-                Yii::$app->session->setFlash('error', 'Невозможно удалить запись ' .
-                    'которая используется в других таблицах.');
-            } else {
-                throw $e;
-            }
-        }
+        $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
     }

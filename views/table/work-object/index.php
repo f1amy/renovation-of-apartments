@@ -15,14 +15,19 @@ $this->title = 'Рабочие объекты';
 <div class="work-object-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
-    <?php Pjax::begin(); ?>
 
     <p>
         <?= Html::a(FAS::icon('plus') .
-            ' Создать рабочий объект', ['create'], ['class' => 'btn btn-success']) ?>
+            ' Создать рабочий объект', ['create'], [
+            'class' => 'btn btn-success',
+        ]) ?>
         <?= Html::a(FAS::icon('file-alt') .
-            ' Форма создания заказа', ['form/order/create'], ['class' => 'btn btn-info']) ?>
+            ' Форма создания заказа', ['form/order/create'], [
+            'class' => 'btn btn-info',
+        ]) ?>
     </p>
+
+    <?php Pjax::begin(); ?>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,

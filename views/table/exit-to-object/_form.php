@@ -19,10 +19,12 @@ use app\models\table\Order;
 
     <?= $form->field($model, 'order_id')->dropDownList(
         ArrayHelper::map(Order::find()->all(), 'id', function ($model) {
-            return 'Код ' . $model->id . ' - От ' . $model->contract_date;
+            return 'Договор №' . $model->id . ' от ' . $model->contract_date .
+                ' - ' . $model->customer->full_name .
+                ' - ' . $model->workObject->house_address;
         }),
         ['prompt' => 'Выберите значение...']
-    ) ?>
+    )->label('Заказ') ?>
 
     <?= $form->field($model, 'brigade_gathering_datetime')->widget(DateTimePicker::className(), [
         'pluginOptions' => [
