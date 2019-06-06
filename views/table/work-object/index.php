@@ -1,7 +1,6 @@
 <?php
 
 use yii\helpers\Html;
-//use yii\grid\GridView;
 use kartik\grid\GridView;
 use yii\widgets\Pjax;
 
@@ -12,16 +11,11 @@ use rmrevin\yii\fontawesome\FAS;
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = 'Рабочие объекты';
-
-/*if (!$this->params['useSideNavInsteadOfBreadcrumbs']) {
-    $this->params['breadcrumbs'][] = $this->title;
-}*/
 ?>
 <div class="work-object-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
     <?php Pjax::begin(); ?>
-    <?php /* echo $this->render('_search', ['model' => $searchModel]); */ ?>
 
     <p>
         <?= Html::a(FAS::icon('plus') .
@@ -34,9 +28,8 @@ $this->title = 'Рабочие объекты';
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-            ['class' => 'kartik\grid\SerialColumn', /* 'headerOptions' => ['rowspan' => 2] */ ],
+            ['class' => 'kartik\grid\SerialColumn'],
 
-            //'id',
             'house_address',
             'apartment_number',
             'entrance_number',
@@ -45,7 +38,7 @@ $this->title = 'Рабочие объекты';
             [
                 'class' => 'kartik\grid\ActionColumn',
                 'template' => '{formUpdate} {update} {delete}',
-                'header' => 'Действия', /* 'headerOptions' => ['rowspan' => 2], */
+                'header' => 'Действия',
                 'buttons' => [
                     'formUpdate' => function ($url, $model) {
                         return Html::a(

@@ -4,5 +4,4 @@ runtime
 !runtime/.gitignore
 web/assets
 !web/assets/.gitignore
-vagrant
 vendor

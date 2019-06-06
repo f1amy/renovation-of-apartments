@@ -62,7 +62,6 @@ class SiteController extends Controller
     {
         if (Yii::$app->user->isGuest) {
             return $this->redirect(['site/login']);
-            //return $this->render('guestIndex');
         } else if (Yii::$app->user->can('brigadeWorker')) {
             return $this->render('brigadeWorkerIndex');
         } else if (Yii::$app->user->can('headOfAccounting')) {
@@ -85,11 +84,6 @@ class SiteController extends Controller
 
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            /* if (Yii::$app->user->can('brigadeWorker')
-                || Yii::$app->user->can('brigadier')) {
-                return $this->redirect(['table/work-plan/index']);
-            } */
-
             return $this->goBack();
         }
 

@@ -1,7 +1,6 @@
 <?php
 
 use yii\helpers\Html;
-//use yii\grid\GridView;
 use kartik\grid\GridView;
 use yii\widgets\Pjax;
 
@@ -12,10 +11,6 @@ use rmrevin\yii\fontawesome\FAS;
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = 'Вещи на складах';
-
-/*if (!$this->params['useSideNavInsteadOfBreadcrumbs']) {
-    $this->params['breadcrumbs'][] = $this->title;
-}*/
 ?>
 
 <div class="item-index">
@@ -26,23 +21,18 @@ $this->title = 'Вещи на складах';
     <p>
         <?= Html::a(FAS::icon('plus') .
             ' Создать вещь', ['create'], ['class' => 'btn btn-success']) ?>
-        <?php /* echo Html::button('Поиск', ['class' => 'btn btn-primary',
-            'data-toggle' => 'collapse', 'data-target' => '#search-collapse']) */ ?>
     </p>
-
-    <?php /* echo $this->render('_search', ['model' => $searchModel]); */ ?>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-            ['class' => 'kartik\grid\SerialColumn', /* 'headerOptions' => ['rowspan' => 2] */ ],
+            ['class' => 'kartik\grid\SerialColumn'],
 
             [
                 'label' => 'Инв. номер',
                 'attribute' => 'id',
             ],
-            //'warehouse_id',
             [
                 'attribute' => 'warehouse',
                 'value' => 'warehouse.name',
@@ -55,7 +45,7 @@ $this->title = 'Вещи на складах';
 
             [
                 'class' => 'kartik\grid\ActionColumn',
-                'header' => 'Действия', /* 'headerOptions' => ['rowspan' => 2] */
+                'header' => 'Действия',
                 'template' => '{update} {delete}',
             ],
         ],

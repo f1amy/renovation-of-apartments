@@ -1,10 +1,7 @@
 <?php
 
 use yii\helpers\Html;
-//use yii\widgets\ActiveForm;
-//use yii\bootstrap\ActiveForm;
 use yii\bootstrap4\ActiveForm;
-//use dosamigos\datetimepicker\DateTimePicker;
 use kartik\datetime\DateTimePicker;
 
 /* @var $this yii\web\View */
@@ -21,8 +18,6 @@ use kartik\datetime\DateTimePicker;
     </div>
     <div class="form-group">
         <?= $form->field($order, 'contract_date')->widget(DateTimePicker::className(), [
-            /* 'language' => 'ru',
-            'template' => '{button}{reset}{input}', */
             'pluginOptions' => [
                 'autoclose' => true,
                 'format' => 'yyyy-mm-dd',

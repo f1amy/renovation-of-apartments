@@ -5,13 +5,10 @@
 
 use app\assets\AppAsset;
 use app\widgets\Alert;
-//use yii\bootstrap\Nav;
-//use yii\bootstrap\NavBar;
 use yii\bootstrap4\Nav;
 use yii\bootstrap4\NavBar;
 use yii\helpers\Url;
 use yii\helpers\Html;
-//use yii\widgets\Breadcrumbs;
 use yii\bootstrap4\Breadcrumbs;
 use rmrevin\yii\fontawesome\FAS;
 
@@ -42,7 +39,6 @@ AppAsset::register($this);
                 . ' ' . Yii::$app->name,
             'brandUrl' => Yii::$app->homeUrl,
             'innerContainerOptions' => ['class' => 'container-fluid'],
-            //'brandImage' => '/favicon.png',
             'options' => [
                 'class' => 'navbar navbar-expand-lg navbar-dark bg-dark',
             ],
@@ -50,7 +46,6 @@ AppAsset::register($this);
         echo Nav::widget([
             'options' => ['class' => 'navbar-nav ml-auto'],
             'items' => [
-                //['label' => 'Домашняя страница', 'url' => [Url::home()]],
                 Yii::$app->user->isGuest ? (Html::a(
                     FAS::icon('sign-in-alt') . ' ' . 'Вход',
                     Url::to(['site/login']),

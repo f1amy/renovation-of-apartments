@@ -1,8 +1,6 @@
 <?php
 
 use yii\helpers\Html;
-//use yii\widgets\ActiveForm;
-//use yii\bootstrap\ActiveForm;
 use yii\bootstrap4\ActiveForm;
 use yii\helpers\ArrayHelper;
 
@@ -19,7 +17,6 @@ use app\models\table\Warehouse;
 
     <?= $form->field($model, 'warehouse_id')->dropDownList(
         ArrayHelper::map(
-            //Warehouse::find()/*->orderBy('id')*/->all(),
             Warehouse::find()->all(),
             'id',
             function ($model) {

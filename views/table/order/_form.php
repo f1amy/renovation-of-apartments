@@ -1,8 +1,6 @@
 <?php
 
 use yii\helpers\Html;
-//use yii\widgets\ActiveForm;
-//use yii\bootstrap\ActiveForm;
 use yii\bootstrap4\ActiveForm;
 use yii\helpers\ArrayHelper;
 use kartik\datetime\DateTimePicker;
@@ -20,8 +18,6 @@ use app\models\table\WorkObject;
     <?php $form = ActiveForm::begin(['options' => ['class' => 'col-lg-6']]); ?>
 
     <?= $form->field($model, 'contract_date')->widget(DateTimePicker::className(), [
-        /* 'language' => 'ru',
-        'template' => '{button}{reset}{input}', */
         'pluginOptions' => [
             'autoclose' => true,
             'format' => 'yyyy-mm-dd',

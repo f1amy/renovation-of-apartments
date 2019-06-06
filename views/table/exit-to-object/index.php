@@ -1,7 +1,6 @@
 <?php
 
 use yii\helpers\Html;
-//use yii\grid\GridView;
 use kartik\grid\GridView;
 use yii\widgets\Pjax;
 
@@ -12,10 +11,6 @@ use rmrevin\yii\fontawesome\FAS;
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = 'Выходы на объекты';
-
-/*if (!$this->params['useSideNavInsteadOfBreadcrumbs']) {
-    $this->params['breadcrumbs'][] = $this->title;
-}*/
 
 $actionsTemplate = '{update} {delete}';
 
@@ -36,19 +31,14 @@ if (\Yii::$app->user->can('brigadeWorker')) {
                 ' Создать выход на объект', ['create'], ['class' => 'btn btn-success']);
         }
         ?>
-        <?php /* echo Html::button('Поиск', ['class' => 'btn btn-primary',
-            'data-toggle' => 'collapse', 'data-target' => '#search-collapse']) */ ?>
     </p>
-
-    <?php /* echo $this->render('_search', ['model' => $searchModel]); */ ?>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-            ['class' => 'kartik\grid\SerialColumn', /* 'headerOptions' => ['rowspan' => 2] */ ],
+            ['class' => 'kartik\grid\SerialColumn'],
 
-            //'id',
             'order_id',
             [
                 'attribute' => 'brigade_gathering_datetime',
@@ -58,7 +48,7 @@ if (\Yii::$app->user->can('brigadeWorker')) {
             [
                 'class' => 'kartik\grid\ActionColumn',
                 'template' => $actionsTemplate,
-                'header' => 'Действия', /* 'headerOptions' => ['rowspan' => 2] */
+                'header' => 'Действия',
             ],
         ],
     ]); ?>

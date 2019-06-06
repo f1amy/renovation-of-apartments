@@ -20,7 +20,7 @@ $config = [
             'cookieValidationKey' => 'KP1oqdJGvkD0RTozjPbkZ8XNY6cV5Gfr',
         ],
         'cache' => [
-            'class' => 'yii\caching\MemCache', //FileCache
+            'class' => 'yii\caching\MemCache', // was FileCache
             'useMemcached' => true,
             'servers' => [
                 [
@@ -37,13 +37,6 @@ $config = [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
-        'mailer' => [
-            'class' => 'yii\swiftmailer\Mailer',
-            // send all mails to a file by default. You have to set
-            // 'useFileTransport' to false and configure a transport
-            // for the mailer to send real emails.
-            'useFileTransport' => true,
-        ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
             'targets' => [
@@ -58,14 +51,13 @@ $config = [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'enableStrictParsing' => true,
-            //'suffix' => '/',
             'normalizer' => [
                 'class' => 'yii\web\UrlNormalizer',
                 // use temporary redirection instead of permanent for debugging
                 //'action' => yii\web\UrlNormalizer::ACTION_REDIRECT_TEMPORARY,
             ],
             'rules' => [
-                //url => action
+                // url => action
                 'table/<name>' => 'table/<name>/index',
                 'table/<name>/<action:(create|view|update|delete)>' => 'table/<name>/<action>',
                 'form/<name>/<action:(create|view|update|delete)>' => 'form/<name>/<action>',
@@ -83,7 +75,6 @@ $config = [
         ],
         'formatter' => [
             'defaultTimeZone' => 'Asia/Yekaterinburg',
-            //'timeZone' => 'Asia/Yekaterinburg',
             //'datetimeFormat' => 'php:d.m.Y H:i:s',
         ],
     ],

@@ -1,12 +1,9 @@
 <?php
 
 use yii\helpers\Html;
-//use yii\widgets\ActiveForm;
-//use yii\bootstrap\ActiveForm;
 use yii\bootstrap4\ActiveForm;
 
 use yii\helpers\ArrayHelper;
-//use dosamigos\datetimepicker\DateTimePicker;
 use kartik\datetime\DateTimePicker;
 
 use app\models\table\Order;
@@ -28,8 +25,6 @@ use app\models\table\Order;
     ) ?>
 
     <?= $form->field($model, 'brigade_gathering_datetime')->widget(DateTimePicker::className(), [
-        /* 'language' => 'ru',
-        'template' => '{button}{reset}{input}', */
         'pluginOptions' => [
             'autoclose' => true,
             'format' => 'yyyy-mm-dd hh:ii:ss',

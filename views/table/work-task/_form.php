@@ -1,8 +1,6 @@
 <?php
 
 use yii\helpers\Html;
-//use yii\widgets\ActiveForm;
-//use yii\bootstrap\ActiveForm;
 use yii\bootstrap4\ActiveForm;
 use yii\helpers\ArrayHelper;
 
