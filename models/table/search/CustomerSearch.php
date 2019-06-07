@@ -57,10 +57,6 @@ class CustomerSearch extends Customer
         }
 
         // grid filtering conditions
-        $query->andFilterWhere([
-            'id' => $this->id,
-        ]);
-
         $query->andFilterWhere(['like', 'full_name', $this->full_name])
             ->andFilterWhere(['like', 'phone_number', $this->phone_number])
             ->andFilterWhere(['like', 'email_address', $this->email_address]);

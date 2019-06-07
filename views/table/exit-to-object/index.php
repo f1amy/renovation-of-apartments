@@ -43,18 +43,31 @@ if (\Yii::$app->user->can('brigadeWorker')) {
         'columns' => [
             ['class' => 'kartik\grid\SerialColumn'],
 
-            'order_id',
+            [
+                'attribute' => 'order_id',
+                'label' => 'Номер договора'
+            ],
+            [
+                'attribute' => 'customer',
+                'value' => 'customer.full_name',
+                'label' => 'ФИО заказчика'
+            ],
             [
                 'attribute' => 'brigade_gathering_datetime',
-                'format' => ['datetime', 'php:Y-m-d H:i'],
+                'format' => 'datetime',
                 'filter' => DateTimePicker::widget([
                     'name' => 'ExitToObjectSearch[brigade_gathering_datetime]',
                     'pluginOptions' => [
                         'autoclose' => true,
-                        'format' => 'yyyy-mm-dd hh:ii:ss',
+                        'format' => 'dd.mm.yyyy hh:ii',
                         'todayBtn' => true,
                     ]
                 ])
+            ],
+            [
+                'attribute' => 'workObject',
+                'value' => 'workObject.house_address',
+                'label' => 'Адрес рабочего объекта'
             ],
 
             [

@@ -35,6 +35,7 @@ class Employee extends \yii\db\ActiveRecord
             [['full_name', 'phone_number', 'position'], 'required'],
             [['full_name', 'email_address', 'position'], 'string', 'max' => 64],
             [['email_address'], 'email'],
+            [['email_address'], 'default', 'value' => null],
             [
                 ['full_name'], 'match', 'pattern' => '/^[А-Я][а-я]+ [А-Я][а-я]+ [А-Я][а-я]+$/u',
                 'message' => 'Значение «ФИО» неверно. Используйте формат: "Фамилия Имя Отчество".'

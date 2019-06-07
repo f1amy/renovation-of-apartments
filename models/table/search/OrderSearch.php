@@ -21,7 +21,8 @@ class OrderSearch extends Order
     {
         return [
             [['id', 'customer_id', 'work_object_id'], 'integer'],
-            [['contract_date', 'customer', 'workObject'], 'safe'],
+            [['customer', 'workObject'], 'safe'],
+            [['contract_date'], 'date', 'format' => 'php:Y-m-d'],
         ];
     }
 
@@ -73,9 +74,7 @@ class OrderSearch extends Order
 
         // grid filtering conditions
         $query->andFilterWhere([
-            'id' => $this->id,
-            'customer_id' => $this->customer_id,
-            'work_object_id' => $this->work_object_id,
+            'order.id' => $this->id,
             'contract_date' => $this->contract_date
         ]);
 

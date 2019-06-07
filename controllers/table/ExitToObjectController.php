@@ -90,6 +90,9 @@ class ExitToObjectController extends Controller
     {
         $model = $this->findModel($id);
 
+        $model->brigade_gathering_datetime = \Yii::$app->formatter
+            ->asDate($model->brigade_gathering_datetime, 'php:d.m.Y H:i');
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['index']);
         }

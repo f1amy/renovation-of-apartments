@@ -11,6 +11,9 @@ use yii\data\ActiveDataProvider;
  */
 class ExitToObjectSearch extends ExitToObject
 {
+    public $customer;
+    public $workObject;
+
     /**
      * {@inheritdoc}
      */
@@ -18,7 +21,7 @@ class ExitToObjectSearch extends ExitToObject
     {
         return [
             [['id', 'order_id'], 'integer'],
-            [['brigade_gathering_datetime'], 'safe'],
+            [['brigade_gathering_datetime', 'customer', 'workObject'], 'safe'],
         ];
     }
 
@@ -42,11 +45,23 @@ class ExitToObjectSearch extends ExitToObject
     {
         $query = ExitToObject::find();
 
+        $query->joinWith(['customer', 'workObject']);
+
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
+
+        $dataProvider->sort->attributes['customer'] = [
+            'asc' => ['customer.full_name' => SORT_ASC],
+            'desc' => ['customer.full_name' => SORT_DESC],
+        ];
+
+        $dataProvider->sort->attributes['workObject'] = [
+            'asc' => ['work_object.house_address' => SORT_ASC],
+            'desc' => ['work_object.house_address' => SORT_DESC],
+        ];
 
         $this->load($params);
 
@@ -58,10 +73,12 @@ class ExitToObjectSearch extends ExitToObject
 
         // grid filtering conditions
         $query->andFilterWhere([
-            'id' => $this->id,
-            'order_id' => $this->order_id,
             'brigade_gathering_datetime' => $this->brigade_gathering_datetime
         ]);
+
+        $query->andFilterWhere(['like', 'order_id', $this->order_id])
+            ->andFilterWhere(['like', 'customer.full_name', $this->customer])
+            ->andFilterWhere(['like', 'work_object.house_address', $this->workObject]);
 
         return $dataProvider;
     }

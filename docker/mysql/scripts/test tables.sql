@@ -137,7 +137,7 @@ insert into customer (
     phone_number
 ) values (
     'Константинов Альберт Улебович',
-    '+79504662378'
+    '+7 950 466-23-78'
 );
 
 insert into customer (
@@ -146,7 +146,7 @@ insert into customer (
     email_address
 ) values (
     'Титов Лука Львович',
-    '+79503889256',
+    '+7 950 388-92-56',
     'titov.lion@gmail.com'
 );
 
@@ -156,7 +156,7 @@ insert into customer (
     email_address
 ) values (
     'Терентьева Силика Рубеновна',
-    '+79509642844',
+    '+7 950 964-28-44',
     'terentyeva.silika@gmail.com'
 );
 
@@ -166,7 +166,7 @@ insert into customer (
     email_address
 ) values (
     'Григорьева Залина Семеновна',
-    '+795056378253',
+    '+7 950 563-78-23',
     'grigorieva.zalina@gmail.com'
 );
 
@@ -257,7 +257,7 @@ insert into employee (
     position
 ) values (
     'Лазарева Эрида Ростиславовна',
-    '+79508672857',
+    '+7 950 867-28-57',
     'lazareva.erida@gmail.com',
     'Начальница учета'
 );
@@ -269,7 +269,7 @@ insert into employee (
     position
 ) values (
     'Волков Олег Альбертович',
-    '+79502562759',
+    '+7 950 256-27-59',
     'volkov.oleg@gmail.com',
     'Бригадир'
 );
@@ -277,12 +277,10 @@ insert into employee (
 insert into employee (
     full_name,
     phone_number,
-    email_address,
     position
 ) values (
     'Костин Борис Андреевич',
-    '+79509487275',
-    'kostin.boris@gmail.com',
+    '+7 950 948-72-75',
     'Рабочий'
 );
 
@@ -293,7 +291,7 @@ insert into employee (
     position
 ) values (
     'Архипов Мечеслав Христофорович',
-    '+79508764692',
+    '+7 950 876-46-92',
     'arhipov.mecheslav@gmail.com',
     'Рабочий'
 );
@@ -305,7 +303,7 @@ insert into employee (
     position
 ) values (
     'Новиков Вениамин Ярославович',
-    '+79506638792',
+    '+7 950 663-87-92',
     'novikov.veniamin@gmail.com',
     'Рабочий'
 );
@@ -317,7 +315,7 @@ insert into employee (
     position
 ) values (
     'Самсонов Анатолий Кимович',
-    '+79505793984',
+    '+7 950 579-39-84',
     'samsonov.anatoly@gmail.com',
     'Рабочий'
 );
@@ -325,12 +323,10 @@ insert into employee (
 insert into employee (
     full_name,
     phone_number,
-    email_address,
     position
 ) values (
     'Королёв Федор Альбертович',
-    '+79507854283',
-    'korolev.fedor@gmail.com',
+    '+7 950 785-42-83',
     'Рабочий'
 );
 
@@ -341,7 +337,7 @@ insert into employee (
     position
 ) values (
     'Тарасов Игорь Васильевич',
-    '+79508649268',
+    '+7 950 864-92-68',
     'tarasov.igor@gmail.com',
     'Директор'
 );
@@ -353,7 +349,7 @@ insert into employee (
     position
 ) values (
     'Владимирова Неолина Тимофеевна',
-    '+79509873568',
+    '+7 950 987-35-68',
     'vladimirovna.neolina@gmail.com',
     'Начальница кадров'
 );

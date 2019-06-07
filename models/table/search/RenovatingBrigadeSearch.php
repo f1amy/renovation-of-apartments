@@ -13,6 +13,7 @@ class RenovatingBrigadeSearch extends RenovatingBrigade
 {
     public $employee;
     public $exitToObject;
+    public $workObject;
 
     /**
      * {@inheritdoc}
@@ -21,8 +22,25 @@ class RenovatingBrigadeSearch extends RenovatingBrigade
     {
         return [
             [['id', 'employee_id', 'exit_to_object_id'], 'integer'],
-            [['employee', 'exitToObject'], 'safe'],
+            [['employee', 'workObject'], 'safe'],
+            [['exitToObject'], 'datetime', 'format' => 'php:Y-m-d H:i:s'],
         ];
+    }
+
+    public function beforeValidate()
+    {
+        if (!parent::beforeValidate()) {
+            return false;
+        }
+
+        $value = $this->exitToObject;
+
+        if ($value != '' && $value != null) {
+            $this->exitToObject = \Yii::$app
+                ->formatter->asDatetime($value, 'php:Y-m-d H:i:s');
+        }
+
+        return true;
     }
 
     /**
@@ -45,7 +63,7 @@ class RenovatingBrigadeSearch extends RenovatingBrigade
     {
         $query = RenovatingBrigade::find();
 
-        $query->joinWith(['employee', 'exitToObject']);
+        $query->joinWith(['employee', 'exitToObject', 'workObject']);
 
         // add conditions that should always apply here
 
@@ -63,6 +81,11 @@ class RenovatingBrigadeSearch extends RenovatingBrigade
             'desc' => ['exit_to_object.brigade_gathering_datetime' => SORT_DESC],
         ];
 
+        $dataProvider->sort->attributes['workObject'] = [
+            'asc' => ['work_object.house_address' => SORT_ASC],
+            'desc' => ['work_object.house_address' => SORT_DESC],
+        ];
+
         $this->load($params);
 
         if (!$this->validate()) {
@@ -73,13 +96,14 @@ class RenovatingBrigadeSearch extends RenovatingBrigade
 
         // grid filtering conditions
         $query->andFilterWhere([
-            'id' => $this->id,
-            'employee_id' => $this->employee_id,
-            'exit_to_object_id' => $this->exit_to_object_id,
+            'exit_to_object.brigade_gathering_datetime' => $this->exitToObject
         ]);
 
         $query->andFilterWhere(['like', 'employee.full_name', $this->employee])
-            ->andFilterWhere(['like', 'exit_to_object.brigade_gathering_datetime', $this->exitToObject]);
+            ->andFilterWhere([
+                'like', 'work_object.house_address',
+                $this->workObject
+            ]);
 
         return $dataProvider;
     }

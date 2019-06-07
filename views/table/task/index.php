@@ -41,7 +41,7 @@ $this->title = 'Задачи';
             ['class' => 'kartik\grid\SerialColumn'],
 
             'text',
-            ['attribute' => 'cost', 'label' => 'Стоимость услуги, руб.'],
+            'cost:currency',
 
             [
                 'class' => 'kartik\grid\ActionColumn',

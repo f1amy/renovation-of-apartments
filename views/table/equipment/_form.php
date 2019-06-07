@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\bootstrap4\ActiveForm;
 use yii\helpers\ArrayHelper;
+use kartik\select2\Select2;
 
 use app\models\table\Item;
 use app\models\table\ExitToObject;
@@ -16,17 +17,20 @@ use app\models\table\ExitToObject;
 
     <?php $form = ActiveForm::begin(['options' => ['class' => 'col-lg-6']]); ?>
 
-    <?= $form->field($model, 'item_id')->dropDownList(ArrayHelper::map(
-        Item::find()->all(),
-        'id',
-        function ($model) {
-            return 'Инв. №' . $model->id . ' - ' . $model->name .
-                ' - Остаток ' . $model->quantity . ' шт.';
-        }
-    ), ['prompt' => 'Выберите значение...'])->label('Вещь') ?>
+    <?= $form->field($model, 'item_id')->widget(Select2::classname(), [
+        'data' => ArrayHelper::map(
+            Item::find()->all(),
+            'id',
+            function ($model) {
+                return 'Инв. №' . $model->id . ' - ' . $model->name .
+                    ' - Остаток ' . $model->quantity . ' шт.';
+            }
+        ),
+        'options' => ['prompt' => 'Выберите значение...'],
+    ])->label('Вещь') ?>
 
-    <?= $form->field($model, 'exit_to_object_id')->dropDownList(
-        ArrayHelper::map(
+    <?= $form->field($model, 'exit_to_object_id')->widget(Select2::classname(), [
+        'data' => ArrayHelper::map(
             ExitToObject::find()->all(),
             'id',
             function ($model) {
@@ -34,8 +38,8 @@ use app\models\table\ExitToObject;
                     ' - Место ' . $model->order->workObject->house_address;
             }
         ),
-        ['prompt' => 'Выберите значение...']
-    )->label('Выход на объект') ?>
+        'options' => ['prompt' => 'Выберите значение...'],
+    ])->label('Выход на объект') ?>
 
     <?= $form->field($model, 'item_quantity')
         ->input('number', ['step' => '1', 'min' => '0']) ?>

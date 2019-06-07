@@ -63,6 +63,31 @@ class WorkTask extends \yii\db\ActiveRecord
      */
     public function getExitToObject()
     {
-        return $this->hasOne(ExitToObject::className(), ['id' => 'exit_to_object_id']);
+        return $this->hasOne(
+            ExitToObject::className(),
+            ['id' => 'exit_to_object_id']
+        );
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getWorkObject()
+    {
+        return $this->hasOne(
+            WorkObject::className(),
+            ['id' => 'work_object_id']
+        )->via('order');
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getOrder()
+    {
+        return $this->hasOne(
+            Order::className(),
+            ['id' => 'order_id']
+        )->via('exitToObject');
     }
 }

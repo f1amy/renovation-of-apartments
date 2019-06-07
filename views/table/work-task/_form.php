@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\bootstrap4\ActiveForm;
 use yii\helpers\ArrayHelper;
+use kartik\select2\Select2;
 
 use app\models\table\Task;
 use app\models\table\ExitToObject;
@@ -16,25 +17,28 @@ use app\models\table\ExitToObject;
 
     <?php $form = ActiveForm::begin(['options' => ['class' => 'col-lg-6']]); ?>
 
-    <?= $form->field($model, 'task_id')->dropDownList(
-        ArrayHelper::map(
+    <?= $form->field($model, 'task_id')->widget(Select2::classname(), [
+        'data' => ArrayHelper::map(
             Task::find()->all(),
             'id',
             function ($model) {
                 return $model->text;
             }
         ),
-        ['prompt' => 'Выберите значение...']
-    )->label('Задача') ?>
+        'options' => ['prompt' => 'Выберите значение...'],
+    ])->label('Задача') ?>
 
-    <?= $form->field($model, 'exit_to_object_id')->dropDownList(ArrayHelper::map(
-        ExitToObject::find()->all(),
-        'id',
-        function ($model) {
-            return 'Дата выхода ' . $model->brigade_gathering_datetime .
-                ' - Место ' . $model->order->workObject->house_address;
-        }
-    ), ['prompt' => 'Выберите значение...'])->label('Выход на объект') ?>
+    <?= $form->field($model, 'exit_to_object_id')->widget(Select2::classname(), [
+        'data' => ArrayHelper::map(
+            ExitToObject::find()->all(),
+            'id',
+            function ($model) {
+                return 'Дата выхода ' . $model->brigade_gathering_datetime .
+                    ' - Место ' . $model->order->workObject->house_address;
+            }
+        ),
+        'options' => ['prompt' => 'Выберите значение...'],
+    ])->label('Выход на объект') ?>
 
     <div class="form-group">
         <?= Html::submitButton('Сохранить', [

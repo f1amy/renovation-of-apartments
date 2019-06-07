@@ -42,6 +42,7 @@ class Customer extends \yii\db\ActiveRecord
                 'pattern' => '/^\+7 \d{3} \d{3}-\d{2}-\d{2}$/'
             ],
             [['email_address'], 'email'],
+            [['email_address'], 'default', 'value' => null],
             [['phone_number'], 'unique'],
             [['email_address'], 'unique'],
         ];

@@ -13,6 +13,7 @@ class EquipmentSearch extends Equipment
 {
     public $item;
     public $exitToObject;
+    public $workObject;
 
     /**
      * {@inheritdoc}
@@ -21,8 +22,25 @@ class EquipmentSearch extends Equipment
     {
         return [
             [['id', 'item_id', 'exit_to_object_id', 'item_quantity'], 'integer'],
-            [['item', 'exitToObject'], 'safe'],
+            [['item', 'workObject'], 'safe'],
+            [['exitToObject'], 'datetime', 'format' => 'php:Y-m-d H:i:s'],
         ];
+    }
+
+    public function beforeValidate()
+    {
+        if (!parent::beforeValidate()) {
+            return false;
+        }
+
+        $value = $this->exitToObject;
+
+        if ($value != '' && $value != null) {
+            $this->exitToObject = \Yii::$app
+                ->formatter->asDatetime($value, 'php:Y-m-d H:i:s');
+        }
+
+        return true;
     }
 
     /**
@@ -45,7 +63,7 @@ class EquipmentSearch extends Equipment
     {
         $query = Equipment::find();
 
-        $query->joinWith(['item', 'exitToObject']);
+        $query->joinWith(['item', 'exitToObject', 'workObject']);
 
         // add conditions that should always apply here
 
@@ -63,6 +81,11 @@ class EquipmentSearch extends Equipment
             'desc' => ['exit_to_object.brigade_gathering_datetime' => SORT_DESC],
         ];
 
+        $dataProvider->sort->attributes['workObject'] = [
+            'asc' => ['work_object.house_address' => SORT_ASC],
+            'desc' => ['work_object.house_address' => SORT_DESC],
+        ];
+
         $this->load($params);
 
         if (!$this->validate()) {
@@ -73,14 +96,16 @@ class EquipmentSearch extends Equipment
 
         // grid filtering conditions
         $query->andFilterWhere([
-            'id' => $this->id,
-            'item_id' => $this->item_id,
-            'exit_to_object_id' => $this->exit_to_object_id,
-            'item_quantity' => $this->item_quantity,
+            'exit_to_object.brigade_gathering_datetime' => $this->exitToObject
         ]);
 
-        $query->andFilterWhere(['like', 'item.name', $this->item])
-            ->andFilterWhere(['like', 'exit_to_object.brigade_gathering_datetime', $this->exitToObject]);
+        $query->andFilterWhere(['like', 'item_quantity', $this->item_quantity])
+            ->andFilterWhere(['like', 'item.name', $this->item])
+            ->andFilterWhere([
+                'like',
+                'work_object.house_address',
+                $this->workObject
+            ]);
 
         return $dataProvider;
     }

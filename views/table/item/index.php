@@ -42,9 +42,9 @@ $this->title = 'Вещи на складах';
                 'label' => 'Наименование склада',
             ],
             'name',
-            ['attribute' => 'quantity', 'label' => 'Количество, шт.'],
-            ['attribute' => 'purchase_price', 'label' => 'Цена покупки, руб.'],
             'type',
+            ['attribute' => 'quantity', 'label' => 'Количество, шт.'],
+            'purchase_price:currency',
 
             [
                 'class' => 'kartik\grid\ActionColumn',

@@ -41,9 +41,9 @@ $this->title = 'Сотрудники';
             ['class' => 'kartik\grid\SerialColumn'],
 
             'full_name',
+            'position',
             'phone_number',
             'email_address:email',
-            'position',
 
             [
                 'class' => 'kartik\grid\ActionColumn',

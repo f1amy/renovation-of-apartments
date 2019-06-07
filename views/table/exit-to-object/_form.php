@@ -5,6 +5,7 @@ use yii\bootstrap4\ActiveForm;
 
 use yii\helpers\ArrayHelper;
 use kartik\datetime\DateTimePicker;
+use kartik\select2\Select2;
 
 use app\models\table\Order;
 
@@ -17,19 +18,19 @@ use app\models\table\Order;
 
     <?php $form = ActiveForm::begin(['options' => ['class' => 'col-lg-6']]); ?>
 
-    <?= $form->field($model, 'order_id')->dropDownList(
-        ArrayHelper::map(Order::find()->all(), 'id', function ($model) {
+    <?= $form->field($model, 'order_id')->widget(Select2::classname(), [
+        'data' => ArrayHelper::map(Order::find()->all(), 'id', function ($model) {
             return 'Договор №' . $model->id . ' от ' . $model->contract_date .
                 ' - ' . $model->customer->full_name .
                 ' - ' . $model->workObject->house_address;
         }),
-        ['prompt' => 'Выберите значение...']
-    )->label('Заказ') ?>
+        'options' => ['prompt' => 'Выберите значение...'],
+    ])->label('Заказ') ?>
 
     <?= $form->field($model, 'brigade_gathering_datetime')->widget(DateTimePicker::className(), [
         'pluginOptions' => [
             'autoclose' => true,
-            'format' => 'yyyy-mm-dd hh:ii:ss',
+            'format' => 'dd.mm.yyyy hh:ii',
             'todayBtn' => true,
         ]
     ]) ?>

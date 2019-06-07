@@ -57,14 +57,13 @@ class WorkObjectSearch extends WorkObject
         }
 
         // grid filtering conditions
+        $query->andFilterWhere(['like', 'house_address', $this->house_address]);
+
         $query->andFilterWhere([
-            'id' => $this->id,
             'apartment_number' => $this->apartment_number,
             'entrance_number' => $this->entrance_number,
             'floor_number' => $this->floor_number,
         ]);
-
-        $query->andFilterWhere(['like', 'house_address', $this->house_address]);
 
         return $dataProvider;
     }

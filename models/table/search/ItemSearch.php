@@ -68,17 +68,12 @@ class ItemSearch extends Item
         }
 
         // grid filtering conditions
-        $query->andFilterWhere([
-            'item.id' => $this->id,
-            'warehouse_id' => $this->warehouse_id,
-            'quantity' => $this->quantity,
-            'purchase_price' => $this->purchase_price,
-        ]);
-
-        $query->andFilterWhere(['like', 'name', $this->name])
-            ->andFilterWhere(['like', 'type', $this->type]);
-
-        $query->andFilterWhere(['like', 'warehouse.name', $this->warehouse]);
+        $query->andFilterWhere(['like', 'item.id', $this->id])
+            ->andFilterWhere(['like', 'quantity', $this->quantity])
+            ->andFilterWhere(['like', 'purchase_price', $this->purchase_price])
+            ->andFilterWhere(['like', 'item.name', $this->name])
+            ->andFilterWhere(['like', 'type', $this->type])
+            ->andFilterWhere(['like', 'warehouse.name', $this->warehouse]);
 
         return $dataProvider;
     }

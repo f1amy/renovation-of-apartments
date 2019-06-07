@@ -75,7 +75,11 @@ $config = [
         ],
         'formatter' => [
             'defaultTimeZone' => 'Asia/Yekaterinburg',
-            //'datetimeFormat' => 'php:d.m.Y H:i:s',
+            'timeZone' => 'Asia/Yekaterinburg',
+            'dateFormat' => 'dd.MM.yyyy',
+            'datetimeFormat' => 'dd.MM.yyyy HH:mm',
+            'locale' => 'ru-RU',
+            'currencyCode' => 'RUB'
         ],
     ],
     'params' => $params,

@@ -5,6 +5,7 @@ use kartik\grid\GridView;
 use yii\widgets\Pjax;
 
 use rmrevin\yii\fontawesome\FAS;
+use kartik\datetime\DateTimePicker;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\table\search\RenovatingBrigadeSearch */
@@ -50,7 +51,21 @@ if (\Yii::$app->user->can('brigadeWorker')) {
             [
                 'attribute' => 'exitToObject',
                 'value' => 'exitToObject.brigade_gathering_datetime',
+                'format' => 'datetime',
                 'label' => 'Дата и время сбора бригады',
+                'filter' => DateTimePicker::widget([
+                    'name' => 'RenovatingBrigadeSearch[exitToObject]',
+                    'pluginOptions' => [
+                        'autoclose' => true,
+                        'format' => 'dd.mm.yyyy hh:ii',
+                        'todayBtn' => true,
+                    ]
+                ])
+            ],
+            [
+                'attribute' => 'workObject',
+                'value' => 'workObject.house_address',
+                'label' => 'Адрес рабочего объекта'
             ],
 
             [

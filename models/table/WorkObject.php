@@ -32,6 +32,7 @@ class WorkObject extends \yii\db\ActiveRecord
     {
         return [
             [['house_address', 'apartment_number'], 'required'],
+            [['entrance_number', 'floor_number'], 'default', 'value' => null],
             [['apartment_number', 'entrance_number', 'floor_number'], 'integer', 'min' => 0],
             [['house_address'], 'string', 'max' => 64],
             [['house_address', 'apartment_number'], 'unique', 'targetAttribute' => ['house_address', 'apartment_number']],

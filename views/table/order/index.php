@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use kartik\grid\GridView;
 use yii\widgets\Pjax;
+use kartik\datetime\DateTimePicker;
 
 use rmrevin\yii\fontawesome\FAS;
 
@@ -37,7 +38,19 @@ $this->title = 'Заказы';
             ['class' => 'kartik\grid\SerialColumn'],
 
             'id',
-            'contract_date',
+            [
+                'attribute' => 'contract_date',
+                'format' => 'date',
+                'filter' => DateTimePicker::widget([
+                    'name' => 'OrderSearch[contract_date]',
+                    'pluginOptions' => [
+                        'autoclose' => true,
+                        'format' => 'dd.mm.yyyy',
+                        'minView' => 2,
+                        'todayBtn' => true,
+                    ]
+                ])
+            ],
             [
                 'attribute' => 'customer',
                 'value' => 'customer.full_name',
@@ -51,7 +64,7 @@ $this->title = 'Заказы';
             [
                 'attribute' => 'totalCost',
                 'label' => 'Общая стоимость',
-                'format' => ['currency', 'RUB'],
+                'format' => 'currency',
             ],
 
             [

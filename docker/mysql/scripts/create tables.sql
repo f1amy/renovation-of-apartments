@@ -21,9 +21,9 @@ create table if not exists item (
     id integer not null auto_increment,
     warehouse_id integer not null,
     name varchar(32) not null,
+    type enum ('Инструмент', 'Материал') not null,
     quantity integer not null,
     purchase_price decimal(10, 2) not null,
-    type enum ('Инструмент', 'Материал') not null,
     primary key (id),
     foreign key (warehouse_id)
         references warehouse (id),
@@ -65,9 +65,9 @@ create table if not exists `order` (
 create table if not exists employee (
     id integer not null auto_increment,
     full_name varchar(64) not null,
+    position varchar(64) not null,
     phone_number varchar(32) not null,
     email_address varchar(64) null,
-    position varchar(64) not null,
     primary key (id),
     unique key (phone_number),
     unique key (email_address)
@@ -98,8 +98,8 @@ create table if not exists work_task (
 create table if not exists equipment (
     id integer not null auto_increment,
     item_id integer not null,
-    exit_to_object_id integer not null,
     item_quantity integer not null,
+    exit_to_object_id integer not null,
     primary key (id),
     foreign key (item_id)
         references item (id),

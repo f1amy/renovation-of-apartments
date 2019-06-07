@@ -54,7 +54,7 @@ class OrderController extends \yii\web\Controller
                 $order->customer_id = $customer->id;
                 $order->work_object_id = $workObject->id;
 
-                $order->save(false);
+                $order->save();
 
                 return $this->redirect(['table/order/index']);
             }

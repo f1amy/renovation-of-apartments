@@ -79,3 +79,18 @@ main {
     display: none !important;
   }
 }
+
+.select2-container--krajee-bs4
+.select2-results__option--highlighted[aria-selected] {
+  background-color: var(--primary);
+}
+
+select.form-control.select2-hidden-accessible.is-valid ~
+.select2-container--krajee-bs4 span.select2-selection--single {
+  border-color: #28a745;
+}
+
+select.form-control.select2-hidden-accessible.is-invalid ~
+.select2-container--krajee-bs4 span.select2-selection--single {
+  border-color: #dc3545;
+}

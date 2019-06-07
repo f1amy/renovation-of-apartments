@@ -58,12 +58,8 @@ class TaskSearch extends Task
         }
 
         // grid filtering conditions
-        $query->andFilterWhere([
-            'id' => $this->id,
-            'cost' => $this->cost,
-        ]);
-
-        $query->andFilterWhere(['like', 'text', $this->text]);
+        $query->andFilterWhere(['like', 'text', $this->text])
+            ->andFilterWhere(['like', 'cost', $this->cost]);
 
         return $dataProvider;
     }

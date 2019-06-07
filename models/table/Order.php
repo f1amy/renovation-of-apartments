@@ -43,10 +43,26 @@ class Order extends \yii\db\ActiveRecord
     public function init()
     {
         if (!method_exists($this, 'search')) {
-            $this->contract_date = date('Y-m-d');
+            $this->contract_date = date('d.m.Y');
         }
 
         parent::init();
+    }
+
+    public function beforeValidate()
+    {
+        if (!parent::beforeValidate()) {
+            return false;
+        }
+
+        $value = $this->contract_date;
+
+        if ($value != '' && $value != null) {
+            $this->contract_date = Yii::$app
+                ->formatter->asDate($value, 'php:Y-m-d');
+        }
+
+        return true;
     }
 
     /**

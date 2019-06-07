@@ -85,6 +85,9 @@ class OrderController extends Controller
     {
         $model = $this->findModel($id);
 
+        $model->contract_date = \Yii::$app->formatter
+            ->asDate($model->contract_date, 'php:d.m.Y');
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['index']);
         }

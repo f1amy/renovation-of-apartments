@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use kartik\grid\GridView;
 use yii\widgets\Pjax;
+use kartik\datetime\DateTimePicker;
 
 use rmrevin\yii\fontawesome\FAS;
 
@@ -48,11 +49,28 @@ if (\Yii::$app->user->can('brigadeWorker')) {
                 'label' => 'Наименование вещи',
             ],
             [
+                'attribute' => 'item_quantity',
+                'label' => 'Количество вещей, шт.'
+            ],
+            [
                 'attribute' => 'exitToObject',
                 'value' => 'exitToObject.brigade_gathering_datetime',
+                'format' => 'datetime',
                 'label' => 'Дата и время сбора бригады',
+                'filter' => DateTimePicker::widget([
+                    'name' => 'EquipmentSearch[exitToObject]',
+                    'pluginOptions' => [
+                        'autoclose' => true,
+                        'format' => 'dd.mm.yyyy hh:ii',
+                        'todayBtn' => true,
+                    ]
+                ])
             ],
-            ['attribute' => 'item_quantity', 'label' => 'Количество вещей, шт.'],
+            [
+                'attribute' => 'workObject',
+                'value' => 'workObject.house_address',
+                'label' => 'Адрес рабочего объекта'
+            ],
 
             [
                 'class' => 'kartik\grid\ActionColumn',

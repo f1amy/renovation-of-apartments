@@ -57,10 +57,6 @@ class WarehouseSearch extends Warehouse
         }
 
         // grid filtering conditions
-        $query->andFilterWhere([
-            'id' => $this->id,
-        ]);
-
         $query->andFilterWhere(['like', 'name', $this->name])
             ->andFilterWhere(['like', 'address', $this->address]);
 

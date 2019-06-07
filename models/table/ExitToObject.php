@@ -44,6 +44,31 @@ class ExitToObject extends \yii\db\ActiveRecord
         ];
     }
 
+    public function init()
+    {
+        if (!method_exists($this, 'search')) {
+            $this->brigade_gathering_datetime = date('d.m.Y H:i');
+        }
+
+        parent::init();
+    }
+
+    public function beforeValidate()
+    {
+        if (!parent::beforeValidate()) {
+            return false;
+        }
+
+        $value = $this->brigade_gathering_datetime;
+
+        if ($value != '' && $value != null) {
+            $this->brigade_gathering_datetime = Yii::$app
+                ->formatter->asDatetime($value, 'php:Y-m-d H:i:s');
+        }
+
+        return true;
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -78,6 +103,28 @@ class ExitToObject extends \yii\db\ActiveRecord
     public function getOrder()
     {
         return $this->hasOne(Order::className(), ['id' => 'order_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCustomer()
+    {
+        return $this->hasOne(
+            Customer::className(),
+            ['id' => 'customer_id']
+        )->via('order');
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getWorkObject()
+    {
+        return $this->hasOne(
+            WorkObject::className(),
+            ['id' => 'work_object_id']
+        )->via('order');
     }
 
     /**

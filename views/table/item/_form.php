@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\bootstrap4\ActiveForm;
 use yii\helpers\ArrayHelper;
+use kartik\select2\Select2;
 
 use app\models\table\Warehouse;
 
@@ -15,15 +16,16 @@ use app\models\table\Warehouse;
 
     <?php $form = ActiveForm::begin(['options' => ['class' => 'col-lg-6']]); ?>
 
-    <?= $form->field($model, 'warehouse_id')->dropDownList(
-        ArrayHelper::map(
+    <?= $form->field($model, 'warehouse_id')->widget(Select2::classname(), [
+        'data' => ArrayHelper::map(
             Warehouse::find()->all(),
             'id',
             function ($model) {
                 return $model->name . ' - Адрес ' . $model->address;
-            }),
-        ['prompt' => 'Выберите значение...']
-    )->label('Склад') ?>
+            }
+        ),
+        'options' => ['prompt' => 'Выберите значение...'],
+    ])->label('Склад') ?>
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 

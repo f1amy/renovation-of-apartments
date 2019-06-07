@@ -45,8 +45,8 @@ class EmployeeReport extends Model
     public function init()
     {
         if (!method_exists($this, 'search')) {
-            $this->start_date = date('Y-m') . '-01';
-            $this->end_date = date('Y-m-d');
+            $this->start_date = '01.' . date('m.Y');
+            $this->end_date = date('d.m.Y');
         }
 
         parent::init();
