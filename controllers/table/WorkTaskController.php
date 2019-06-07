@@ -63,7 +63,8 @@ class WorkTaskController extends Controller
 
     /**
      * Creates a new WorkTask model.
-     * If creation is successful, the browser will be redirected to the 'index' page.
+     * If creation is successful, the browser will be redirected
+     * to the 'index' page.
      * @return mixed
      */
     public function actionCreate()
@@ -81,7 +82,8 @@ class WorkTaskController extends Controller
 
     /**
      * Updates an existing WorkTask model.
-     * If update is successful, the browser will be redirected to the 'index' page.
+     * If update is successful, the browser will be redirected
+     * to the 'index' page.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -101,7 +103,8 @@ class WorkTaskController extends Controller
 
     /**
      * Deletes an existing WorkTask model.
-     * If deletion is successful, the browser will be redirected to the 'index' page.
+     * If deletion is successful, the browser will be redirected
+     * to the 'index' page.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found

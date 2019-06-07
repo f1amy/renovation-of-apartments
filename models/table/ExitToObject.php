@@ -38,9 +38,22 @@ class ExitToObject extends \yii\db\ActiveRecord
             [['order_id', 'brigade_gathering_datetime'], 'required'],
             [['order_id'], 'integer', 'min' => 0],
             [['brigade_gathering_datetime'], 'safe'],
-            [['order_id', 'brigade_gathering_datetime'], 'unique', 'targetAttribute' => ['order_id', 'brigade_gathering_datetime']],
-            [['brigade_gathering_datetime'], 'datetime', 'format' => 'php:Y-m-d H:i:s'],
-            [['order_id'], 'exist', 'skipOnError' => true, 'targetClass' => Order::className(), 'targetAttribute' => ['order_id' => 'id']],
+            [
+                ['order_id', 'brigade_gathering_datetime'],
+                'unique',
+                'targetAttribute' => ['order_id', 'brigade_gathering_datetime']
+            ],
+            [
+                ['brigade_gathering_datetime'],
+                'datetime', 'format' => 'php:Y-m-d H:i:s'
+            ],
+            [
+                ['order_id'],
+                'exist',
+                'skipOnError' => true,
+                'targetClass' => Order::className(),
+                'targetAttribute' => ['order_id' => 'id']
+            ],
         ];
     }
 
@@ -62,8 +75,10 @@ class ExitToObject extends \yii\db\ActiveRecord
         $value = $this->brigade_gathering_datetime;
 
         if ($value != '' && $value != null) {
-            $this->brigade_gathering_datetime = Yii::$app
-                ->formatter->asDatetime($value, 'php:Y-m-d H:i:s');
+            if (strtotime($value) != false) {
+                $this->brigade_gathering_datetime = Yii::$app
+                    ->formatter->asDatetime($value, 'php:Y-m-d H:i:s');
+            }
         }
 
         return true;
@@ -94,7 +109,13 @@ class ExitToObject extends \yii\db\ActiveRecord
      */
     public function getItems()
     {
-        return $this->hasMany(Item::className(), ['id' => 'item_id'])->viaTable('equipment', ['exit_to_object_id' => 'id']);
+        return $this->hasMany(
+            Item::className(),
+            ['id' => 'item_id']
+        )->viaTable(
+            'equipment',
+            ['exit_to_object_id' => 'id']
+        );
     }
 
     /**
@@ -140,7 +161,13 @@ class ExitToObject extends \yii\db\ActiveRecord
      */
     public function getEmployees()
     {
-        return $this->hasMany(Employee::className(), ['id' => 'employee_id'])->viaTable('renovating_brigade', ['exit_to_object_id' => 'id']);
+        return $this->hasMany(
+            Employee::className(),
+            ['id' => 'employee_id']
+        )->viaTable(
+            'renovating_brigade',
+            ['exit_to_object_id' => 'id']
+        );
     }
 
     /**
@@ -156,6 +183,12 @@ class ExitToObject extends \yii\db\ActiveRecord
      */
     public function getTasks()
     {
-        return $this->hasMany(Task::className(), ['id' => 'task_id'])->viaTable('work_task', ['exit_to_object_id' => 'id']);
+        return $this->hasMany(
+            Task::className(),
+            ['id' => 'task_id']
+        )->viaTable(
+            'work_task',
+            ['exit_to_object_id' => 'id']
+        );
     }
 }

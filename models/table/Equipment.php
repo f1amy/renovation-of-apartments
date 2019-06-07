@@ -38,9 +38,23 @@ class Equipment extends \yii\db\ActiveRecord
             ['item_quantity', 'integer', 'min' => 1],
             ['item_quantity', 'validateItemQuantity', 'on' => self::SCENARIO_DEFAULT],
             ['item_quantity', 'validateItemQuantityOnUpdate', 'on' => self::SCENARIO_UPDATE],
-            [['item_id', 'exit_to_object_id'], 'unique', 'targetAttribute' => ['item_id', 'exit_to_object_id']],
-            [['item_id'], 'exist', 'skipOnError' => true, 'targetClass' => Item::className(), 'targetAttribute' => ['item_id' => 'id']],
-            [['exit_to_object_id'], 'exist', 'skipOnError' => true, 'targetClass' => ExitToObject::className(), 'targetAttribute' => ['exit_to_object_id' => 'id']],
+            [
+                ['item_id', 'exit_to_object_id'],
+                'unique',
+                'targetAttribute' => ['item_id', 'exit_to_object_id']
+            ],
+            [
+                ['item_id'],
+                'exist', 'skipOnError' => true,
+                'targetClass' => Item::className(),
+                'targetAttribute' => ['item_id' => 'id']
+            ],
+            [
+                ['exit_to_object_id'],
+                'exist', 'skipOnError' => true,
+                'targetClass' => ExitToObject::className(),
+                'targetAttribute' => ['exit_to_object_id' => 'id']
+            ],
         ];
     }
 

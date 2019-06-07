@@ -2,7 +2,6 @@
 
 use yii\helpers\Html;
 use kartik\grid\GridView;
-use yii\widgets\Pjax;
 
 use rmrevin\yii\fontawesome\FAS;
 
@@ -27,11 +26,10 @@ $this->title = 'Заказчики';
         ]) ?>
     </p>
 
-    <?php Pjax::begin(); ?>
-
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
+        'pjax' => true,
         'columns' => [
             ['class' => 'kartik\grid\SerialColumn'],
 
@@ -59,5 +57,4 @@ $this->title = 'Заказчики';
             ],
         ],
     ]); ?>
-    <?php Pjax::end(); ?>
 </div>

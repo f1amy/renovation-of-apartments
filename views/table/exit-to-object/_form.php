@@ -27,13 +27,16 @@ use app\models\table\Order;
         'options' => ['prompt' => 'Выберите значение...'],
     ])->label('Заказ') ?>
 
-    <?= $form->field($model, 'brigade_gathering_datetime')->widget(DateTimePicker::className(), [
-        'pluginOptions' => [
-            'autoclose' => true,
-            'format' => 'dd.mm.yyyy hh:ii',
-            'todayBtn' => true,
+    <?= $form->field($model, 'brigade_gathering_datetime')->widget(
+        DateTimePicker::className(),
+        [
+            'pluginOptions' => [
+                'autoclose' => true,
+                'format' => 'dd.mm.yyyy hh:ii',
+                'todayBtn' => true,
+            ]
         ]
-    ]) ?>
+    ) ?>
 
     <div class="form-group">
         <?= Html::submitButton('Сохранить', [

@@ -2,8 +2,6 @@
 
 use yii\helpers\Html;
 use kartik\grid\GridView;
-use yii\widgets\Pjax;
-use kartik\datetime\DateTimePicker;
 
 use rmrevin\yii\fontawesome\FAS;
 
@@ -29,11 +27,10 @@ $this->title = 'Заказы';
         ]) ?>
     </p>
 
-    <?php Pjax::begin(); ?>
-
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
+        'pjax' => true,
         'columns' => [
             ['class' => 'kartik\grid\SerialColumn'],
 
@@ -41,15 +38,15 @@ $this->title = 'Заказы';
             [
                 'attribute' => 'contract_date',
                 'format' => 'date',
-                'filter' => DateTimePicker::widget([
-                    'name' => 'OrderSearch[contract_date]',
+                'filterType' => '\kartik\datetime\DateTimePicker',
+                'filterWidgetOptions' => [
                     'pluginOptions' => [
                         'autoclose' => true,
                         'format' => 'dd.mm.yyyy',
                         'minView' => 2,
                         'todayBtn' => true,
                     ]
-                ])
+                ]
             ],
             [
                 'attribute' => 'customer',
@@ -87,5 +84,4 @@ $this->title = 'Заказы';
             ],
         ],
     ]); ?>
-    <?php Pjax::end(); ?>
 </div>

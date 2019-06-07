@@ -2,10 +2,8 @@
 
 use yii\helpers\Html;
 use kartik\grid\GridView;
-use yii\widgets\Pjax;
 
 use rmrevin\yii\fontawesome\FAS;
-use kartik\datetime\DateTimePicker;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\table\search\RenovatingBrigadeSearch */
@@ -35,11 +33,10 @@ if (\Yii::$app->user->can('brigadeWorker')) {
         ?>
     </p>
 
-    <?php Pjax::begin(); ?>
-
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
+        'pjax' => true,
         'columns' => [
             ['class' => 'kartik\grid\SerialColumn'],
 
@@ -53,14 +50,14 @@ if (\Yii::$app->user->can('brigadeWorker')) {
                 'value' => 'exitToObject.brigade_gathering_datetime',
                 'format' => 'datetime',
                 'label' => 'Дата и время сбора бригады',
-                'filter' => DateTimePicker::widget([
-                    'name' => 'RenovatingBrigadeSearch[exitToObject]',
+                'filterType' => '\kartik\datetime\DateTimePicker',
+                'filterWidgetOptions' => [
                     'pluginOptions' => [
                         'autoclose' => true,
                         'format' => 'dd.mm.yyyy hh:ii',
                         'todayBtn' => true,
                     ]
-                ])
+                ]
             ],
             [
                 'attribute' => 'workObject',
@@ -75,5 +72,4 @@ if (\Yii::$app->user->can('brigadeWorker')) {
             ],
         ],
     ]); ?>
-    <?php Pjax::end(); ?>
 </div>

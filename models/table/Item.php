@@ -36,12 +36,22 @@ class Item extends \yii\db\ActiveRecord
         return [
             [['warehouse_id', 'name', 'quantity', 'purchase_price', 'type'], 'required'],
             [['warehouse_id', 'quantity'], 'integer', 'min' => 0],
-            [['purchase_price'], 'number', 'min' => 0, 'numberPattern' => '/^\d+((.|,)\d{1,2})?$/'],
+            [
+                ['purchase_price'],
+                'number',
+                'min' => 0,
+                'numberPattern' => '/^\d+((.|,)\d{1,2})?$/'
+            ],
             [['type'], 'string'],
             [['type'], 'match', 'pattern' => '/^(Инструмент|Материал)$/'],
             [['name'], 'string', 'max' => 32],
             [['warehouse_id', 'name'], 'unique', 'targetAttribute' => ['warehouse_id', 'name']],
-            [['warehouse_id'], 'exist', 'skipOnError' => true, 'targetClass' => Warehouse::className(), 'targetAttribute' => ['warehouse_id' => 'id']],
+            [
+                ['warehouse_id'],
+                'exist', 'skipOnError' => true,
+                'targetClass' => Warehouse::className(),
+                'targetAttribute' => ['warehouse_id' => 'id']
+            ],
         ];
     }
 
@@ -73,7 +83,13 @@ class Item extends \yii\db\ActiveRecord
      */
     public function getExitToObjects()
     {
-        return $this->hasMany(ExitToObject::className(), ['id' => 'exit_to_object_id'])->viaTable('equipment', ['item_id' => 'id']);
+        return $this->hasMany(
+            ExitToObject::className(),
+            ['id' => 'exit_to_object_id']
+        )->viaTable(
+            'equipment',
+            ['item_id' => 'id']
+        );
     }
 
     /**

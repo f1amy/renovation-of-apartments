@@ -75,6 +75,9 @@ class OrderController extends \yii\web\Controller
             throw new NotFoundHttpException("Заказ не найден.");
         }
 
+        $order->contract_date = \Yii::$app->formatter
+            ->asDate($order->contract_date, 'php:d.m.Y');
+
         $customer = Customer::findOne($order->customer_id);
         $workObject = WorkObject::findOne($order->work_object_id);
 

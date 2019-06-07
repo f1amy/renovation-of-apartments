@@ -58,7 +58,8 @@ class TaskController extends Controller
 
     /**
      * Creates a new Task model.
-     * If creation is successful, the browser will be redirected to the 'index' page.
+     * If creation is successful, the browser will be redirected
+     * to the 'index' page.
      * @return mixed
      */
     public function actionCreate()
@@ -76,7 +77,8 @@ class TaskController extends Controller
 
     /**
      * Updates an existing Task model.
-     * If update is successful, the browser will be redirected to the 'index' page.
+     * If update is successful, the browser will be redirected
+     * to the 'index' page.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -96,7 +98,8 @@ class TaskController extends Controller
 
     /**
      * Deletes an existing Task model.
-     * If deletion is successful, the browser will be redirected to the 'index' page.
+     * If deletion is successful, the browser will be redirected
+     * to the 'index' page.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -106,9 +109,13 @@ class TaskController extends Controller
         try {
             $this->findModel($id)->delete();
         } catch (yii\db\IntegrityException $e) {
-            if (strpos($e->errorInfo[2], 'a foreign key constraint fails') !== false) {
-                Yii::$app->session->setFlash('error', 'Невозможно удалить запись ' .
-                    'которая используется в других таблицах.');
+            if (strpos(
+                $e->errorInfo[2],
+                'a foreign key constraint fails'
+            ) !== false) {
+                Yii::$app->session
+                    ->setFlash('error', 'Невозможно удалить запись ' .
+                        'которая используется в других таблицах.');
             } else {
                 throw $e;
             }

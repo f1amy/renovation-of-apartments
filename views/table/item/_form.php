@@ -31,7 +31,8 @@ use app\models\table\Warehouse;
 
     <?= $form->field($model, 'quantity')->input('number', ['min' => '0', 'step' => '1']) ?>
 
-    <?= $form->field($model, 'purchase_price')->input('number', ['min' => '0', 'step' => '0.01']) ?>
+    <?= $form->field($model, 'purchase_price')
+        ->input('number', ['min' => '0', 'step' => '0.01']) ?>
 
     <?= $form->field($model, 'type')->dropDownList([
         'Инструмент' => 'Инструмент',

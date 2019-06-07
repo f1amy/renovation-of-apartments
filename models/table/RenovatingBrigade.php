@@ -32,9 +32,23 @@ class RenovatingBrigade extends \yii\db\ActiveRecord
         return [
             [['employee_id', 'exit_to_object_id'], 'required'],
             [['employee_id', 'exit_to_object_id'], 'integer', 'min' => 0],
-            [['employee_id', 'exit_to_object_id'], 'unique', 'targetAttribute' => ['employee_id', 'exit_to_object_id']],
-            [['employee_id'], 'exist', 'skipOnError' => true, 'targetClass' => Employee::className(), 'targetAttribute' => ['employee_id' => 'id']],
-            [['exit_to_object_id'], 'exist', 'skipOnError' => true, 'targetClass' => ExitToObject::className(), 'targetAttribute' => ['exit_to_object_id' => 'id']],
+            [
+                ['employee_id', 'exit_to_object_id'], 'unique',
+                'targetAttribute' => [
+                    'employee_id',
+                    'exit_to_object_id'
+                ]
+            ],
+            [
+                ['employee_id'], 'exist',
+                'skipOnError' => true, 'targetClass' => Employee::className(),
+                'targetAttribute' => ['employee_id' => 'id']
+            ],
+            [
+                ['exit_to_object_id'], 'exist',
+                'skipOnError' => true, 'targetClass' => ExitToObject::className(),
+                'targetAttribute' => ['exit_to_object_id' => 'id']
+            ],
         ];
     }
 

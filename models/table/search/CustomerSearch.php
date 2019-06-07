@@ -17,7 +17,6 @@ class CustomerSearch extends Customer
     public function rules()
     {
         return [
-            [['id'], 'integer'],
             [['full_name', 'phone_number', 'email_address'], 'safe'],
         ];
     }
@@ -51,7 +50,8 @@ class CustomerSearch extends Customer
         $this->load($params);
 
         if (!$this->validate()) {
-            // uncomment the following line if you do not want to return any records when validation fails
+            // uncomment the following line if you do not want to return
+            // any records when validation fails
             // $query->where('0=1');
             return $dataProvider;
         }

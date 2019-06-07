@@ -63,7 +63,8 @@ class EquipmentController extends Controller
 
     /**
      * Creates a new Equipment model.
-     * If creation is successful, the browser will be redirected to the 'index' page.
+     * If creation is successful, the browser will be redirected
+     * to the 'index' page.
      * @return mixed
      */
     public function actionCreate()
@@ -85,7 +86,8 @@ class EquipmentController extends Controller
 
     /**
      * Updates an existing Equipment model.
-     * If update is successful, the browser will be redirected to the 'index' page.
+     * If update is successful, the browser will be redirected
+     * to the 'index' page.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -119,7 +121,8 @@ class EquipmentController extends Controller
 
     /**
      * Deletes an existing Equipment model.
-     * If deletion is successful, the browser will be redirected to the 'index' page.
+     * If deletion is successful, the browser will be redirected
+     * to the 'index' page.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found

@@ -74,6 +74,12 @@ class Employee extends \yii\db\ActiveRecord
      */
     public function getExitToObjects()
     {
-        return $this->hasMany(ExitToObject::className(), ['id' => 'exit_to_object_id'])->viaTable('renovating_brigade', ['employee_id' => 'id']);
+        return $this->hasMany(
+            ExitToObject::className(),
+            ['id' => 'exit_to_object_id']
+        )->viaTable(
+            'renovating_brigade',
+            ['employee_id' => 'id']
+        );
     }
 }

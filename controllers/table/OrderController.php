@@ -58,7 +58,8 @@ class OrderController extends Controller
 
     /**
      * Creates a new Order model.
-     * If creation is successful, the browser will be redirected to the 'index' page.
+     * If creation is successful, the browser will be redirected
+     * to the 'index' page.
      * @return mixed
      */
     public function actionCreate()
@@ -76,7 +77,8 @@ class OrderController extends Controller
 
     /**
      * Updates an existing Order model.
-     * If update is successful, the browser will be redirected to the 'index' page.
+     * If update is successful, the browser will be redirected
+     * to the 'index' page.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -99,7 +101,8 @@ class OrderController extends Controller
 
     /**
      * Deletes an existing Order model.
-     * If deletion is successful, the browser will be redirected to the 'index' page.
+     * If deletion is successful, the browser will be redirected
+     * to the 'index' page.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -109,9 +112,13 @@ class OrderController extends Controller
         try {
             $this->findModel($id)->delete();
         } catch (yii\db\IntegrityException $e) {
-            if (strpos($e->errorInfo[2], 'a foreign key constraint fails') !== false) {
-                Yii::$app->session->setFlash('error', 'Невозможно удалить запись ' .
-                    'которая используется в других таблицах.');
+            if (strpos(
+                $e->errorInfo[2],
+                'a foreign key constraint fails'
+            ) !== false) {
+                Yii::$app->session
+                    ->setFlash('error', 'Невозможно удалить запись ' .
+                        'которая используется в других таблицах.');
             } else {
                 throw $e;
             }

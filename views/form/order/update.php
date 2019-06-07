@@ -6,7 +6,7 @@ use yii\helpers\Html;
 
 $this->title = 'Редактировать заказ: ' . $order->id;
 $this->params['breadcrumbs'][] = ['label' => 'Заказы', 'url' => ['table/order/index']];
-$this->params['breadcrumbs'][] = ['label' => $order->id, 'url' => ['table/order/view', 'id' => $order->id]];
+$this->params['breadcrumbs'][] = ['label' => $order->id];
 $this->params['breadcrumbs'][] = 'Редактировать';
 ?>
 

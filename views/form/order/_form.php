@@ -20,7 +20,7 @@ use kartik\datetime\DateTimePicker;
         <?= $form->field($order, 'contract_date')->widget(DateTimePicker::className(), [
             'pluginOptions' => [
                 'autoclose' => true,
-                'format' => 'yyyy-mm-dd',
+                'format' => 'dd.mm.yyyy',
                 'minView' => 2,
                 'todayBtn' => true,
             ]
@@ -57,11 +57,14 @@ use kartik\datetime\DateTimePicker;
     <div class="form-group">
         <?= $form->field($workObject, 'house_address')->textInput(['maxlength' => true]) ?>
 
-        <?= $form->field($workObject, 'apartment_number')->input('number', ['min' => 0, 'step' => 1]) ?>
+        <?= $form->field($workObject, 'apartment_number')
+            ->input('number', ['min' => 0, 'step' => 1]) ?>
 
-        <?= $form->field($workObject, 'entrance_number')->input('number', ['min' => 0, 'step' => 1]) ?>
+        <?= $form->field($workObject, 'entrance_number')
+            ->input('number', ['min' => 0, 'step' => 1]) ?>
 
-        <?= $form->field($workObject, 'floor_number')->input('number', ['min' => 0, 'step' => 1]) ?>
+        <?= $form->field($workObject, 'floor_number')
+            ->input('number', ['min' => 0, 'step' => 1]) ?>
     </div>
 
     <div class="form-group">

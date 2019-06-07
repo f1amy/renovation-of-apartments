@@ -32,9 +32,23 @@ class WorkTask extends \yii\db\ActiveRecord
         return [
             [['task_id', 'exit_to_object_id'], 'required'],
             [['task_id', 'exit_to_object_id'], 'integer', 'min' => 0],
-            [['task_id', 'exit_to_object_id'], 'unique', 'targetAttribute' => ['task_id', 'exit_to_object_id']],
-            [['task_id'], 'exist', 'skipOnError' => true, 'targetClass' => Task::className(), 'targetAttribute' => ['task_id' => 'id']],
-            [['exit_to_object_id'], 'exist', 'skipOnError' => true, 'targetClass' => ExitToObject::className(), 'targetAttribute' => ['exit_to_object_id' => 'id']],
+            [
+                ['task_id', 'exit_to_object_id'],
+                'unique', 'targetAttribute' => [
+                    'task_id',
+                    'exit_to_object_id'
+                ]
+            ],
+            [
+                ['task_id'], 'exist',
+                'skipOnError' => true, 'targetClass' => Task::className(),
+                'targetAttribute' => ['task_id' => 'id']
+            ],
+            [
+                ['exit_to_object_id'], 'exist',
+                'skipOnError' => true, 'targetClass' => ExitToObject::className(),
+                'targetAttribute' => ['exit_to_object_id' => 'id']
+            ],
         ];
     }
 

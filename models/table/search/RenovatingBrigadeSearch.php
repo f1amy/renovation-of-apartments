@@ -7,7 +7,8 @@ use yii\base\Model;
 use yii\data\ActiveDataProvider;
 
 /**
- * RenovatingBrigadeSearch represents the model behind the search form of `app\models\table\RenovatingBrigade`.
+ * RenovatingBrigadeSearch represents the model behind
+ * the search form of `app\models\table\RenovatingBrigade`.
  */
 class RenovatingBrigadeSearch extends RenovatingBrigade
 {
@@ -21,7 +22,6 @@ class RenovatingBrigadeSearch extends RenovatingBrigade
     public function rules()
     {
         return [
-            [['id', 'employee_id', 'exit_to_object_id'], 'integer'],
             [['employee', 'workObject'], 'safe'],
             [['exitToObject'], 'datetime', 'format' => 'php:Y-m-d H:i:s'],
         ];
@@ -36,8 +36,10 @@ class RenovatingBrigadeSearch extends RenovatingBrigade
         $value = $this->exitToObject;
 
         if ($value != '' && $value != null) {
-            $this->exitToObject = \Yii::$app
-                ->formatter->asDatetime($value, 'php:Y-m-d H:i:s');
+            if (strtotime($value) != false) {
+                $this->exitToObject = \Yii::$app
+                    ->formatter->asDatetime($value, 'php:Y-m-d H:i:s');
+            }
         }
 
         return true;
@@ -89,7 +91,8 @@ class RenovatingBrigadeSearch extends RenovatingBrigade
         $this->load($params);
 
         if (!$this->validate()) {
-            // uncomment the following line if you do not want to return any records when validation fails
+            // uncomment the following line if you do not want to return
+            // any records when validation fails
             // $query->where('0=1');
             return $dataProvider;
         }

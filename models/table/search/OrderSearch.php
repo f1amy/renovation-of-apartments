@@ -20,7 +20,7 @@ class OrderSearch extends Order
     public function rules()
     {
         return [
-            [['id', 'customer_id', 'work_object_id'], 'integer'],
+            [['id'], 'integer'],
             [['customer', 'workObject'], 'safe'],
             [['contract_date'], 'date', 'format' => 'php:Y-m-d'],
         ];
@@ -67,7 +67,8 @@ class OrderSearch extends Order
         $this->load($params);
 
         if (!$this->validate()) {
-            // uncomment the following line if you do not want to return any records when validation fails
+            // uncomment the following line if you do not want to return
+            // any records when validation fails
             // $query->where('0=1');
             return $dataProvider;
         }

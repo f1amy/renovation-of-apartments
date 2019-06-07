@@ -16,7 +16,8 @@ $config = [
     ],
     'components' => [
         'request' => [
-            // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
+            // !!! insert a secret key in the following (if it is empty)
+            // !!! this is required by cookie validation
             'cookieValidationKey' => 'KP1oqdJGvkD0RTozjPbkZ8XNY6cV5Gfr',
         ],
         'cache' => [
@@ -59,8 +60,10 @@ $config = [
             'rules' => [
                 // url => action
                 'table/<name>' => 'table/<name>/index',
-                'table/<name>/<action:(create|view|update|delete)>' => 'table/<name>/<action>',
-                'form/<name>/<action:(create|view|update|delete)>' => 'form/<name>/<action>',
+                'table/<name>/<action:(create|view|update|delete)>'
+                    => 'table/<name>/<action>',
+                'form/<name>/<action:(create|view|update|delete)>'
+                    => 'form/<name>/<action>',
                 'report/<name>' => 'report/<name>/index',
                 '' => 'site/index',
                 'login' => 'site/login',
@@ -95,7 +98,8 @@ if (YII_ENV_DEV) {
     $config['bootstrap'][] = 'debug';
     $config['modules']['debug'] = [
         'class' => 'yii\debug\Module',
-        // uncomment the following to add your IP if you are not connecting from localhost.
+        // uncomment the following to add your IP if you are not connecting
+        // from localhost.
         //'allowedIPs' => ['127.0.0.1', '::1'],
         'allowedIPs' => ['*'],
     ];
@@ -103,7 +107,8 @@ if (YII_ENV_DEV) {
     $config['bootstrap'][] = 'gii';
     $config['modules']['gii'] = [
         'class' => 'yii\gii\Module',
-        // uncomment the following to add your IP if you are not connecting from localhost.
+        // uncomment the following to add your IP if you are not connecting
+        // from localhost.
         //'allowedIPs' => ['127.0.0.1', '::1'],
         'allowedIPs' => ['*'],
     ];

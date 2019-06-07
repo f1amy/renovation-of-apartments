@@ -35,8 +35,16 @@ class Order extends \yii\db\ActiveRecord
             [['contract_date', 'customer_id', 'work_object_id'], 'required'],
             [['contract_date'], 'date', 'format' => 'php:Y-m-d'],
             [['customer_id', 'work_object_id'], 'integer', 'min' => 0],
-            [['customer_id'], 'exist', 'skipOnError' => true, 'targetClass' => Customer::className(), 'targetAttribute' => ['customer_id' => 'id']],
-            [['work_object_id'], 'exist', 'skipOnError' => true, 'targetClass' => WorkObject::className(), 'targetAttribute' => ['work_object_id' => 'id']],
+            [
+                ['customer_id'], 'exist',
+                'skipOnError' => true, 'targetClass' => Customer::className(),
+                'targetAttribute' => ['customer_id' => 'id']
+            ],
+            [
+                ['work_object_id'], 'exist',
+                'skipOnError' => true, 'targetClass' => WorkObject::className(),
+                'targetAttribute' => ['work_object_id' => 'id']
+            ],
         ];
     }
 
@@ -58,8 +66,10 @@ class Order extends \yii\db\ActiveRecord
         $value = $this->contract_date;
 
         if ($value != '' && $value != null) {
-            $this->contract_date = Yii::$app
-                ->formatter->asDate($value, 'php:Y-m-d');
+            if (strtotime($value) != false) {
+                $this->contract_date = Yii::$app
+                    ->formatter->asDate($value, 'php:Y-m-d');
+            }
         }
 
         return true;

@@ -7,7 +7,8 @@ use yii\base\Model;
 use yii\data\ActiveDataProvider;
 
 /**
- * ExitToObjectSearch represents the model behind the search form of `app\models\table\ExitToObject`.
+ * ExitToObjectSearch represents the model behind
+ * the search form of `app\models\table\ExitToObject`.
  */
 class ExitToObjectSearch extends ExitToObject
 {
@@ -20,8 +21,12 @@ class ExitToObjectSearch extends ExitToObject
     public function rules()
     {
         return [
-            [['id', 'order_id'], 'integer'],
-            [['brigade_gathering_datetime', 'customer', 'workObject'], 'safe'],
+            [['order_id'], 'integer'],
+            [['customer', 'workObject'], 'safe'],
+            [
+                ['brigade_gathering_datetime'],
+                'datetime', 'format' => 'php:Y-m-d H:i:s'
+            ],
         ];
     }
 
@@ -66,7 +71,8 @@ class ExitToObjectSearch extends ExitToObject
         $this->load($params);
 
         if (!$this->validate()) {
-            // uncomment the following line if you do not want to return any records when validation fails
+            // uncomment the following line if you do not want to return
+            // any records when validation fails
             // $query->where('0=1');
             return $dataProvider;
         }

@@ -19,10 +19,9 @@ class ItemSearch extends Item
     public function rules()
     {
         return [
-            [['id', 'warehouse_id', 'quantity'], 'integer'],
-            [['name', 'type'], 'safe'],
+            [['id', 'quantity'], 'integer'],
             [['purchase_price'], 'number'],
-            [['warehouse'], 'safe'],
+            [['name', 'type', 'warehouse'], 'safe'],
         ];
     }
 
@@ -62,7 +61,8 @@ class ItemSearch extends Item
         $this->load($params);
 
         if (!$this->validate()) {
-            // uncomment the following line if you do not want to return any records when validation fails
+            // uncomment the following line if you do not want to return
+            // any records when validation fails
             // $query->where('0=1');
             return $dataProvider;
         }
