@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b9a5e1e60117259cd216b997b07fa535",
+    "content-hash": "87f2c49d1ef6eda512df1826a61c0488",
     "packages": [
         {
             "name": "2amigos/yii2-highcharts-widget",
@@ -578,6 +578,52 @@
             "time": "2018-09-07T08:11:16+00:00"
         },
         {
+            "name": "loveorigami/yii2-modal-ajax",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/f1amy/yii2-modal-ajax.git",
+                "reference": "467f15f884525ed12af583b83f7820205f3ad3a6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/f1amy/yii2-modal-ajax/zipball/467f15f884525ed12af583b83f7820205f3ad3a6",
+                "reference": "467f15f884525ed12af583b83f7820205f3ad3a6",
+                "shasum": ""
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "lo\\widgets\\modal\\": "src/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Karnbrock Gmbh",
+                    "homepage": "http://karnbrock.biz"
+                },
+                {
+                    "name": "Lukyanov Andrey",
+                    "homepage": "http://loveorigami.info"
+                }
+            ],
+            "description": "A wrapper around Yii2 Bootstrap Modal for using an ActiveForm via AJAX inside",
+            "homepage": "https://github.com/loveorigami/yii2-modal-ajax",
+            "keywords": [
+                "ajax-modal",
+                "bootstrap",
+                "modal",
+                "yii2"
+            ],
+            "support": {
+                "source": "https://github.com/f1amy/yii2-modal-ajax/tree/master"
+            },
+            "time": "2019-06-09T17:00:32+00:00"
+        },
+        {
             "name": "npm-asset/bootstrap",
             "version": "4.3.1",
             "dist": {
@@ -607,16 +653,15 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/f1amy/yii2-fontawesome.git",
-                "reference": "1b44d2f8b88111bce86cd8030b7b50db3aca11f7"
+                "reference": "f114dfee969f494b9e08af7caecac9d032d73e90"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/f1amy/yii2-fontawesome/zipball/1b44d2f8b88111bce86cd8030b7b50db3aca11f7",
-                "reference": "1b44d2f8b88111bce86cd8030b7b50db3aca11f7",
+                "url": "https://api.github.com/repos/f1amy/yii2-fontawesome/zipball/f114dfee969f494b9e08af7caecac9d032d73e90",
+                "reference": "f114dfee969f494b9e08af7caecac9d032d73e90",
                 "shasum": ""
             },
             "require": {
-                "npm-asset/fortawesome--fontawesome-free": "~5.7.1",
                 "php": ">=5.4.0",
                 "yiisoft/yii2": "^2.0.0"
             },
@@ -659,7 +704,7 @@
                 "issues": "https://github.com/rmrevin/yii2-fontawesome/issues",
                 "source": "https://github.com/rmrevin/yii2-fontawesome"
             },
-            "time": "2019-06-06T14:33:53+00:00"
+            "time": "2019-06-09T12:58:08+00:00"
         },
         {
             "name": "yiisoft/yii2",
@@ -1036,6 +1081,7 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
+        "loveorigami/yii2-modal-ajax": 20,
         "rmrevin/yii2-fontawesome": 20
     },
     "prefer-stable": false,

@@ -5,12 +5,22 @@ use dosamigos\highcharts\HighCharts;
 use yii\helpers\ArrayHelper;
 use app\models\table\Task;
 use app\models\table\WorkTask;
+use rmrevin\yii\fontawesome\FAS;
 
 /* @var $this yii\web\View */
 
 $this->title = 'Отчет по задачам';
 ?>
 <div class="report-task-index">
+
+    <div class="form-group">
+        <?= Html::a(
+            FAS::icon('arrow-left') . ' Назад',
+            Yii::$app->request->referrer ?
+                Yii::$app->request->referrer : Yii::$app->homeUrl,
+            ['class' => 'btn btn-secondary']
+        ) ?>
+    </div>
 
     <h1><?= Html::encode($this->title) ?></h1>
 

@@ -4,6 +4,7 @@ use yii\helpers\Html;
 use yii\bootstrap4\ActiveForm;
 use yii\helpers\ArrayHelper;
 use kartik\select2\Select2;
+use rmrevin\yii\fontawesome\FAS;
 
 use app\models\table\Warehouse;
 
@@ -14,7 +15,7 @@ use app\models\table\Warehouse;
 
 <div class="item-form">
 
-    <?php $form = ActiveForm::begin(['options' => ['class' => 'col-lg-6']]); ?>
+    <?php $form = ActiveForm::begin(['options' => ['class' => 'col-lg']]); ?>
 
     <?= $form->field($model, 'warehouse_id')->widget(Select2::classname(), [
         'data' => ArrayHelper::map(
@@ -40,7 +41,8 @@ use app\models\table\Warehouse;
     ], ['prompt' => 'Выберите значение...']) ?>
 
     <div class="form-group">
-        <?= Html::submitButton('Сохранить', [
+        <?= Html::submitButton(FAS::icon('check') .
+            ' Сохранить', [
             'class' => 'btn btn-success'
         ]) ?>
     </div>

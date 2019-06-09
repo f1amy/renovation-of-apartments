@@ -17,8 +17,15 @@ class WorkObjectSearch extends WorkObject
     public function rules()
     {
         return [
-            [['apartment_number', 'entrance_number', 'floor_number'], 'integer'],
+            [[
+                'id', 'apartment_number',
+                'entrance_number', 'floor_number'
+            ], 'integer'],
             [['house_address'], 'safe'],
+            [[
+                'apartment_number', 'entrance_number',
+                'floor_number', 'house_address'
+            ], 'trim'],
         ];
     }
 
@@ -48,6 +55,8 @@ class WorkObjectSearch extends WorkObject
             'query' => $query,
         ]);
 
+        $dataProvider->sort->defaultOrder = ['id' => SORT_ASC];
+
         $this->load($params);
 
         if (!$this->validate()) {
@@ -58,7 +67,8 @@ class WorkObjectSearch extends WorkObject
         }
 
         // grid filtering conditions
-        $query->andFilterWhere(['like', 'house_address', $this->house_address]);
+        $query->andFilterWhere(['like', 'id', $this->id])
+            ->andFilterWhere(['like', 'house_address', $this->house_address]);
 
         $query->andFilterWhere([
             'apartment_number' => $this->apartment_number,

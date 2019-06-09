@@ -24,8 +24,35 @@ class EmployeeReport extends Model
         return [
             [['start_date', 'end_date'], 'required'],
             [['start_date', 'end_date'], 'date', 'format' => 'php:Y-m-d'],
-            ['end_date', 'compare', 'compareAttribute' => 'start_date' , 'operator' => '>='],
+            ['end_date', 'compare', 'compareAttribute' => 'start_date', 'operator' => '>='],
         ];
+    }
+
+    public function beforeValidate()
+    {
+        if (!parent::beforeValidate()) {
+            return false;
+        }
+
+        $start_date = $this->start_date;
+        $end_date = $this->end_date;
+
+        if (
+            $start_date != '' && $start_date != null
+            && $end_date != '' && $end_date != null
+        ) {
+            if (
+                strtotime($start_date) != false
+                && strtotime($end_date) != false
+            ) {
+                $this->start_date = Yii::$app
+                    ->formatter->asDate($start_date, 'php:Y-m-d');
+                $this->end_date = Yii::$app
+                    ->formatter->asDate($end_date, 'php:Y-m-d');
+            }
+        }
+
+        return true;
     }
 
     /**

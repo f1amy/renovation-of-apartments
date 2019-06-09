@@ -5,6 +5,7 @@ use yii\bootstrap4\ActiveForm;
 use yii\helpers\ArrayHelper;
 use kartik\datetime\DateTimePicker;
 use kartik\select2\Select2;
+use rmrevin\yii\fontawesome\FAS;
 
 use app\models\table\Customer;
 use app\models\table\WorkObject;
@@ -16,7 +17,7 @@ use app\models\table\WorkObject;
 
 <div class="order-form">
 
-    <?php $form = ActiveForm::begin(['options' => ['class' => 'col-lg-6']]); ?>
+    <?php $form = ActiveForm::begin(['options' => ['class' => 'col-lg']]); ?>
 
     <?= $form->field($model, 'contract_date')->widget(DateTimePicker::className(), [
         'pluginOptions' => [
@@ -51,7 +52,8 @@ use app\models\table\WorkObject;
     ])->label('Рабочий объект') ?>
 
     <div class="form-group">
-        <?= Html::submitButton('Сохранить', [
+        <?= Html::submitButton(FAS::icon('check') .
+            ' Сохранить', [
             'class' => 'btn btn-success'
         ]) ?>
     </div>

@@ -23,6 +23,7 @@ class OrderSearch extends Order
             [['id'], 'integer'],
             [['customer', 'workObject'], 'safe'],
             [['contract_date'], 'date', 'format' => 'php:Y-m-d'],
+            [['id', 'contract_date', 'customer', 'workObject'], 'trim'],
         ];
     }
 
@@ -54,6 +55,8 @@ class OrderSearch extends Order
             'query' => $query,
         ]);
 
+        $dataProvider->sort->defaultOrder = ['id' => SORT_ASC];
+
         $dataProvider->sort->attributes['customer'] = [
             'asc' => ['customer.full_name' => SORT_ASC],
             'desc' => ['customer.full_name' => SORT_DESC],
@@ -75,11 +78,11 @@ class OrderSearch extends Order
 
         // grid filtering conditions
         $query->andFilterWhere([
-            'order.id' => $this->id,
             'contract_date' => $this->contract_date
         ]);
 
-        $query->andFilterWhere(['like', 'customer.full_name', $this->customer])
+        $query->andFilterWhere(['like', 'order.id', $this->id])
+            ->andFilterWhere(['like', 'customer.full_name', $this->customer])
             ->andFilterWhere(['like', 'work_object.house_address', $this->workObject]);
 
         return $dataProvider;

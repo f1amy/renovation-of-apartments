@@ -4,6 +4,7 @@ use yii\helpers\Html;
 use kartik\grid\GridView;
 
 use rmrevin\yii\fontawesome\FAS;
+use lo\widgets\modal\ModalAjax;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\table\search\WarehouseSearch */
@@ -16,20 +17,29 @@ $this->title = 'Склады';
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <p>
+    <div>
         <?= Html::a(FAS::icon('plus') .
             ' Создать склад', ['create'], [
-            'class' => 'btn btn-success',
+            'id' => 'createWarehouse',
+            'class' => 'btn btn-success mb-3',
         ]) ?>
         <?= Html::a(
             FAS::icon('chart-bar') .
                 ' Отчет по складам',
             ['report/warehouse/index'],
             [
-                'class' => 'btn btn-primary',
+                'class' => 'btn btn-primary mb-3',
             ]
         ) ?>
-    </p>
+    </div>
+
+    <?= ModalAjax::widget([
+        'id' => 'createUpdateWarehouse',
+        'bootstrapVersion' => ModalAjax::BOOTSTRAP_VERSION_4,
+        'selector' => '#createWarehouse, #w0-pjax a[aria-label="Изменить"]',
+        'pjaxContainer' => '#w0-pjax',
+        'autoClose' => true,
+    ]) ?>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,

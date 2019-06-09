@@ -20,6 +20,8 @@
         "kartik-v/yii2-grid": "^3.3",
         "kartik-v/yii2-widget-datetimepicker": "^1.4",
         "kartik-v/yii2-widget-select2": "^2.1",
+        "loveorigami/yii2-modal-ajax": "dev-master",
+        "npm-asset/fortawesome--fontawesome-free": "~5.7.1",
         "rmrevin/yii2-fontawesome": "dev-npm-free-asset-fix",
         "yiisoft/yii2": "~2.0.14",
         "yiisoft/yii2-bootstrap4": "^2.0"
@@ -70,6 +72,10 @@
         {
             "type": "vcs",
             "url": "https://github.com/f1amy/yii2-fontawesome"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/f1amy/yii2-modal-ajax"
         }
     ]
 }

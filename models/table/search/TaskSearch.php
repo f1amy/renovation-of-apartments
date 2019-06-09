@@ -17,8 +17,10 @@ class TaskSearch extends Task
     public function rules()
     {
         return [
+            [['id'], 'integer'],
             [['text'], 'safe'],
             [['cost'], 'number'],
+            [['text', 'cost'], 'trim'],
         ];
     }
 
@@ -48,6 +50,8 @@ class TaskSearch extends Task
             'query' => $query,
         ]);
 
+        $dataProvider->sort->defaultOrder = ['id' => SORT_ASC];
+
         $this->load($params);
 
         if (!$this->validate()) {
@@ -58,7 +62,8 @@ class TaskSearch extends Task
         }
 
         // grid filtering conditions
-        $query->andFilterWhere(['like', 'text', $this->text])
+        $query->andFilterWhere(['like', 'id', $this->id])
+            ->andFilterWhere(['like', 'text', $this->text])
             ->andFilterWhere(['like', 'cost', $this->cost]);
 
         return $dataProvider;

@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\bootstrap4\ActiveForm;
+use rmrevin\yii\fontawesome\FAS;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\table\WorkObject */
@@ -10,7 +11,7 @@ use yii\bootstrap4\ActiveForm;
 
 <div class="work-object-form">
 
-    <?php $form = ActiveForm::begin(['options' => ['class' => 'col-lg-6']]); ?>
+    <?php $form = ActiveForm::begin(['options' => ['class' => 'col-lg']]); ?>
 
     <?= $form->field($model, 'house_address')->textInput(['maxlength' => true]) ?>
 
@@ -21,7 +22,8 @@ use yii\bootstrap4\ActiveForm;
     <?= $form->field($model, 'floor_number')->input('number', ['min' => 0, 'step' => 1]) ?>
 
     <div class="form-group">
-        <?= Html::submitButton('Сохранить', [
+        <?= Html::submitButton(FAS::icon('check') .
+            ' Сохранить', [
             'class' => 'btn btn-success'
         ]) ?>
     </div>

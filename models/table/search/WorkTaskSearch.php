@@ -21,8 +21,10 @@ class WorkTaskSearch extends WorkTask
     public function rules()
     {
         return [
+            [['id'], 'integer'],
             [['task', 'workObject'], 'safe'],
             [['exitToObject'], 'datetime', 'format' => 'php:Y-m-d H:i:s'],
+            [['task', 'exitToObject', 'workObject'], 'trim'],
         ];
     }
 
@@ -72,6 +74,8 @@ class WorkTaskSearch extends WorkTask
             'query' => $query,
         ]);
 
+        $dataProvider->sort->defaultOrder = ['id' => SORT_ASC];
+
         $dataProvider->sort->attributes['task'] = [
             'asc' => ['task.text' => SORT_ASC],
             'desc' => ['task.text' => SORT_DESC],
@@ -101,7 +105,8 @@ class WorkTaskSearch extends WorkTask
             'exit_to_object.brigade_gathering_datetime' => $this->exitToObject
         ]);
 
-        $query->andFilterWhere(['like', 'task.text', $this->task])
+        $query->andFilterWhere(['like', 'id', $this->id])
+            ->andFilterWhere(['like', 'task.text', $this->task])
             ->andFilterWhere([
                 'like',
                 'work_object.house_address',

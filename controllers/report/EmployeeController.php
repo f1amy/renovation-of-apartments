@@ -34,6 +34,11 @@ class EmployeeController extends \yii\web\Controller
         $model = new EmployeeReport();
 
         if ($model->load(Yii::$app->request->get()) && $model->validate()) {
+            $model->start_date = Yii::$app
+                ->formatter->asDate($model->start_date, 'php:d.m.Y');
+            $model->end_date = Yii::$app
+                ->formatter->asDate($model->end_date, 'php:d.m.Y');
+
             return $this->render('index', [
                 'model' => $model,
                 'reportDates' => [

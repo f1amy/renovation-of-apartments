@@ -21,9 +21,10 @@ class EquipmentSearch extends Equipment
     public function rules()
     {
         return [
-            [['item_quantity'], 'integer'],
+            [['id', 'item_quantity'], 'integer'],
             [['item', 'workObject'], 'safe'],
             [['exitToObject'], 'datetime', 'format' => 'php:Y-m-d H:i:s'],
+            [['item_quantity', 'item', 'workObject', 'exitToObject'], 'trim'],
         ];
     }
 
@@ -73,6 +74,8 @@ class EquipmentSearch extends Equipment
             'query' => $query,
         ]);
 
+        $dataProvider->sort->defaultOrder = ['id' => SORT_ASC];
+
         $dataProvider->sort->attributes['item'] = [
             'asc' => ['item.name' => SORT_ASC],
             'desc' => ['item.name' => SORT_DESC],
@@ -101,8 +104,9 @@ class EquipmentSearch extends Equipment
         $query->andFilterWhere([
             'exit_to_object.brigade_gathering_datetime' => $this->exitToObject
         ]);
-
-        $query->andFilterWhere(['like', 'item_quantity', $this->item_quantity])
+        
+        $query->andFilterWhere(['like', 'id', $this->id])
+            ->andFilterWhere(['like', 'item_quantity', $this->item_quantity])
             ->andFilterWhere(['like', 'item.name', $this->item])
             ->andFilterWhere([
                 'like',

@@ -4,6 +4,7 @@ use yii\helpers\Html;
 use yii\bootstrap4\ActiveForm;
 use yii\helpers\ArrayHelper;
 use kartik\select2\Select2;
+use rmrevin\yii\fontawesome\FAS;
 
 use app\models\table\Item;
 use app\models\table\ExitToObject;
@@ -15,7 +16,7 @@ use app\models\table\ExitToObject;
 
 <div class="equipment-form">
 
-    <?php $form = ActiveForm::begin(['options' => ['class' => 'col-lg-6']]); ?>
+    <?php $form = ActiveForm::begin(['options' => ['class' => 'col-lg']]); ?>
 
     <?= $form->field($model, 'item_id')->widget(Select2::classname(), [
         'data' => ArrayHelper::map(
@@ -45,7 +46,8 @@ use app\models\table\ExitToObject;
         ->input('number', ['step' => '1', 'min' => '0']) ?>
 
     <div class="form-group">
-        <?= Html::submitButton('Сохранить', [
+        <?= Html::submitButton(FAS::icon('check') .
+            ' Сохранить', [
             'class' => 'btn btn-success'
         ]) ?>
     </div>

@@ -17,7 +17,9 @@ class WarehouseSearch extends Warehouse
     public function rules()
     {
         return [
+            [['id'], 'integer'],
             [['name', 'address'], 'safe'],
+            [['name', 'address'], 'trim'],
         ];
     }
 
@@ -47,6 +49,8 @@ class WarehouseSearch extends Warehouse
             'query' => $query,
         ]);
 
+        $dataProvider->sort->defaultOrder = ['id' => SORT_ASC];
+
         $this->load($params);
 
         if (!$this->validate()) {
@@ -57,7 +61,8 @@ class WarehouseSearch extends Warehouse
         }
 
         // grid filtering conditions
-        $query->andFilterWhere(['like', 'name', $this->name])
+        $query->andFilterWhere(['like', 'id', $this->id])
+            ->andFilterWhere(['like', 'name', $this->name])
             ->andFilterWhere(['like', 'address', $this->address]);
 
         return $dataProvider;

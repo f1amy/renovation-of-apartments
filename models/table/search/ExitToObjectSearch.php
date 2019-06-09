@@ -21,12 +21,16 @@ class ExitToObjectSearch extends ExitToObject
     public function rules()
     {
         return [
-            [['order_id'], 'integer'],
+            [['id', 'order_id'], 'integer'],
             [['customer', 'workObject'], 'safe'],
             [
                 ['brigade_gathering_datetime'],
                 'datetime', 'format' => 'php:Y-m-d H:i:s'
             ],
+            [[
+                'order_id', 'customer',
+                'brigade_gathering_datetime', 'workObject'
+            ], 'trim'],
         ];
     }
 
@@ -58,6 +62,8 @@ class ExitToObjectSearch extends ExitToObject
             'query' => $query,
         ]);
 
+        $dataProvider->sort->defaultOrder = ['id' => SORT_ASC];
+
         $dataProvider->sort->attributes['customer'] = [
             'asc' => ['customer.full_name' => SORT_ASC],
             'desc' => ['customer.full_name' => SORT_DESC],
@@ -82,7 +88,8 @@ class ExitToObjectSearch extends ExitToObject
             'brigade_gathering_datetime' => $this->brigade_gathering_datetime
         ]);
 
-        $query->andFilterWhere(['like', 'order_id', $this->order_id])
+        $query->andFilterWhere(['like', 'id', $this->id])
+            ->andFilterWhere(['like', 'order_id', $this->order_id])
             ->andFilterWhere(['like', 'customer.full_name', $this->customer])
             ->andFilterWhere(['like', 'work_object.house_address', $this->workObject]);
 

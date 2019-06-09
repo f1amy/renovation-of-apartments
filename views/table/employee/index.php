@@ -4,6 +4,7 @@ use kartik\grid\GridView;
 use yii\helpers\Html;
 
 use rmrevin\yii\fontawesome\FAS;
+use lo\widgets\modal\ModalAjax;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\table\search\EmployeeSearch */
@@ -16,20 +17,29 @@ $this->title = 'Сотрудники';
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <p>
+    <div>
         <?= Html::a(FAS::icon('plus') .
             ' Создать сотрудника', ['create'], [
-            'class' => 'btn btn-success',
+            'id' => 'createEmployee',
+            'class' => 'btn btn-success mb-3',
         ]) ?>
         <?= Html::a(
             FAS::icon('chart-bar') .
                 ' Отчет по сотрудникам',
             ['report/employee/index'],
             [
-                'class' => 'btn btn-primary',
+                'class' => 'btn btn-primary mb-3',
             ]
         ) ?>
-    </p>
+    </div>
+
+    <?= ModalAjax::widget([
+        'id' => 'createUpdateEmployee',
+        'bootstrapVersion' => ModalAjax::BOOTSTRAP_VERSION_4,
+        'selector' => '#createEmployee, #w0-pjax a[aria-label="Изменить"]',
+        'pjaxContainer' => '#w0-pjax',
+        'autoClose' => true,
+    ]) ?>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,

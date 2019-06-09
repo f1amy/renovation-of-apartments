@@ -12,6 +12,69 @@ use yii\helpers\Html;
 use yii\bootstrap4\Breadcrumbs;
 use rmrevin\yii\fontawesome\FAS;
 
+Yii::$app->view->registerJs(
+    "
+    const sidebarClientHeight = document.querySelector('.sidebar').clientHeight;
+    const sidebarScrollHeight = document.querySelector('.sidebar').scrollHeight;
+
+    if (sidebarScrollHeight > sidebarClientHeight) {
+        if (sessionStorage.getItem('sidebarPosition') != null) {
+            document.querySelector('.sidebar').scrollTop =
+                sessionStorage.getItem('sidebarPosition');
+            console.log('Sidebar position restored from session storage.');
+        }
+    
+        window.onbeforeunload = () => {
+            sessionStorage.setItem(
+                'sidebarPosition',
+                document.querySelector('.sidebar').scrollTop
+            );
+            console.log('Sidebar position saved to session storage.');
+        }
+    }
+    ",
+    $this::POS_READY,
+    'remember-sidebar-position'
+);
+
+$navBarNavItems = [
+    Yii::$app->user->isGuest ? (Html::a(
+        FAS::icon('sign-in-alt') . ' ' . 'Вход',
+        Url::to(['site/login']),
+        ['class' => 'nav-link']
+    )) : ('<li class="nav-item">'
+        . Html::beginForm([Url::to(['site/logout'])], 'post')
+        . Html::submitButton(
+            FAS::icon('user-circle') . ' ' .
+                Yii::$app->user->identity->username . ' (Выйти)',
+            ['class' => 'btn btn-link nav-link logout border-0']
+        )
+        . Html::endForm()
+        . '</li>')
+];
+
+if (!Yii::$app->user->isGuest) {
+    array_push(
+        $navBarNavItems,
+        [
+            'label' => 'Навигация',
+            'options' => ['class' => 'd-sm-none'],
+            'items' => []
+        ],
+    );
+
+    if (Yii::$app->user->can('headOfAccounting')) {
+        include Yii::getAlias('@app/views/mobileNav/headOfAccounting.php');
+        $navBarNavItems[1]['items'] = getHeadOfAccountingMobileNavItems();
+    } else if (Yii::$app->user->can('brigadier')) {
+        include Yii::getAlias('@app/views/mobileNav/brigadier.php');
+        $navBarNavItems[1]['items'] = getBrigadierMobileNavItems();
+    } else if (Yii::$app->user->can('brigadeWorker')) {
+        include Yii::getAlias('@app/views/mobileNav/brigadeWorker.php');
+        $navBarNavItems[1]['items'] = getBrigadeWorkerMobileNavItems();
+    }
+}
+
 AppAsset::register($this);
 ?>
 <?php $this->beginPage(); ?>
@@ -31,7 +94,7 @@ AppAsset::register($this);
 <body>
     <?php $this->beginBody(); ?>
 
-    <header class="fixed-top">
+    <header>
         <?php
         NavBar::begin([
             'brandLabel' => '<img src="/icons/room.png" width="34" height="34" ' .
@@ -40,60 +103,54 @@ AppAsset::register($this);
             'brandUrl' => Yii::$app->homeUrl,
             'innerContainerOptions' => ['class' => 'container-fluid'],
             'options' => [
-                'class' => 'navbar navbar-expand-lg navbar-dark bg-dark',
+                'class' => 'navbar navbar-expand-sm navbar-dark bg-dark',
             ],
         ]);
         echo Nav::widget([
             'options' => ['class' => 'navbar-nav ml-auto'],
-            'items' => [
-                Yii::$app->user->isGuest ? (Html::a(
-                    FAS::icon('sign-in-alt') . ' ' . 'Вход',
-                    Url::to(['site/login']),
-                    ['class' => 'nav-link']
-                )) : ('<li class="nav-item">'
-                    . Html::beginForm([Url::to(['site/logout'])], 'post')
-                    . Html::submitButton(
-                        FAS::icon('user-circle') . ' ' .
-                            Yii::$app->user->identity->username . ' (Выйти)',
-                        ['class' => 'btn btn-link nav-link logout border-0']
-                    )
-                    . Html::endForm()
-                    . '</li>'),
-            ],
+            'items' => $navBarNavItems,
         ]);
         NavBar::end();
         ?>
     </header>
 
-    <?php
-    if (Yii::$app->user->isGuest) {
-        $this->beginContent("@app/views/sideNav/guestSideNav.php");
-        $this->endContent();
-    } else if (Yii::$app->user->can('headOfAccounting')) {
-        $this->beginContent("@app/views/sideNav/headOfAccountingSideNav.php");
-        $this->endContent();
-    } else if (Yii::$app->user->can('brigadier')) {
-        $this->beginContent("@app/views/sideNav/brigadierSideNav.php");
-        $this->endContent();
-    } else if (Yii::$app->user->can('brigadeWorker')) {
-        $this->beginContent("@app/views/sideNav/brigadeWorkerSideNav.php");
-        $this->endContent();
-    }
-    ?>
+    <div class="container-fluid">
+        <div class="row flex-sm-nowrap">
 
-    <div class="wrap bg-light">
-        <main class="container border-left border-right bg-white mx-auto">
-            <?= Breadcrumbs::widget([
-                'homeLink' => [
-                    'label' => 'Домашняя страница',
-                    'url' => Url::home()
-                ],
-                'links' => isset($this->params['breadcrumbs']) ?
-                    $this->params['breadcrumbs'] : [],
-            ]) ?>
-            <?= Alert::widget() ?>
-            <?= $content ?>
-        </main>
+            <nav class="sidebar border-right col-xl-2 px-0 d-none d-sm-block">
+                <?php
+                if (Yii::$app->user->isGuest) {
+                    $this->beginContent("@app/views/sideNav/guest.php");
+                    $this->endContent();
+                } else if (Yii::$app->user->can('headOfAccounting')) {
+                    $this->beginContent("@app/views/sideNav/headOfAccounting.php");
+                    $this->endContent();
+                } else if (Yii::$app->user->can('brigadier')) {
+                    $this->beginContent("@app/views/sideNav/brigadier.php");
+                    $this->endContent();
+                } else if (Yii::$app->user->can('brigadeWorker')) {
+                    $this->beginContent("@app/views/sideNav/brigadeWorker.php");
+                    $this->endContent();
+                }
+                ?>
+            </nav>
+
+            <div class="main-wrap bg-light col-xl">
+                <main class="container border-left border-right bg-white mx-auto">
+                    <?= Breadcrumbs::widget([
+                        'homeLink' => [
+                            'label' => 'Домашняя страница',
+                            'url' => Url::home()
+                        ],
+                        'links' => isset($this->params['breadcrumbs']) ?
+                            $this->params['breadcrumbs'] : [],
+                    ]) ?>
+                    <?= Alert::widget() ?>
+                    <?= $content ?>
+                </main>
+            </div>
+
+        </div>
     </div>
 
     <?php $this->endBody(); ?>

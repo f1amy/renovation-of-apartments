@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\bootstrap4\ActiveForm;
+use rmrevin\yii\fontawesome\FAS;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\table\Customer */
@@ -10,7 +11,7 @@ use yii\bootstrap4\ActiveForm;
 
 <div class="customer-form">
 
-    <?php $form = ActiveForm::begin(['options' => ['class' => 'col-lg-6']]); ?>
+    <?php $form = ActiveForm::begin(['options' => ['class' => 'col-lg']]); ?>
 
     <?= $form->field($model, 'full_name')->textInput([
         'maxlength' => true,
@@ -32,7 +33,8 @@ use yii\bootstrap4\ActiveForm;
     ]) ?>
 
     <div class="form-group">
-        <?= Html::submitButton('Сохранить', [
+        <?= Html::submitButton(FAS::icon('check') .
+            ' Сохранить', [
             'class' => 'btn btn-success'
         ]) ?>
     </div>

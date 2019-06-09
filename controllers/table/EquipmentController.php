@@ -69,6 +69,10 @@ class EquipmentController extends Controller
      */
     public function actionCreate()
     {
+        if (!Yii::$app->request->isAjax) {
+            throw new ForbiddenHttpException('Доступ к запрашиваемой странице запрещен.');
+        }
+
         $model = new Equipment();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -76,10 +80,12 @@ class EquipmentController extends Controller
             $item->quantity -= $model->item_quantity;
             $item->save();
 
-            return $this->redirect(['index']);
+            Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+
+            return ['success' => true];
         }
 
-        return $this->render('create', [
+        return $this->renderAjax('create', [
             'model' => $model,
         ]);
     }
@@ -94,6 +100,10 @@ class EquipmentController extends Controller
      */
     public function actionUpdate($id)
     {
+        if (!Yii::$app->request->isAjax) {
+            throw new ForbiddenHttpException('Доступ к запрашиваемой странице запрещен.');
+        }
+
         $model = $this->findModel($id);
 
         $oldItem = $model->item;
@@ -111,10 +121,11 @@ class EquipmentController extends Controller
             $newItem->quantity -= $model->item_quantity;
             $newItem->save();
 
-            return $this->redirect(['index']);
+            Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+            return ['success' => true];
         }
 
-        return $this->render('update', [
+        return $this->renderAjax('update', [
             'model' => $model,
         ]);
     }
@@ -130,7 +141,7 @@ class EquipmentController extends Controller
     public function actionDelete($id)
     {
         $equipment = $this->findModel($id);
-        
+
         $item = $equipment->item;
         $item->quantity += $equipment->item_quantity;
         $item->save();

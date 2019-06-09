@@ -17,7 +17,9 @@ class CustomerSearch extends Customer
     public function rules()
     {
         return [
+            [['id'], 'integer'],
             [['full_name', 'phone_number', 'email_address'], 'safe'],
+            [['full_name', 'phone_number', 'email_address'], 'trim'],
         ];
     }
 
@@ -47,6 +49,8 @@ class CustomerSearch extends Customer
             'query' => $query,
         ]);
 
+        $dataProvider->sort->defaultOrder = ['id' => SORT_ASC];
+
         $this->load($params);
 
         if (!$this->validate()) {
@@ -57,6 +61,7 @@ class CustomerSearch extends Customer
         }
 
         // grid filtering conditions
+        $query->andFilterWhere(['like', 'id', $this->id]);
         $query->andFilterWhere(['like', 'full_name', $this->full_name])
             ->andFilterWhere(['like', 'phone_number', $this->phone_number])
             ->andFilterWhere(['like', 'email_address', $this->email_address]);

@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\bootstrap4\ActiveForm;
 use kartik\datetime\DateTimePicker;
+use rmrevin\yii\fontawesome\FAS;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\table\Contract */
@@ -68,9 +69,17 @@ use kartik\datetime\DateTimePicker;
     </div>
 
     <div class="form-group">
-        <?= Html::submitButton('Сохранить', [
-            'class' => 'btn btn-success'
+        <?= Html::submitButton(FAS::icon('check') .
+            ' Сохранить', [
+            'class' => 'btn btn-success mr-2'
         ]) ?>
+
+        <?= Html::a(
+            FAS::icon('times') . ' Отмена',
+            Yii::$app->request->referrer ?
+                Yii::$app->request->referrer : Yii::$app->homeUrl,
+            ['class' => 'btn btn-danger']
+        ) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

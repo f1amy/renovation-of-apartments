@@ -3,55 +3,63 @@ body {
   height: 100vh;
 }
 
-main {
-  padding: 15px;
-  min-height: calc(100vh - 60px);
-}
-
-.wrap {
+body {
+  overflow-y: scroll;
   overflow-x: hidden;
+}
+
+header {
+  position: sticky;
+  top: 0;
+  z-index: 1040;
+}
+
+main {
+  padding-top: 15px;
+  padding-bottom: 15px;
   min-height: calc(100vh - 60px);
-  position: fixed;
-  top: 60px;
-  left: 225px;
-  right: 0;
-  bottom: 0;
 }
 
-.side-nav {
+.sidebar {
   background-color: whitesmoke;
-  height: calc(100vh - 60px);
-  width: 225px;
-  overflow-y: auto;
-  position: fixed;
+  position: sticky;
   top: 60px;
-  left: 0;
-  right: 225px;
-  bottom: 0;
+  z-index: 1000;
+  height: calc(100vh - 60px);
+  max-height: calc(100vh - 60px);
+  overflow-y: auto;
+  min-width: 221px;
+  flex-shrink: 100;
+  scroll-behavior: smooth;
 }
 
-.side-nav .list-group-item.active {
+.sidebar section:last-of-type {
+  border-bottom: 1px solid #dee2e6;
+}
+
+.sidebar .list-group-item.active {
   background-color: var(--secondary);
   border-color: var(--secondary);
 }
 
-.side-nav .fas {
+.sidebar .fas {
   width: 20px;
   text-align: center;
 }
 
-.side-nav p {
+.sidebar p {
   padding: 12px 16px;
   margin: 0;
 }
 
-.side-nav section a {
+.sidebar section a {
   padding: 12px 16px;
   user-select: none;
 }
 
-.side-nav h6 {
-  padding: 12px 16px;
+.sidebar small {
+  display: block;
+  padding: 8px 16px;
   margin-bottom: 0;
   text-transform: uppercase;
 }
@@ -74,12 +82,6 @@ main {
   display: block;
 }
 
-@media (max-width: 768px) {
-  label#submit-button-fix {
-    display: none !important;
-  }
-}
-
 .select2-container--krajee-bs4
 .select2-results__option--highlighted[aria-selected] {
   background-color: var(--primary);
@@ -93,4 +95,12 @@ select.form-control.select2-hidden-accessible.is-valid ~
 select.form-control.select2-hidden-accessible.is-invalid ~
 .select2-container--krajee-bs4 span.select2-selection--single {
   border-color: #dc3545;
+}
+
+.kv-grid-bs4 a.asc:after {
+  content: " \f15e";
+}
+
+.kv-grid-bs4 a.desc:after {
+  content: " \f15d";
 }

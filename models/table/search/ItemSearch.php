@@ -22,6 +22,10 @@ class ItemSearch extends Item
             [['id', 'quantity'], 'integer'],
             [['purchase_price'], 'number'],
             [['name', 'type', 'warehouse'], 'safe'],
+            [[
+                'id', 'warehouse', 'name',
+                'type', 'quantity', 'purchase_price'
+            ], 'trim'],
         ];
     }
 
@@ -52,6 +56,8 @@ class ItemSearch extends Item
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
+
+        $dataProvider->sort->defaultOrder = ['id' => SORT_ASC];
 
         $dataProvider->sort->attributes['warehouse'] = [
             'asc' => ['warehouse.name' => SORT_ASC],

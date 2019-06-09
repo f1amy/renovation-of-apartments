@@ -22,8 +22,10 @@ class RenovatingBrigadeSearch extends RenovatingBrigade
     public function rules()
     {
         return [
+            [['id'], 'integer'],
             [['employee', 'workObject'], 'safe'],
             [['exitToObject'], 'datetime', 'format' => 'php:Y-m-d H:i:s'],
+            [['employee', 'workObject', 'exitToObject'], 'trim'],
         ];
     }
 
@@ -73,6 +75,8 @@ class RenovatingBrigadeSearch extends RenovatingBrigade
             'query' => $query,
         ]);
 
+        $dataProvider->sort->defaultOrder = ['id' => SORT_ASC];
+
         $dataProvider->sort->attributes['employee'] = [
             'asc' => ['employee.full_name' => SORT_ASC],
             'desc' => ['employee.full_name' => SORT_DESC],
@@ -102,7 +106,8 @@ class RenovatingBrigadeSearch extends RenovatingBrigade
             'exit_to_object.brigade_gathering_datetime' => $this->exitToObject
         ]);
 
-        $query->andFilterWhere(['like', 'employee.full_name', $this->employee])
+        $query->andFilterWhere(['like', 'id', $this->id])
+            ->andFilterWhere(['like', 'employee.full_name', $this->employee])
             ->andFilterWhere([
                 'like', 'work_object.house_address',
                 $this->workObject

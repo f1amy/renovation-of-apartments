@@ -8,12 +8,22 @@ use yii\bootstrap4\ActiveForm;
 use kartik\datetime\DateTimePicker;
 use yii\helpers\Url;
 use yii\bootstrap4\Html;
+use rmrevin\yii\fontawesome\FAS;
 
 /* @var $this yii\web\View */
 
 $this->title = 'Отчет по сотрудникам';
 ?>
 <div class="report-employee-index">
+
+    <div class="form-group">
+        <?= Html::a(
+            FAS::icon('arrow-left') . ' Назад',
+            Yii::$app->request->referrer ?
+                Yii::$app->request->referrer : Yii::$app->homeUrl,
+            ['class' => 'btn btn-secondary']
+        ) ?>
+    </div>
 
     <h1><?= Html::encode($this->title) ?></h1>
 
@@ -33,7 +43,7 @@ $this->title = 'Отчет по сотрудникам';
             [
                 'pluginOptions' => [
                     'autoclose' => true,
-                    'format' => 'yyyy-mm-dd',
+                    'format' => 'dd.mm.yyyy',
                     'minView' => 2,
                     'todayBtn' => true,
                 ]
@@ -44,14 +54,14 @@ $this->title = 'Отчет по сотрудникам';
             [
                 'pluginOptions' => [
                     'autoclose' => true,
-                    'format' => 'yyyy-mm-dd',
+                    'format' => 'dd.mm.yyyy',
                     'minView' => 2,
                     'todayBtn' => true,
                 ]
             ]
         ) ?>
         <div class="form-group col-md-auto">
-            <label id="submit-button-fix" class="d-block">&nbsp;</label>
+            <label class="d-md-block d-none">&nbsp;</label>
             <?= Html::submitButton('Показать', [
                 'class' => 'btn btn-success'
             ]) ?>

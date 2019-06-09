@@ -9,6 +9,7 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
+use yii\web\ForbiddenHttpException;
 
 /**
  * CustomerController implements the CRUD actions for Customer model.
@@ -64,13 +65,18 @@ class CustomerController extends Controller
      */
     public function actionCreate()
     {
+        if (!Yii::$app->request->isAjax) {
+            throw new ForbiddenHttpException('Доступ к запрашиваемой странице запрещен.');
+        }
+
         $model = new Customer();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['index']);
+            Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+            return ['success' => true];
         }
 
-        return $this->render('create', [
+        return $this->renderAjax('create', [
             'model' => $model,
         ]);
     }
@@ -85,13 +91,18 @@ class CustomerController extends Controller
      */
     public function actionUpdate($id)
     {
+        if (!Yii::$app->request->isAjax) {
+            throw new ForbiddenHttpException('Доступ к запрашиваемой странице запрещен.');
+        }
+
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['index']);
+            Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+            return ['success' => true];
         }
 
-        return $this->render('update', [
+        return $this->renderAjax('update', [
             'model' => $model,
         ]);
     }

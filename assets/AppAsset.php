@@ -27,5 +27,6 @@ class AppAsset extends AssetBundle
         'yii\web\YiiAsset',
         'yii\bootstrap4\BootstrapAsset',
         'rmrevin\yii\fontawesome\NpmFreeAssetBundle',
+        'lo\widgets\modal\ModalAjaxAsset',
     ];
 }

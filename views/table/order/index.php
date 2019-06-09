@@ -4,6 +4,7 @@ use yii\helpers\Html;
 use kartik\grid\GridView;
 
 use rmrevin\yii\fontawesome\FAS;
+use lo\widgets\modal\ModalAjax;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\table\search\OrderSearch */
@@ -16,16 +17,25 @@ $this->title = 'Заказы';
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <p>
+    <div>
         <?= Html::a(FAS::icon('plus') .
             ' Создать заказ', ['create'], [
-            'class' => 'btn btn-success',
+            'id' => 'createOrder',
+            'class' => 'btn btn-success mb-3',
         ]) ?>
         <?= Html::a(FAS::icon('file-alt') .
             ' Форма создания заказа', ['form/order/create'], [
-            'class' => 'btn btn-info',
+            'class' => 'btn btn-info mb-3',
         ]) ?>
-    </p>
+    </div>
+
+    <?= ModalAjax::widget([
+        'id' => 'createUpdateOrder',
+        'bootstrapVersion' => ModalAjax::BOOTSTRAP_VERSION_4,
+        'selector' => '#createOrder, #w0-pjax a[aria-label="Изменить"]',
+        'pjaxContainer' => '#w0-pjax',
+        'autoClose' => true,
+    ]) ?>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -40,6 +50,7 @@ $this->title = 'Заказы';
                 'format' => 'date',
                 'filterType' => '\kartik\datetime\DateTimePicker',
                 'filterWidgetOptions' => [
+                    'removeButton' => false,
                     'pluginOptions' => [
                         'autoclose' => true,
                         'format' => 'dd.mm.yyyy',

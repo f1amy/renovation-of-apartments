@@ -11,8 +11,8 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="customer-create">
 
-    <div class="col-lg-6">
-        <h1><?= Html::encode($this->title) ?></h1>
+    <div class="col-lg">
+        <h2><?= Html::encode($this->title) ?></h2>
     </div>
 
     <?= $this->render('_form', [
