@@ -12,9 +12,13 @@ $this->title = 'Домашняя страница';
     <div class="container">
 
         <div class="jumbotron text-center bg-transparent">
-            <h2>Добро пожаловать, <?= Yii::$app->user->identity->username; ?>.</h2>
-            <h2><small>Перейдите на вкладку слева ← <br>
-                    или на ссылку снизу ↓, чтобы начать работу.</small></h2>
+            <h2>Добро пожаловать, <?= FAS::icon('user') ?> <?= Yii::$app->user->identity->username; ?>.</h2>
+            <h2>
+                <small><span class="d-none d-sm-block">Перейдите на вкладку слева <?= FAS::icon('arrow-left') ?></span>
+                    <span class="d-block d-sm-none">Перейдите по меню навигации сверху <?= FAS::icon('arrow-up') ?></span>
+                    или нажмите на ссылку снизу <?= FAS::icon('arrow-down') ?>, чтобы начать работу.
+                </small>
+            </h2>
         </div>
 
         <div class="row justify-content-around">

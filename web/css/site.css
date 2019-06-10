@@ -33,7 +33,7 @@ main {
   height: calc(100vh - 60px);
   max-height: calc(100vh - 60px);
   overflow-y: auto;
-  min-width: 221px;
+  min-width: 224px;
   flex-shrink: 100;
   scroll-behavior: smooth;
 }
