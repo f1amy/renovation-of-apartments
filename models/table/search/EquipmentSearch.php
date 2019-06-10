@@ -21,7 +21,7 @@ class EquipmentSearch extends Equipment
     public function rules()
     {
         return [
-            [['id', 'item_quantity'], 'integer'],
+            [['id', 'exit_to_object_id', 'item_quantity'], 'integer'],
             [['item', 'workObject'], 'safe'],
             [['exitToObject'], 'datetime', 'format' => 'php:Y-m-d H:i:s'],
             [['item_quantity', 'item', 'workObject', 'exitToObject'], 'trim'],
@@ -36,7 +36,7 @@ class EquipmentSearch extends Equipment
 
         $value = $this->exitToObject;
 
-        if ($value != '' && $value != null) {
+        if ($value != '' && $value !== null) {
             if (strtotime($value) != false) {
                 $this->exitToObject = \Yii::$app
                     ->formatter->asDatetime($value, 'php:Y-m-d H:i:s');
@@ -102,7 +102,8 @@ class EquipmentSearch extends Equipment
 
         // grid filtering conditions
         $query->andFilterWhere([
-            'exit_to_object.brigade_gathering_datetime' => $this->exitToObject
+            'exit_to_object.brigade_gathering_datetime' => $this->exitToObject,
+            'equipment.exit_to_object_id' => $this->exit_to_object_id
         ]);
         
         $query->andFilterWhere(['like', 'id', $this->id])

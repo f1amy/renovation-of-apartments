@@ -16,7 +16,7 @@ $this->title = 'Отчет по задачам';
     <div class="form-group">
         <?= Html::a(
             FAS::icon('arrow-left') . ' Назад',
-            Yii::$app->request->referrer ?
+            Yii::$app->request->referrer !== null ?
                 Yii::$app->request->referrer : Yii::$app->homeUrl,
             ['class' => 'btn btn-secondary']
         ) ?>

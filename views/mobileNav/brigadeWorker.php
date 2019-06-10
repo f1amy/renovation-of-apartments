@@ -1,30 +1,21 @@
 <?php
 
 use yii\helpers\Url;
+use rmrevin\yii\fontawesome\FAS;
 
 function getBrigadeWorkerMobileNavItems()
 {
     return [
-        [
-            'label' => 'Начальная',
-            'url' => Url::home()
-        ],
+        ['label' => FAS::icon('home') . ' ' .
+            'Начальная', 'url' => Url::home()],
         '<div class="dropdown-divider"></div>',
-        [
-            'label' => 'Выходы на объекты',
-            'url' => Url::to('table/exit-to-object')
-        ],
-        [
-            'label' => 'Снаряжения',
-            'url' => Url::to('table/equipment')
-        ],
-        [
-            'label' => 'Рабочие задачи',
-            'url' => Url::to('table/work-task')
-        ],
-        [
-            'label' => 'Ремонтные бригады',
-            'url' => Url::to('table/renovating-brigade')
-        ],
+        ['label' => FAS::icon('truck') . ' ' .
+            'Выходы на объекты', 'url' => Url::to(['table/exit-to-object'])],
+        ['label' => FAS::icon('hard-hat') . ' ' .
+            'Ремонтные бригады', 'url' => Url::to(['table/renovating-brigade'])],
+        ['label' => FAS::icon('toolbox') . ' ' .
+            'Снаряжения', 'url' => Url::to(['table/equipment'])],
+        ['label' => FAS::icon('thumbtack') . ' ' .
+            'Рабочие задачи', 'url' => Url::to(['table/work-task'])],
     ];
 }

@@ -18,7 +18,7 @@ Yii::$app->view->registerJs(
     const sidebarScrollHeight = document.querySelector('.sidebar').scrollHeight;
 
     if (sidebarScrollHeight > sidebarClientHeight) {
-        if (sessionStorage.getItem('sidebarPosition') != null) {
+        if (sessionStorage.getItem('sidebarPosition') !== null) {
             document.querySelector('.sidebar').scrollTop =
                 sessionStorage.getItem('sidebarPosition');
             console.log('Sidebar position restored from session storage.');
@@ -109,6 +109,7 @@ AppAsset::register($this);
         echo Nav::widget([
             'options' => ['class' => 'navbar-nav ml-auto'],
             'items' => $navBarNavItems,
+            'encodeLabels' => false
         ]);
         NavBar::end();
         ?>

@@ -74,7 +74,7 @@ class ExitToObject extends \yii\db\ActiveRecord
 
         $value = $this->brigade_gathering_datetime;
 
-        if ($value != '' && $value != null) {
+        if ($value != '' && $value !== null) {
             if (strtotime($value) != false) {
                 $this->brigade_gathering_datetime = Yii::$app
                     ->formatter->asDatetime($value, 'php:Y-m-d H:i:s');

@@ -65,7 +65,7 @@ class Order extends \yii\db\ActiveRecord
 
         $value = $this->contract_date;
 
-        if ($value != '' && $value != null) {
+        if ($value != '' && $value !== null) {
             if (strtotime($value) != false) {
                 $this->contract_date = Yii::$app
                     ->formatter->asDate($value, 'php:Y-m-d');

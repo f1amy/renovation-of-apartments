@@ -1,60 +1,37 @@
 <?php
 
 use yii\helpers\Url;
+use rmrevin\yii\fontawesome\FAS;
 
 function getHeadOfAccountingMobileNavItems()
 {
     return [
-        [
-            'label' => 'Начальная',
-            'url' => Url::home()
-        ],
+        ['label' => FAS::icon('home') . ' ' .
+            'Начальная', 'url' => Url::home()],
         '<div class="dropdown-divider"></div>',
-        [
-            'label' => 'Заказы',
-            'url' => Url::to('table/order')
-        ],
-        [
-            'label' => 'Заказчики',
-            'url' => Url::to('table/customer')
-        ],
-        [
-            'label' => 'Рабочие объекты',
-            'url' => Url::to('table/work-object')
-        ],
+        ['label' => FAS::icon('shopping-cart') . ' ' .
+            'Заказы', 'url' => Url::to(['table/order'])],
+        ['label' => FAS::icon('users') . ' ' .
+            'Заказчики', 'url' => Url::to(['table/customer'])],
+        ['label' => FAS::icon('briefcase') . ' ' .
+            'Рабочие объекты', 'url' => Url::to(['table/work-object'])],
         '<div class="dropdown-divider"></div>',
-        [
-            'label' => 'Выходы на объекты',
-            'url' => Url::to('table/exit-to-object')
-        ],
-        [
-            'label' => 'Снаряжения',
-            'url' => Url::to('table/equipment')
-        ],
-        [
-            'label' => 'Рабочие задачи',
-            'url' => Url::to('table/work-task')
-        ],
-        [
-            'label' => 'Ремонтные бригады',
-            'url' => Url::to('table/renovating-brigade')
-        ],
+        ['label' => FAS::icon('truck') . ' ' .
+            'Выходы на объекты', 'url' => Url::to(['table/exit-to-object'])],
+        ['label' => FAS::icon('hard-hat') . ' ' .
+            'Ремонтные бригады', 'url' => Url::to(['table/renovating-brigade'])],
+        ['label' => FAS::icon('toolbox') . ' ' .
+            'Снаряжения', 'url' => Url::to(['table/equipment'])],
+        ['label' => FAS::icon('thumbtack') . ' ' .
+            'Рабочие задачи', 'url' => Url::to(['table/work-task'])],
         '<div class="dropdown-divider"></div>',
-        [
-            'label' => 'Склады',
-            'url' => Url::to('table/warehouse')
-        ],
-        [
-            'label' => 'Вещи на складах',
-            'url' => Url::to('table/item')
-        ],
-        [
-            'label' => 'Задачи',
-            'url' => Url::to('table/task')
-        ],
-        [
-            'label' => 'Сотрудники',
-            'url' => Url::to('table/employee')
-        ],
+        ['label' => FAS::icon('boxes') . ' ' .
+            'Вещи на складах', 'url' => Url::to(['table/item'])],
+        ['label' => FAS::icon('warehouse') . ' ' .
+            'Склады', 'url' => Url::to(['table/warehouse'])],
+        ['label' => FAS::icon('tasks') . ' ' .
+            'Задачи', 'url' => Url::to(['table/task'])],
+        ['label' => FAS::icon('id-card') . ' ' .
+            'Сотрудники', 'url' => Url::to(['table/employee'])],
     ];
 }

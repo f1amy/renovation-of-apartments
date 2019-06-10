@@ -22,7 +22,7 @@ class RenovatingBrigadeSearch extends RenovatingBrigade
     public function rules()
     {
         return [
-            [['id'], 'integer'],
+            [['id', 'exit_to_object_id'], 'integer'],
             [['employee', 'workObject'], 'safe'],
             [['exitToObject'], 'datetime', 'format' => 'php:Y-m-d H:i:s'],
             [['employee', 'workObject', 'exitToObject'], 'trim'],
@@ -37,7 +37,7 @@ class RenovatingBrigadeSearch extends RenovatingBrigade
 
         $value = $this->exitToObject;
 
-        if ($value != '' && $value != null) {
+        if ($value != '' && $value !== null) {
             if (strtotime($value) != false) {
                 $this->exitToObject = \Yii::$app
                     ->formatter->asDatetime($value, 'php:Y-m-d H:i:s');
@@ -103,7 +103,8 @@ class RenovatingBrigadeSearch extends RenovatingBrigade
 
         // grid filtering conditions
         $query->andFilterWhere([
-            'exit_to_object.brigade_gathering_datetime' => $this->exitToObject
+            'exit_to_object.brigade_gathering_datetime' => $this->exitToObject,
+            'renovating_brigade.exit_to_object_id' => $this->exit_to_object_id
         ]);
 
         $query->andFilterWhere(['like', 'id', $this->id])

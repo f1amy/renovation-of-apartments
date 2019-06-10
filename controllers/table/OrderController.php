@@ -9,6 +9,7 @@ use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
+use yii\web\ForbiddenHttpException;
 
 /**
  * OrderController implements the CRUD actions for Order model.

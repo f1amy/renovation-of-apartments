@@ -14,6 +14,11 @@ header {
   z-index: 1040;
 }
 
+header .navbar-nav .dropdown .dropdown-menu .fas {
+  width: 20px;
+  text-align: center;
+}
+
 main {
   padding-top: 15px;
   padding-bottom: 15px;

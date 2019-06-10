@@ -21,7 +21,7 @@ $this->title = 'Заказы';
         <?= Html::a(FAS::icon('plus') .
             ' Создать заказ', ['create'], [
             'id' => 'createOrder',
-            'class' => 'btn btn-success mb-3',
+            'class' => 'btn btn-success mb-3 mr-2',
         ]) ?>
         <?= Html::a(FAS::icon('file-alt') .
             ' Форма создания заказа', ['form/order/create'], [

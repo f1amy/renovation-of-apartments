@@ -16,7 +16,6 @@ $this->title = 'Домашняя страница';
             <h2>Добро пожаловать, <?= Yii::$app->user->identity->username; ?>.</h2>
             <h2><small>Перейдите на вкладку слева ← <br>
                     или на ссылку снизу ↓, чтобы начать работу.</small></h2>
-            <h2><small></small></h2>
         </div>
 
         <div class="row justify-content-around">
@@ -32,14 +31,12 @@ $this->title = 'Домашняя страница';
                             ['form/order/create'],
                             ['class' => 'btn btn-primary']
                         ) ?>
-                        <!--
                         <?= Html::a(
                             FAS::icon('file-alt') .
                                 ' Создание выхода на объект',
-                            ['form/order/create'],
+                            ['form/exit-to-object/create'],
                             ['class' => 'btn btn-primary']
                         ) ?>
-                        -->
                     </div>
                 </div>
             </div>

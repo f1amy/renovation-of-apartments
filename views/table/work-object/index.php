@@ -20,7 +20,7 @@ $this->title = 'Рабочие объекты';
         <?= Html::a(FAS::icon('plus') .
             ' Создать рабочий объект', ['create'], [
             'id' => 'createWorkObject',
-            'class' => 'btn btn-success mb-3',
+            'class' => 'btn btn-success mb-3 mr-2',
         ]) ?>
         <?= Html::a(FAS::icon('file-alt') .
             ' Форма создания заказа', ['form/order/create'], [

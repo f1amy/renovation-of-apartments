@@ -38,8 +38,8 @@ class EmployeeReport extends Model
         $end_date = $this->end_date;
 
         if (
-            $start_date != '' && $start_date != null
-            && $end_date != '' && $end_date != null
+            $start_date != '' && $start_date !== null
+            && $end_date != '' && $end_date !== null
         ) {
             if (
                 strtotime($start_date) != false

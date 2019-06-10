@@ -49,8 +49,24 @@ $gridViewColumns = [
 if (!\Yii::$app->user->can('brigadeWorker')) {
     $gridViewColumns[] = [
         'class' => 'kartik\grid\ActionColumn',
-        'template' => '{update} {delete}',
+        'template' => '{formUpdate} {update} {delete}',
         'header' => 'Действия',
+        'buttons' => [
+            'formUpdate' => function ($url, $model) {
+                return Html::a(
+                    FAS::icon('file-alt'),
+                    yii\helpers\Url::to([
+                        'form/exit-to-object/update',
+                        'id' => $model->exit_to_object_id
+                    ]),
+                    [
+                        'title' => 'Изменить на форме',
+                        'aria-label' => 'Изменить на форме',
+                        'data-pjax' => '0',
+                    ]
+                );
+            }
+        ],
     ];
 }
 ?>
@@ -65,7 +81,7 @@ if (!\Yii::$app->user->can('brigadeWorker')) {
             echo Html::a(FAS::icon('plus') .
                 ' Создать снаряжение', ['create'], [
                 'id' => 'createEquipment',
-                'class' => 'btn btn-success mb-3',
+                'class' => 'btn btn-success mb-3 mr-2',
             ]);
             echo ModalAjax::widget([
                 'id' => 'createUpdateEquipment',
@@ -74,6 +90,14 @@ if (!\Yii::$app->user->can('brigadeWorker')) {
                 'pjaxContainer' => '#w0-pjax',
                 'autoClose' => true,
             ]);
+            echo Html::a(
+                FAS::icon('file-alt') .
+                    ' Форма создания выхода на объект',
+                ['form/exit-to-object/create'],
+                [
+                    'class' => 'btn btn-info mb-3',
+                ]
+            );
         }
         ?>
     </div>
