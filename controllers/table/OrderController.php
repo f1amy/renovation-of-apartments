@@ -99,6 +99,8 @@ class OrderController extends Controller
 
         $model->contract_date = \Yii::$app->formatter
             ->asDate($model->contract_date, 'php:d.m.Y');
+        $model->period_of_execution = \Yii::$app->formatter
+            ->asDate($model->period_of_execution, 'php:d.m.Y');
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;

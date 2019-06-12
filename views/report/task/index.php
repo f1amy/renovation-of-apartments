@@ -10,6 +10,21 @@ use rmrevin\yii\fontawesome\FAS;
 /* @var $this yii\web\View */
 
 $this->title = 'Отчет по задачам';
+
+$this->registerJs("
+    $(document).ready(function () {
+        let chart = Highcharts.charts[0];
+
+        $('#toggle-legend').click(function () {
+            chart.legend.update({
+                enabled: !chart.legend.options.enabled,
+            });
+        });
+    });
+    ",
+    $this::POS_READY,
+    'toggle-chart-legend'
+);
 ?>
 <div class="report-task-index">
 
@@ -26,6 +41,10 @@ $this->title = 'Отчет по задачам';
 
     <p>Этот отчет позволяет узнать спрос на выполняемые ремонтной бригадой задачи.</p>
 
+    <div class="col mb-3">
+        <button id="toggle-legend" class="btn btn-primary">Переключить видимость легенды</button>
+    </div>
+
     <?= HighCharts::widget([
         'clientOptions' => [
             'chart' => [
@@ -33,6 +52,9 @@ $this->title = 'Отчет по задачам';
             ],
             'title' => [
                 'text' => 'Популярность задач'
+            ],
+            'legend' => [
+                'enabled' => false,
             ],
             'xAxis' => [
                 'categories' => [
@@ -55,7 +77,7 @@ $this->title = 'Отчет по задачам';
                     )->count();
 
                     return [
-                        'name' => $model->text,
+                        'name' => $model->category . ' - ' .$model->text,
                         'data' => [
                             $demand
                         ]

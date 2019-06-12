@@ -44,8 +44,9 @@ class OrderController extends Controller
             $customer->load(Yii::$app->request->post()) &&
             $workObject->load(Yii::$app->request->post())
         ) {
-            $isValid = $order->validate(['contract_date']) &&
-                $customer->validate() && $workObject->validate();
+            $isValid = $order->validate([
+                'contract_date', 'period_of_execution', 'status'
+            ]) && $customer->validate() && $workObject->validate();
 
             if ($isValid) {
                 $customer->save(false);
@@ -77,6 +78,8 @@ class OrderController extends Controller
 
         $order->contract_date = \Yii::$app->formatter
             ->asDate($order->contract_date, 'php:d.m.Y');
+        $order->period_of_execution = \Yii::$app->formatter
+            ->asDate($order->period_of_execution, 'php:d.m.Y');
 
         $customer = Customer::findOne($order->customer_id);
         $workObject = WorkObject::findOne($order->work_object_id);
@@ -86,8 +89,9 @@ class OrderController extends Controller
             $customer->load(Yii::$app->request->post()) &&
             $workObject->load(Yii::$app->request->post())
         ) {
-            $isValid = $order->validate(['contract_date']) &&
-                $customer->validate() && $workObject->validate();
+            $isValid = $order->validate([
+                'contract_date', 'period_of_execution', 'status'
+            ]) && $customer->validate() && $workObject->validate();
 
             if ($isValid) {
                 $order->save(false);

@@ -31,12 +31,13 @@ $this->title = 'Рабочие объекты';
     <?= ModalAjax::widget([
         'id' => 'createUpdateWorkObject',
         'bootstrapVersion' => ModalAjax::BOOTSTRAP_VERSION_4,
-        'selector' => '#createWorkObject, #w0-pjax a[aria-label="Изменить"]',
-        'pjaxContainer' => '#w0-pjax',
+        'selector' => '#createWorkObject, #gridWorkObject a[aria-label="Изменить"]',
+        'pjaxContainer' => '#gridWorkObject-pjax',
         'autoClose' => true,
     ]) ?>
 
     <?= GridView::widget([
+        'id' => 'gridWorkObject',
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'pjax' => true,
@@ -45,6 +46,8 @@ $this->title = 'Рабочие объекты';
 
             'house_address',
             'apartment_number',
+            'apartment_area',
+            'number_of_rooms',
             'entrance_number',
             'floor_number',
 

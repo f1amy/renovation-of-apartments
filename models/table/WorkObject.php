@@ -10,6 +10,8 @@ use Yii;
  * @property int $id
  * @property string $house_address
  * @property int $apartment_number
+ * @property int $apartment_area
+ * @property int $number_of_rooms
  * @property int $entrance_number
  * @property int $floor_number
  *
@@ -31,9 +33,9 @@ class WorkObject extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['house_address', 'apartment_number'], 'required'],
+            [['house_address', 'apartment_number', 'apartment_area', 'number_of_rooms'], 'required'],
             [['entrance_number', 'floor_number'], 'default', 'value' => null],
-            [['apartment_number', 'entrance_number', 'floor_number'], 'integer', 'min' => 0],
+            [['apartment_number', 'apartment_area', 'number_of_rooms', 'entrance_number', 'floor_number'], 'integer', 'min' => 1],
             [['house_address'], 'string', 'max' => 64],
             [
                 ['house_address', 'apartment_number'],
@@ -42,6 +44,7 @@ class WorkObject extends \yii\db\ActiveRecord
                     'apartment_number'
                 ]
             ],
+            [['house_address', 'apartment_number', 'apartment_area', 'number_of_rooms', 'entrance_number', 'floor_number'], 'trim'],
         ];
     }
 
@@ -54,6 +57,8 @@ class WorkObject extends \yii\db\ActiveRecord
             'id' => 'Код',
             'house_address' => 'Адрес дома',
             'apartment_number' => 'Номер квартиры',
+            'apartment_area' => 'Площадь квартиры, м2',
+            'number_of_rooms' => 'Количество комнат',
             'entrance_number' => 'Номер подъезда',
             'floor_number' => 'Номер этажа',
         ];

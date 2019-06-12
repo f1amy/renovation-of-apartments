@@ -28,12 +28,13 @@ $this->title = 'Вещи на складах';
     <?= ModalAjax::widget([
         'id' => 'createUpdateItem',
         'bootstrapVersion' => ModalAjax::BOOTSTRAP_VERSION_4,
-        'selector' => '#createItem, #w0-pjax a[aria-label="Изменить"]',
-        'pjaxContainer' => '#w0-pjax',
+        'selector' => '#createItem, #gridItem a[aria-label="Изменить"]',
+        'pjaxContainer' => '#gridItem-pjax',
         'autoClose' => true,
     ]) ?>
 
     <?= GridView::widget([
+        'id' => 'gridItem',
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'pjax' => true,
@@ -50,8 +51,27 @@ $this->title = 'Вещи на складах';
                 'label' => 'Наименование склада',
             ],
             'name',
-            'type',
-            ['attribute' => 'quantity', 'label' => 'Количество, шт.'],
+            [
+                'attribute' => 'type',
+                'format' => 'text',
+                'filterType' => '\kartik\select2\Select2',
+                'filterWidgetOptions' => [
+                    'hideSearch' => true,
+                    'data' => [
+                        'Инструмент' => 'Инструмент',
+                        'Материал' => 'Материал',
+                        'Расходуемое' => 'Расходуемое',
+                        'Другое' => 'Другое',
+                    ],
+                    'options' => [
+                        'prompt' => 'Выберите...'
+                    ],
+                    'pluginOptions' => [
+                        'allowClear' => true
+                    ],
+                ]
+            ],
+            'quantity',
             'purchase_price:currency',
 
             [

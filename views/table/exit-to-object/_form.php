@@ -20,8 +20,16 @@ use app\models\table\Order;
     <?php $form = ActiveForm::begin(['options' => ['class' => 'col-lg']]); ?>
 
     <?= $form->field($model, 'order_id')->widget(Select2::classname(), [
-        'data' => ArrayHelper::map(Order::find()->all(), 'id', function ($model) {
-            return 'Договор №' . $model->id . ' от ' . $model->contract_date .
+        'data' => ArrayHelper::map(Order::find()->where(
+            ['status' => 'В работе']
+        )->all(), 'id', function ($model) {
+            $contract_date = \Yii::$app->formatter
+                ->asDate($model->contract_date, 'php:d.m.Y');
+            $period_of_execution = \Yii::$app->formatter
+                ->asDate($model->period_of_execution, 'php:d.m.Y');
+
+            return 'Договор №' . $model->id . ' от ' . $contract_date .
+                ' до ' . $period_of_execution .
                 ' - ' . $model->customer->full_name .
                 ' - ' . $model->workObject->house_address;
         }),

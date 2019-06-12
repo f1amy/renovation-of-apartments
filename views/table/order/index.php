@@ -11,6 +11,16 @@ use lo\widgets\modal\ModalAjax;
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = 'Заказы';
+
+$this->registerJs(
+    "
+    $(document).ready(function () {
+        $('#tooltip-link[data-toggle=\"tooltip\"]').tooltip();
+    });
+    ",
+    $this::POS_READY,
+    'init-tooltip'
+);
 ?>
 
 <div class="order-index">
@@ -32,12 +42,13 @@ $this->title = 'Заказы';
     <?= ModalAjax::widget([
         'id' => 'createUpdateOrder',
         'bootstrapVersion' => ModalAjax::BOOTSTRAP_VERSION_4,
-        'selector' => '#createOrder, #w0-pjax a[aria-label="Изменить"]',
-        'pjaxContainer' => '#w0-pjax',
+        'selector' => '#createOrder, #gridOrder a[aria-label="Изменить"]',
+        'pjaxContainer' => '#gridOrder-pjax',
         'autoClose' => true,
     ]) ?>
 
     <?= GridView::widget([
+        'id' => 'gridOrder',
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'pjax' => true,
@@ -47,6 +58,20 @@ $this->title = 'Заказы';
             'id',
             [
                 'attribute' => 'contract_date',
+                'format' => 'date',
+                'filterType' => '\kartik\datetime\DateTimePicker',
+                'filterWidgetOptions' => [
+                    'removeButton' => false,
+                    'pluginOptions' => [
+                        'autoclose' => true,
+                        'format' => 'dd.mm.yyyy',
+                        'minView' => 2,
+                        'todayBtn' => true,
+                    ]
+                ]
+            ],
+            [
+                'attribute' => 'period_of_execution',
                 'format' => 'date',
                 'filterType' => '\kartik\datetime\DateTimePicker',
                 'filterWidgetOptions' => [
@@ -70,9 +95,32 @@ $this->title = 'Заказы';
                 'label' => 'Адрес дома',
             ],
             [
-                'attribute' => 'totalCost',
-                'label' => 'Общая стоимость',
+                'attribute' => 'status',
+                'format' => 'text',
+                'filterType' => '\kartik\select2\Select2',
+                'filterWidgetOptions' => [
+                    'hideSearch' => true,
+                    'data' => [
+                        'В работе' => 'В работе',
+                        'Завершено' => 'Завершено',
+                        'Отменено' => 'Отменено',
+                    ],
+                    'options' => [
+                        'prompt' => 'Выберите...'
+                    ],
+                    'pluginOptions' => [
+                        'allowClear' => true
+                    ],
+                ]
+            ],
+            [
+                'attribute' => 'partialCost',
                 'format' => 'currency',
+                'header' => '<a id="tooltip-link" href="#" class="text-info text-center ' .
+                    'd-inline-block" data-toggle="tooltip" data-placement="bottom" ' .
+                    'title="При расчете учтены задачи с ед. изм. Комплект и ' .
+                    'Штука, а так же Материалы и Расходуемое">' .
+                    FAS::icon('exclamation-circle') . ' Частичная стоимость</a>',
             ],
 
             [

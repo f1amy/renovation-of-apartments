@@ -5,10 +5,10 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\table\Employee */
 
-$this->title = 'Редактировать сотрудника: ' . $model->full_name;
+$this->title = 'Изменить сотрудника: ' . $model->full_name;
 $this->params['breadcrumbs'][] = ['label' => 'Сотрудники', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->full_name];
-$this->params['breadcrumbs'][] = 'Редактировать';
+$this->params['breadcrumbs'][] = 'Изменить';
 ?>
 
 <div class="employee-update">

@@ -31,7 +31,7 @@ class WorkTask extends \yii\db\ActiveRecord
     {
         return [
             [['task_id', 'exit_to_object_id'], 'required'],
-            [['task_id', 'exit_to_object_id'], 'integer', 'min' => 0],
+            [['task_id', 'exit_to_object_id'], 'integer', 'min' => 1],
             [
                 ['task_id', 'exit_to_object_id'],
                 'unique', 'targetAttribute' => [
@@ -49,6 +49,7 @@ class WorkTask extends \yii\db\ActiveRecord
                 'skipOnError' => true, 'targetClass' => ExitToObject::className(),
                 'targetAttribute' => ['exit_to_object_id' => 'id']
             ],
+            [['task_id', 'exit_to_object_id'], 'trim'],
         ];
     }
 

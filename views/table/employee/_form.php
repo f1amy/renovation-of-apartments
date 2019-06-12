@@ -32,7 +32,10 @@ use rmrevin\yii\fontawesome\FAS;
         'placeholder' => 'name@example.com'
     ]) ?>
 
-    <?= $form->field($model, 'position')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'position')->textInput([
+        'maxlength' => true,
+        'placeholder' => 'Пример: Бригадир, рабочий'
+    ]) ?>
 
     <div class="form-group">
         <?= Html::submitButton(FAS::icon('check') .

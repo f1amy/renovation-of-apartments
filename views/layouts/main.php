@@ -12,26 +12,27 @@ use yii\helpers\Html;
 use yii\bootstrap4\Breadcrumbs;
 use rmrevin\yii\fontawesome\FAS;
 
-Yii::$app->view->registerJs(
-    "
-    const sidebarClientHeight = document.querySelector('.sidebar').clientHeight;
-    const sidebarScrollHeight = document.querySelector('.sidebar').scrollHeight;
-
-    if (sidebarScrollHeight > sidebarClientHeight) {
-        if (sessionStorage.getItem('sidebarPosition') !== null) {
-            document.querySelector('.sidebar').scrollTop =
-                sessionStorage.getItem('sidebarPosition');
-            console.log('Sidebar position restored from session storage.');
-        }
+Yii::$app->view->registerJs("
+    $(document).ready(function () {
+        const sidebarClientHeight = document.querySelector('.sidebar').clientHeight;
+        const sidebarScrollHeight = document.querySelector('.sidebar').scrollHeight;
     
-        window.onbeforeunload = () => {
-            sessionStorage.setItem(
-                'sidebarPosition',
-                document.querySelector('.sidebar').scrollTop
-            );
-            console.log('Sidebar position saved to session storage.');
+        if (sidebarScrollHeight > sidebarClientHeight) {
+            if (sessionStorage.getItem('sidebarPosition') !== null) {
+                document.querySelector('.sidebar').scrollTop =
+                    sessionStorage.getItem('sidebarPosition');
+                console.log('Sidebar position restored from session storage.');
+            }
+        
+            window.onbeforeunload = () => {
+                sessionStorage.setItem(
+                    'sidebarPosition',
+                    document.querySelector('.sidebar').scrollTop
+                );
+                console.log('Sidebar position saved to session storage.');
+            }
         }
-    }
+    });
     ",
     $this::POS_READY,
     'remember-sidebar-position'

@@ -34,6 +34,7 @@ class Warehouse extends \yii\db\ActiveRecord
             [['address'], 'string', 'max' => 64],
             [['name'], 'unique'],
             [['address'], 'unique'],
+            [['name', 'address'], 'trim'],
         ];
     }
 

@@ -45,6 +45,7 @@ class Customer extends \yii\db\ActiveRecord
             [['email_address'], 'default', 'value' => null],
             [['phone_number'], 'unique'],
             [['email_address'], 'unique'],
+            [['full_name', 'phone_number', 'email_address'], 'trim'],
         ];
     }
 

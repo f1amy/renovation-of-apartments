@@ -107,6 +107,28 @@ $this->title = 'Отчет по сотрудникам';
         }
 
         if ($exitsCount > 0) {
+            $this->registerJs("
+                $(document).ready(function () {
+                    let chart = Highcharts.charts[0];
+            
+                    $('#toggle-legend').click(function () {
+                        chart.legend.update({
+                            enabled: !chart.legend.options.enabled,
+                        });
+                    });
+                });
+                ",
+                $this::POS_READY,
+                'toggle-chart-legend'
+            );
+            echo Html::tag('div', Html::button(
+                'Переключить видимость легенды',
+                [
+                    'id' => 'toggle-legend',
+                    'class' => 'btn btn-primary'
+                ]
+            ), ['class' => 'col mb-3']);
+
             echo Html::tag(
                 'h5',
                 'Всего совершено выходов на объект рабочими: '

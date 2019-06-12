@@ -14,30 +14,37 @@ use app\models\table\Order;
 
 /* @var $this yii\web\View */
 
-$this->title = 'Редактировать выход на объект: ' . $exitToObject->id;
+$this->title = 'Изменить выход на объект: ' . $exitToObject->id;
 $this->params['breadcrumbs'][] = [
     'label' => 'Выходы на объекты',
     'url' => ['table/exit-to-object/index']
 ];
 $this->params['breadcrumbs'][] = ['label' => $exitToObject->id];
-$this->params['breadcrumbs'][] = 'Редактировать';
+$this->params['breadcrumbs'][] = 'Изменить';
 
-$this->registerJs("
-    $(
-        '#createUpdateRenovatingBrigade,' +
-        '#createUpdateWorkTask,' +
-        '#createUpdateEquipment'
-    ).on(
-        'kbModalShow',
-        function(event, data, status, xhr, selector) {
-            let formGroup = $(event.target).find(
-                'select[name$=\"[exit_to_object_id]\"]'
-            );
-            formGroup = formGroup.closest('.form-group');
-            const select2 = formGroup.find('select');
-            select2.val('$exitToObject->id').trigger('change');
-        });
-");
+$this->registerJs(
+    "
+    $(document).ready(function () {
+        $(
+            '#createUpdateRenovatingBrigade,' +
+            '#createUpdateWorkTask,' +
+            '#createUpdateEquipment'
+        ).on(
+            'kbModalShow',
+            function(event, data, status, xhr, selector) {
+                let formGroup = $(event.target).find(
+                    'select[name$=\"[exit_to_object_id]\"]'
+                );
+                formGroup = formGroup.closest('.form-group');
+                const select2 = formGroup.find('select');
+                select2.val('$exitToObject->id').trigger('change');
+            }
+        );
+    });
+    ",
+    $this::POS_READY,
+    'set-default-value-for-exit-to-object'
+);
 ?>
 
 <div class="order-form-update">
@@ -53,32 +60,29 @@ $this->registerJs("
             ); ?>
 
             <div class="form-group">
-                <?= $form->field($exitToObject, 'order_id')->widget(
-                    Select2::classname(),
-                    [
-                        'data' => ArrayHelper::map(
-                            Order::find()->all(),
-                            'id',
-                            function ($model) {
-                                return 'Договор №' . $model->id . ' от ' .
-                                    $model->contract_date;
-                            }
-                        ),
-                        'options' => ['prompt' => 'Выберите значение...'],
-                    ]
-                )->label('Заказ') ?>
+                <?= $form->field($exitToObject, 'order_id')->widget(Select2::classname(), [
+                    'data' => ArrayHelper::map(Order::find()->all(), 'id', function ($model) {
+                        $contract_date = \Yii::$app->formatter
+                            ->asDate($model->contract_date, 'php:d.m.Y');
+                        $period_of_execution = \Yii::$app->formatter
+                            ->asDate($model->period_of_execution, 'php:d.m.Y');
 
-                <?= $form->field($exitToObject, 'brigade_gathering_datetime')
-                    ->widget(
-                        DateTimePicker::className(),
-                        [
-                            'pluginOptions' => [
-                                'autoclose' => true,
-                                'format' => 'dd.mm.yyyy hh:ii',
-                                'todayBtn' => true,
-                            ]
+                        return 'Договор №' . $model->id . ' от ' . $contract_date .
+                            ' до ' . $period_of_execution;
+                    }),
+                    'options' => ['prompt' => 'Выберите значение...'],
+                ])->label('Заказ') ?>
+
+                <?= $form->field($exitToObject, 'brigade_gathering_datetime')->widget(
+                    DateTimePicker::className(),
+                    [
+                        'pluginOptions' => [
+                            'autoclose' => true,
+                            'format' => 'dd.mm.yyyy hh:ii',
+                            'todayBtn' => true,
                         ]
-                    ) ?>
+                    ]
+                ) ?>
             </div>
 
             <div>
@@ -129,7 +133,7 @@ $this->registerJs("
                 <div>
                     <?= Html::a(
                         FAS::icon('plus') .
-                            ' Создать ремонтную бригаду',
+                            ' Добавить в рабочую бригаду',
                         [Url::to('/table/renovating-brigade/create')],
                         [
                             'id' => 'createRenovatingBrigade',
@@ -194,7 +198,6 @@ $this->registerJs("
                                             'data-method' => 'post',
                                             'data-confirm' => 'Вы действительно' .
                                                 ' хотите удалить данную запись?',
-                                            'onclick'=> "$."
                                         ]
                                     );
                                 },
@@ -208,7 +211,7 @@ $this->registerJs("
                 <div>
                     <?= Html::a(
                         FAS::icon('plus') .
-                            ' Создать рабочую задачу',
+                            ' Добавить рабочую задачу',
                         [Url::to('table/work-task/create')],
                         [
                             'id' => 'createWorkTask',
@@ -233,7 +236,12 @@ $this->registerJs("
                         ['class' => 'kartik\grid\SerialColumn'],
 
                         [
-                            'attribute' => 'task',
+                            'attribute' => 'taskCategory',
+                            'value' => 'task.category',
+                            'label' => 'Категория задачи',
+                        ],
+                        [
+                            'attribute' => 'taskText',
                             'value' => 'task.text',
                             'label' => 'Текст задачи',
                         ],
@@ -289,7 +297,7 @@ $this->registerJs("
         <div>
             <?= Html::a(
                 FAS::icon('plus') .
-                    ' Создать снаряжение',
+                    ' Добавить снаряжение',
                 [Url::to('table/equipment/create')],
                 [
                     'id' => 'createEquipment',
@@ -318,10 +326,7 @@ $this->registerJs("
                     'value' => 'item.name',
                     'label' => 'Наименование вещи',
                 ],
-                [
-                    'attribute' => 'item_quantity',
-                    'label' => 'Количество вещей, шт.'
-                ],
+                'item_quantity',
 
                 [
                     'class' => 'kartik\grid\ActionColumn',

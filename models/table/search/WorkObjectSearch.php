@@ -18,13 +18,13 @@ class WorkObjectSearch extends WorkObject
     {
         return [
             [[
-                'id', 'apartment_number',
-                'entrance_number', 'floor_number'
+                'id', 'apartment_number', 'apartment_area',
+                'number_of_rooms', 'entrance_number', 'floor_number'
             ], 'integer'],
             [['house_address'], 'safe'],
             [[
-                'apartment_number', 'entrance_number',
-                'floor_number', 'house_address'
+                'apartment_number', 'apartment_area', 'house_address',
+                'number_of_rooms', 'entrance_number', 'floor_number'
             ], 'trim'],
         ];
     }
@@ -67,14 +67,16 @@ class WorkObjectSearch extends WorkObject
         }
 
         // grid filtering conditions
-        $query->andFilterWhere(['like', 'id', $this->id])
-            ->andFilterWhere(['like', 'house_address', $this->house_address]);
-
         $query->andFilterWhere([
             'apartment_number' => $this->apartment_number,
             'entrance_number' => $this->entrance_number,
             'floor_number' => $this->floor_number,
         ]);
+
+        $query->andFilterWhere(['like', 'id', $this->id])
+            ->andFilterWhere(['like', 'house_address', $this->house_address])
+            ->andFilterWhere(['like', 'apartment_area', $this->apartment_area])
+            ->andFilterWhere(['like', 'number_of_rooms', $this->number_of_rooms]);
 
         return $dataProvider;
     }

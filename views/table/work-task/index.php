@@ -16,7 +16,12 @@ $gridViewColumns = [
     ['class' => 'kartik\grid\SerialColumn'],
 
     [
-        'attribute' => 'task',
+        'attribute' => 'taskCategory',
+        'value' => 'task.category',
+        'label' => 'Категория задачи',
+    ],
+    [
+        'attribute' => 'taskText',
         'value' => 'task.text',
         'label' => 'Текст задачи',
     ],
@@ -81,9 +86,9 @@ if (!\Yii::$app->user->can('brigadeWorker')) {
             ]);
             echo ModalAjax::widget([
                 'id' => 'createUpdateWorkTask',
-                'selector' => '#createWorkTask, #w0-pjax a[aria-label="Изменить"]',
+                'selector' => '#createWorkTask, #gridWorkTask a[aria-label="Изменить"]',
                 'bootstrapVersion' => ModalAjax::BOOTSTRAP_VERSION_4,
-                'pjaxContainer' => '#w0-pjax',
+                'pjaxContainer' => '#gridWorkTask-pjax',
                 'autoClose' => true,
             ]);
             echo Html::a(
@@ -99,6 +104,7 @@ if (!\Yii::$app->user->can('brigadeWorker')) {
     </div>
 
     <?= GridView::widget([
+        'id' => 'gridWorkTask',
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'pjax' => true,

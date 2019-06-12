@@ -9,9 +9,9 @@ use Yii;
  *
  * @property int $id
  * @property string $full_name
+ * @property string $position
  * @property string $phone_number
  * @property string $email_address
- * @property string $position
  *
  * @property RenovatingBrigade[] $renovatingBrigades
  * @property ExitToObject[] $exitToObjects
@@ -32,8 +32,8 @@ class Employee extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['full_name', 'phone_number', 'position'], 'required'],
-            [['full_name', 'email_address', 'position'], 'string', 'max' => 64],
+            [['full_name', 'position', 'phone_number'], 'required'],
+            [['full_name', 'position', 'email_address'], 'string', 'max' => 64],
             [['email_address'], 'email'],
             [['email_address'], 'default', 'value' => null],
             [
@@ -44,6 +44,7 @@ class Employee extends \yii\db\ActiveRecord
             [['phone_number'], 'match', 'pattern' => '/^\+7 \d{3} \d{3}-\d{2}-\d{2}$/'],
             [['phone_number'], 'unique'],
             [['email_address'], 'unique'],
+            [['full_name', 'position', 'phone_number', 'email_address'], 'trim'],
         ];
     }
 
@@ -55,9 +56,9 @@ class Employee extends \yii\db\ActiveRecord
         return [
             'id' => 'Код',
             'full_name' => 'ФИО',
+            'position' => 'Должность',
             'phone_number' => 'Номер телефона',
             'email_address' => 'Электронный адрес',
-            'position' => 'Должность',
         ];
     }
 

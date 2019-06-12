@@ -10,9 +10,9 @@ use Yii;
  * @property int $id
  * @property int $warehouse_id
  * @property string $name
+ * @property string $type
  * @property int $quantity
  * @property string $purchase_price
- * @property string $type
  *
  * @property Equipment[] $equipments
  * @property ExitToObject[] $exitToObjects
@@ -34,17 +34,17 @@ class Item extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['warehouse_id', 'name', 'quantity', 'purchase_price', 'type'], 'required'],
-            [['warehouse_id', 'quantity'], 'integer', 'min' => 0],
+            [['warehouse_id', 'name', 'type', 'quantity', 'purchase_price'], 'required'],
+            [['warehouse_id', 'quantity'], 'integer', 'min' => 1],
+            [['type'], 'string'],
+            [['type'], 'match', 'pattern' => '/^(Инструмент|Материал|Расходуемое|Другое)$/'],
             [
                 ['purchase_price'],
                 'number',
                 'min' => 0,
                 'numberPattern' => '/^\d+((.|,)\d{1,2})?$/'
             ],
-            [['type'], 'string'],
-            [['type'], 'match', 'pattern' => '/^(Инструмент|Материал)$/'],
-            [['name'], 'string', 'max' => 32],
+            [['name'], 'string', 'max' => 128],
             [['warehouse_id', 'name'], 'unique', 'targetAttribute' => ['warehouse_id', 'name']],
             [
                 ['warehouse_id'],
@@ -52,6 +52,7 @@ class Item extends \yii\db\ActiveRecord
                 'targetClass' => Warehouse::className(),
                 'targetAttribute' => ['warehouse_id' => 'id']
             ],
+            [['warehouse_id', 'name', 'type', 'quantity', 'purchase_price'], 'trim'],
         ];
     }
 
@@ -64,9 +65,9 @@ class Item extends \yii\db\ActiveRecord
             'id' => 'Код',
             'warehouse_id' => 'Код склада',
             'name' => 'Наименование',
+            'type' => 'Тип',
             'quantity' => 'Количество',
             'purchase_price' => 'Цена покупки',
-            'type' => 'Тип',
         ];
     }
 

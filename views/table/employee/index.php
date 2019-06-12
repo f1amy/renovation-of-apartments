@@ -36,12 +36,13 @@ $this->title = 'Сотрудники';
     <?= ModalAjax::widget([
         'id' => 'createUpdateEmployee',
         'bootstrapVersion' => ModalAjax::BOOTSTRAP_VERSION_4,
-        'selector' => '#createEmployee, #w0-pjax a[aria-label="Изменить"]',
-        'pjaxContainer' => '#w0-pjax',
+        'selector' => '#createEmployee, #gridEmployee a[aria-label="Изменить"]',
+        'pjaxContainer' => '#gridEmployee-pjax',
         'autoClose' => true,
     ]) ?>
 
     <?= GridView::widget([
+        'id' => 'gridEmployee',
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'pjax' => true,

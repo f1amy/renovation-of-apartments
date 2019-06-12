@@ -21,9 +21,9 @@ class OrderSearch extends Order
     {
         return [
             [['id'], 'integer'],
-            [['customer', 'workObject'], 'safe'],
-            [['contract_date'], 'date', 'format' => 'php:Y-m-d'],
-            [['id', 'contract_date', 'customer', 'workObject'], 'trim'],
+            [['customer', 'workObject', 'status'], 'safe'],
+            [['contract_date', 'period_of_execution'], 'date', 'format' => 'php:Y-m-d'],
+            [['id', 'contract_date', 'period_of_execution', 'customer', 'workObject', 'status'], 'trim'],
         ];
     }
 
@@ -78,10 +78,12 @@ class OrderSearch extends Order
 
         // grid filtering conditions
         $query->andFilterWhere([
-            'contract_date' => $this->contract_date
+            'contract_date' => $this->contract_date,
+            'period_of_execution' => $this->period_of_execution
         ]);
 
         $query->andFilterWhere(['like', 'order.id', $this->id])
+            ->andFilterWhere(['like', 'status', $this->status])
             ->andFilterWhere(['like', 'customer.full_name', $this->customer])
             ->andFilterWhere(['like', 'work_object.house_address', $this->workObject]);
 

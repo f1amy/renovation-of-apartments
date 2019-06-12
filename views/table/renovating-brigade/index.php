@@ -82,8 +82,8 @@ if (!\Yii::$app->user->can('brigadeWorker')) {
             echo ModalAjax::widget([
                 'id' => 'createUpdateRenovatingBrigade',
                 'bootstrapVersion' => ModalAjax::BOOTSTRAP_VERSION_4,
-                'selector' => '#createRenovatingBrigade, #w0-pjax a[aria-label="Изменить"]',
-                'pjaxContainer' => '#w0-pjax',
+                'selector' => '#createRenovatingBrigade, #gridRenovatingBrigade a[aria-label="Изменить"]',
+                'pjaxContainer' => '#gridRenovatingBrigade-pjax',
                 'autoClose' => true,
             ]);
             echo Html::a(
@@ -99,6 +99,7 @@ if (!\Yii::$app->user->can('brigadeWorker')) {
     </div>
 
     <?= GridView::widget([
+        'id' => 'gridRenovatingBrigade',
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'pjax' => true,

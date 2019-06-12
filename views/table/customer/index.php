@@ -31,12 +31,13 @@ $this->title = 'Заказчики';
     <?= ModalAjax::widget([
         'id' => 'createUpdateCustomer',
         'bootstrapVersion' => ModalAjax::BOOTSTRAP_VERSION_4,
-        'selector' => '#createCustomer, #w0-pjax a[aria-label="Изменить"]',
-        'pjaxContainer' => '#w0-pjax',
+        'selector' => '#createCustomer, #gridCustomer a[aria-label="Изменить"]',
+        'pjaxContainer' => '#gridCustomer-pjax',
         'autoClose' => true,
     ]) ?>
 
     <?= GridView::widget([
+        'id' => 'gridCustomer',
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'pjax' => true,

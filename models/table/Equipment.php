@@ -9,8 +9,8 @@ use Yii;
  *
  * @property int $id
  * @property int $item_id
- * @property int $exit_to_object_id
  * @property int $item_quantity
+ * @property int $exit_to_object_id
  *
  * @property Item $item
  * @property ExitToObject $exitToObject
@@ -33,8 +33,8 @@ class Equipment extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['item_id', 'exit_to_object_id', 'item_quantity'], 'required'],
-            [['item_id', 'exit_to_object_id'], 'integer', 'min' => 0],
+            [['item_id', 'item_quantity', 'exit_to_object_id'], 'required'],
+            [['item_id', 'exit_to_object_id'], 'integer', 'min' => 1],
             ['item_quantity', 'integer', 'min' => 1],
             ['item_quantity', 'validateItemQuantity', 'on' => self::SCENARIO_DEFAULT],
             ['item_quantity', 'validateItemQuantityOnUpdate', 'on' => self::SCENARIO_UPDATE],
@@ -55,6 +55,7 @@ class Equipment extends \yii\db\ActiveRecord
                 'targetClass' => ExitToObject::className(),
                 'targetAttribute' => ['exit_to_object_id' => 'id']
             ],
+            [['item_id', 'item_quantity', 'exit_to_object_id'], 'trim'],
         ];
     }
 
@@ -94,8 +95,8 @@ class Equipment extends \yii\db\ActiveRecord
         return [
             'id' => 'Код',
             'item_id' => 'Код вещи',
-            'exit_to_object_id' => 'Код выхода на объект',
             'item_quantity' => 'Количество вещей',
+            'exit_to_object_id' => 'Код выхода на объект',
         ];
     }
 

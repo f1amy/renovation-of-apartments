@@ -18,9 +18,9 @@ class TaskSearch extends Task
     {
         return [
             [['id'], 'integer'],
-            [['text'], 'safe'],
-            [['cost'], 'number'],
-            [['text', 'cost'], 'trim'],
+            [['category', 'text', 'unit'], 'safe'],
+            [['cost_per_unit'], 'number'],
+            [['category', 'text', 'unit', 'cost_per_unit'], 'trim'],
         ];
     }
 
@@ -63,8 +63,11 @@ class TaskSearch extends Task
 
         // grid filtering conditions
         $query->andFilterWhere(['like', 'id', $this->id])
+            ->andFilterWhere(['like', 'category', $this->category])
             ->andFilterWhere(['like', 'text', $this->text])
-            ->andFilterWhere(['like', 'cost', $this->cost]);
+            ->andFilterWhere(['like', 'unit', $this->unit])
+            ->andFilterWhere(['like', 'cost_per_unit', $this->cost_per_unit]);
+            
 
         return $dataProvider;
     }

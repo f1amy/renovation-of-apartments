@@ -36,20 +36,68 @@ $this->title = 'Задачи';
     <?= ModalAjax::widget([
         'id' => 'createUpdateTask',
         'bootstrapVersion' => ModalAjax::BOOTSTRAP_VERSION_4,
-        'selector' => '#createTask, #w0-pjax a[aria-label="Изменить"]',
-        'pjaxContainer' => '#w0-pjax',
+        'selector' => '#createTask, #gridTask a[aria-label="Изменить"]',
+        'pjaxContainer' => '#gridTask-pjax',
         'autoClose' => true,
     ]) ?>
 
     <?= GridView::widget([
+        'id' => 'gridTask',
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'pjax' => true,
         'columns' => [
             ['class' => 'kartik\grid\SerialColumn'],
 
+            [
+                'attribute' => 'category',
+                'format' => 'text',
+                'filterType' => '\kartik\select2\Select2',
+                'filterWidgetOptions' => [
+                    'hideSearch' => true,
+                    'data' => [
+                        'Потолок' => 'Потолок',
+                        'Стены' => 'Стены',
+                        'Пол' => 'Пол',
+                        'Коммуникации' => 'Коммуникации',
+                        'Демонтаж' => 'Демонтаж',
+                        'Остальное' => 'Остальное',
+                    ],
+                    'options' => [
+                        'prompt' => 'Выберите значение...'
+                    ],
+                    'pluginOptions' => [
+                        'allowClear' => true
+                    ],
+                ]
+            ],
             'text',
-            'cost:currency',
+            [
+                'attribute' => 'unit',
+                'format' => 'text',
+                'filterType' => '\kartik\select2\Select2',
+                'filterWidgetOptions' => [
+                    'hideSearch' => true,
+                    'data' => [
+                        'Квадратный метр' => 'Квадратный метр',
+                        'Штука' => 'Штука',
+                        'Погонный метр' => 'Погонный метр',
+                        'Комплект' => 'Комплект',
+                        'Не применимо' => 'Не применимо',
+                    ],
+                    'options' => [
+                        'prompt' => 'Выберите значение...'
+                    ],
+                    'pluginOptions' => [
+                        'allowClear' => true
+                    ],
+                ]
+            ],
+            [
+                'attribute' => 'cost_per_unit',
+                'format' => 'currency',
+                'label' => 'Стоимость за ед.',
+            ],
 
             [
                 'class' => 'kartik\grid\ActionColumn',

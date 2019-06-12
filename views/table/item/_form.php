@@ -28,16 +28,22 @@ use app\models\table\Warehouse;
         'options' => ['prompt' => 'Выберите значение...'],
     ])->label('Склад') ?>
 
-    <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'name')->textInput([
+        'maxlength' => true,
+        'placeholder' => 'Пример: Лобзик 770Вт Производитель Модель'
+    ]) ?>
 
-    <?= $form->field($model, 'quantity')->input('number', ['min' => '0', 'step' => '1']) ?>
+    <?= $form->field($model, 'quantity')->input('number', ['min' => '1', 'step' => '1']) ?>
 
     <?= $form->field($model, 'purchase_price')
-        ->input('number', ['min' => '0', 'step' => '0.01']) ?>
+        ->input('number', ['min' => '0', 'step' => '0.01'])
+        ->label('Цена покупки, руб.') ?>
 
     <?= $form->field($model, 'type')->dropDownList([
         'Инструмент' => 'Инструмент',
-        'Материал' => 'Материал'
+        'Материал' => 'Материал',
+        'Расходуемое' => 'Расходуемое',
+        'Другое' => 'Другое',
     ], ['prompt' => 'Выберите значение...']) ?>
 
     <div class="form-group">

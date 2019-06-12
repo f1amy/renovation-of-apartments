@@ -35,7 +35,10 @@ use app\models\table\ExitToObject;
             ExitToObject::find()->all(),
             'id',
             function ($model) {
-                return 'Дата выхода ' . $model->brigade_gathering_datetime .
+                $brigade_gathering_datetime = \Yii::$app->formatter
+                    ->asDate($model->brigade_gathering_datetime, 'php:d.m.Y H:i');
+
+                return 'Дата выхода ' . $brigade_gathering_datetime .
                     ' - Место ' . $model->order->workObject->house_address;
             }
         ),

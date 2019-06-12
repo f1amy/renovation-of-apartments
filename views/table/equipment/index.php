@@ -20,10 +20,7 @@ $gridViewColumns = [
         'value' => 'item.name',
         'label' => 'Наименование вещи',
     ],
-    [
-        'attribute' => 'item_quantity',
-        'label' => 'Количество вещей, шт.'
-    ],
+    'item_quantity',
     [
         'attribute' => 'exitToObject',
         'value' => 'exitToObject.brigade_gathering_datetime',
@@ -86,8 +83,8 @@ if (!\Yii::$app->user->can('brigadeWorker')) {
             echo ModalAjax::widget([
                 'id' => 'createUpdateEquipment',
                 'bootstrapVersion' => ModalAjax::BOOTSTRAP_VERSION_4,
-                'selector' => '#createEquipment, #w0-pjax a[aria-label="Изменить"]',
-                'pjaxContainer' => '#w0-pjax',
+                'selector' => '#createEquipment, #gridEquipment a[aria-label="Изменить"]',
+                'pjaxContainer' => '#gridEquipment-pjax',
                 'autoClose' => true,
             ]);
             echo Html::a(
@@ -103,6 +100,7 @@ if (!\Yii::$app->user->can('brigadeWorker')) {
     </div>
 
     <?= GridView::widget([
+        'id' => 'gridEquipment',
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'pjax' => true,

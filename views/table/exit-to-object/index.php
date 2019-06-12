@@ -84,8 +84,8 @@ if (!\Yii::$app->user->can('brigadeWorker')) {
             echo ModalAjax::widget([
                 'id' => 'createUpdateExitToObject',
                 'bootstrapVersion' => ModalAjax::BOOTSTRAP_VERSION_4,
-                'selector' => '#createExitToObject, #w0-pjax a[aria-label="Изменить"]',
-                'pjaxContainer' => '#w0-pjax',
+                'selector' => '#createExitToObject, #gridExitToObject a[aria-label="Изменить"]',
+                'pjaxContainer' => '#gridExitToObject-pjax',
                 'autoClose' => true,
             ]);
             echo Html::a(
@@ -101,6 +101,7 @@ if (!\Yii::$app->user->can('brigadeWorker')) {
     </div>
 
     <?= GridView::widget([
+        'id' => 'gridExitToObject',
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'pjax' => true,

@@ -36,16 +36,15 @@ class ExitToObject extends \yii\db\ActiveRecord
     {
         return [
             [['order_id', 'brigade_gathering_datetime'], 'required'],
-            [['order_id'], 'integer', 'min' => 0],
-            [['brigade_gathering_datetime'], 'safe'],
+            [['order_id'], 'integer', 'min' => 1],
+            [
+                ['brigade_gathering_datetime'],
+                'datetime', 'format' => 'php:Y-m-d H:i:s'
+            ],
             [
                 ['order_id', 'brigade_gathering_datetime'],
                 'unique',
                 'targetAttribute' => ['order_id', 'brigade_gathering_datetime']
-            ],
-            [
-                ['brigade_gathering_datetime'],
-                'datetime', 'format' => 'php:Y-m-d H:i:s'
             ],
             [
                 ['order_id'],
@@ -54,6 +53,7 @@ class ExitToObject extends \yii\db\ActiveRecord
                 'targetClass' => Order::className(),
                 'targetAttribute' => ['order_id' => 'id']
             ],
+            [['order_id', 'brigade_gathering_datetime'], 'trim'],
         ];
     }
 

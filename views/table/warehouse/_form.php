@@ -13,9 +13,15 @@ use rmrevin\yii\fontawesome\FAS;
 
     <?php $form = ActiveForm::begin(['options' => ['class' => 'col-lg']]); ?>
 
-    <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'name')->textInput([
+        'maxlength' => true,
+        'placeholder' => 'Примеры: Основной, дополнительный'
+    ]) ?>
 
-    <?= $form->field($model, 'address')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'address')->textInput([
+        'maxlength' => true,
+        'placeholder' => 'ул. Такая-то, 23'
+    ]) ?>
 
     <div class="form-group">
         <?= Html::submitButton(FAS::icon('check') .

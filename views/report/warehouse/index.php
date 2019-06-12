@@ -10,6 +10,21 @@ use rmrevin\yii\fontawesome\FAS;
 /* @var $this yii\web\View */
 
 $this->title = 'Отчет по складу';
+
+$this->registerJs("
+    $(document).ready(function () {
+        let chart = Highcharts.charts[0];
+
+        $('#toggle-legend').click(function () {
+            chart.legend.update({
+                enabled: !chart.legend.options.enabled,
+            });
+        });
+    });
+    ",
+    $this::POS_READY,
+    'toggle-chart-legend'
+);
 ?>
 <div class="report-warehouse-index">
 
@@ -26,6 +41,10 @@ $this->title = 'Отчет по складу';
 
     <p>Этот отчет позволяет оценить загруженность складов.</p>
 
+    <div class="col mb-3">
+        <button id="toggle-legend" class="btn btn-primary">Переключить видимость легенды</button>
+    </div>
+
     <?= HighCharts::widget([
         'clientOptions' => [
             'chart' => [
@@ -33,6 +52,9 @@ $this->title = 'Отчет по складу';
             ],
             'title' => [
                 'text' => 'Загруженность складов'
+            ],
+            'legend' => [
+                'enabled' => false,
             ],
             'xAxis' => [
                 'categories' => $categories = array_values(

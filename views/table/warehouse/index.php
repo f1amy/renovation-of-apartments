@@ -36,12 +36,13 @@ $this->title = 'Склады';
     <?= ModalAjax::widget([
         'id' => 'createUpdateWarehouse',
         'bootstrapVersion' => ModalAjax::BOOTSTRAP_VERSION_4,
-        'selector' => '#createWarehouse, #w0-pjax a[aria-label="Изменить"]',
-        'pjaxContainer' => '#w0-pjax',
+        'selector' => '#createWarehouse, #gridWarehouse a[aria-label="Изменить"]',
+        'pjaxContainer' => '#gridWarehouse-pjax',
         'autoClose' => true,
     ]) ?>
 
     <?= GridView::widget([
+        'id' => 'gridWarehouse',
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'pjax' => true,

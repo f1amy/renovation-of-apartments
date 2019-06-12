@@ -11,7 +11,8 @@ use yii\data\ActiveDataProvider;
  */
 class WorkTaskSearch extends WorkTask
 {
-    public $task;
+    public $taskCategory;
+    public $taskText;
     public $exitToObject;
     public $workObject;
 
@@ -22,9 +23,9 @@ class WorkTaskSearch extends WorkTask
     {
         return [
             [['id', 'exit_to_object_id'], 'integer'],
-            [['task', 'workObject'], 'safe'],
+            [['taskCategory', 'taskText', 'workObject'], 'safe'],
             [['exitToObject'], 'datetime', 'format' => 'php:Y-m-d H:i:s'],
-            [['task', 'exitToObject', 'workObject'], 'trim'],
+            [['taskCategory', 'taskText', 'exitToObject', 'workObject'], 'trim'],
         ];
     }
 
@@ -76,7 +77,12 @@ class WorkTaskSearch extends WorkTask
 
         $dataProvider->sort->defaultOrder = ['id' => SORT_ASC];
 
-        $dataProvider->sort->attributes['task'] = [
+        $dataProvider->sort->attributes['taskCategory'] = [
+            'asc' => ['task.category' => SORT_ASC],
+            'desc' => ['task.category' => SORT_DESC],
+        ];
+
+        $dataProvider->sort->attributes['taskText'] = [
             'asc' => ['task.text' => SORT_ASC],
             'desc' => ['task.text' => SORT_DESC],
         ];
@@ -107,7 +113,8 @@ class WorkTaskSearch extends WorkTask
         ]);
 
         $query->andFilterWhere(['like', 'id', $this->id])
-            ->andFilterWhere(['like', 'task.text', $this->task])
+            ->andFilterWhere(['like', 'task.category', $this->taskCategory])
+            ->andFilterWhere(['like', 'task.text', $this->taskText])
             ->andFilterWhere([
                 'like',
                 'work_object.house_address',

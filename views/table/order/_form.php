@@ -19,37 +19,64 @@ use app\models\table\WorkObject;
 
     <?php $form = ActiveForm::begin(['options' => ['class' => 'col-lg']]); ?>
 
-    <?= $form->field($model, 'contract_date')->widget(DateTimePicker::className(), [
-        'pluginOptions' => [
-            'autoclose' => true,
-            'format' => 'dd.mm.yyyy',
-            'minView' => 2,
-            'todayBtn' => true,
+    <?= $form->field($model, 'contract_date')->widget(
+        DateTimePicker::className(),
+        [
+            'pluginOptions' => [
+                'autoclose' => true,
+                'format' => 'dd.mm.yyyy',
+                'minView' => 2,
+                'todayBtn' => true,
+            ]
         ]
-    ]) ?>
+    ) ?>
 
-    <?= $form->field($model, 'customer_id')->widget(Select2::classname(), [
-        'data' => ArrayHelper::map(
-            Customer::find()->all(),
-            'id',
-            function ($model) {
-                return $model->full_name;
-            }
-        ),
-        'options' => ['prompt' => 'Выберите значение...'],
-    ])->label('Заказчик') ?>
+    <?= $form->field($model, 'period_of_execution')->widget(
+        DateTimePicker::className(),
+        [
+            'pluginOptions' => [
+                'autoclose' => true,
+                'format' => 'dd.mm.yyyy',
+                'minView' => 2,
+                'todayBtn' => true,
+            ]
+        ]
+    ) ?>
 
-    <?= $form->field($model, 'work_object_id')->widget(Select2::classname(), [
-        'data' => ArrayHelper::map(
-            WorkObject::find()->all(),
-            'id',
-            function ($model) {
-                return $model->house_address .
-                    ' -  Кв. ' . $model->apartment_number;
-            }
-        ),
-        'options' => ['prompt' => 'Выберите значение...'],
-    ])->label('Рабочий объект') ?>
+    <?= $form->field($model, 'customer_id')->widget(
+        Select2::classname(),
+        [
+            'data' => ArrayHelper::map(
+                Customer::find()->all(),
+                'id',
+                function ($model) {
+                    return $model->full_name;
+                }
+            ),
+            'options' => ['prompt' => 'Выберите значение...'],
+        ]
+    )->label('Заказчик') ?>
+
+    <?= $form->field($model, 'work_object_id')->widget(
+        Select2::classname(),
+        [
+            'data' => ArrayHelper::map(
+                WorkObject::find()->all(),
+                'id',
+                function ($model) {
+                    return $model->house_address .
+                        ' -  Кв. ' . $model->apartment_number;
+                }
+            ),
+            'options' => ['prompt' => 'Выберите значение...'],
+        ]
+    )->label('Рабочий объект') ?>
+
+    <?= $form->field($model, 'status')->dropDownList([
+        'В работе' => 'В работе',
+        'Завершено' => 'Завершено',
+        'Отменено' => 'Отменено',
+    ], ['prompt' => 'Выберите значение...']) ?>
 
     <div class="form-group">
         <?= Html::submitButton(FAS::icon('check') .

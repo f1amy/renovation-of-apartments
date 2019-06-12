@@ -71,6 +71,9 @@ class ExitToObjectController extends Controller
             throw new NotFoundHttpException("Выход на объект не найден.");
         }
 
+        $exitToObject->brigade_gathering_datetime = \Yii::$app->formatter
+            ->asDate($exitToObject->brigade_gathering_datetime, 'php:d.m.Y H:i');
+
         if (
             $exitToObject->load(Yii::$app->request->post())
             && $exitToObject->save()

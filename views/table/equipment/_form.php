@@ -23,7 +23,7 @@ use app\models\table\ExitToObject;
             Item::find()->all(),
             'id',
             function ($model) {
-                return 'Инв. №' . $model->id . ' - ' . $model->name .
+                return $model->type . ' - ' . $model->name .
                     ' - Остаток ' . $model->quantity . ' шт.';
             }
         ),
@@ -35,7 +35,10 @@ use app\models\table\ExitToObject;
             ExitToObject::find()->all(),
             'id',
             function ($model) {
-                return 'Дата выхода ' . $model->brigade_gathering_datetime .
+                $brigade_gathering_datetime = \Yii::$app->formatter
+                    ->asDate($model->brigade_gathering_datetime, 'php:d.m.Y H:i');
+
+                return 'Дата выхода ' . $brigade_gathering_datetime .
                     ' - Место ' . $model->order->workObject->house_address;
             }
         ),
@@ -43,7 +46,7 @@ use app\models\table\ExitToObject;
     ])->label('Выход на объект') ?>
 
     <?= $form->field($model, 'item_quantity')
-        ->input('number', ['step' => '1', 'min' => '0']) ?>
+        ->input('number', ['step' => '1', 'min' => '1']) ?>
 
     <div class="form-group">
         <?= Html::submitButton(FAS::icon('check') .
