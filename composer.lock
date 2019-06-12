@@ -71,12 +71,12 @@
             "version": "v5.0.14",
             "source": {
                 "type": "git",
-                "url": "https://github.com/highcharts/highcharts-dist.git",
+                "url": "git@github.com:highslide-software/highcharts-release.git",
                 "reference": "4f89cf3f98a557a9512f7ba63f727998d21f3b79"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/highcharts/highcharts-dist/zipball/4f89cf3f98a557a9512f7ba63f727998d21f3b79",
+                "url": "https://api.github.com/repos/highslide-software/highcharts-release/zipball/4f89cf3f98a557a9512f7ba63f727998d21f3b79",
                 "reference": "4f89cf3f98a557a9512f7ba63f727998d21f3b79"
             },
             "type": "bower-asset"
@@ -808,20 +808,20 @@
         },
         {
             "name": "yiisoft/yii2-bootstrap4",
-            "version": "2.0.3",
+            "version": "2.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii2-bootstrap4.git",
-                "reference": "dce3d0421188cf8ff6d4ec79707e6e2effd02e05"
+                "reference": "9024a36278013047d45435aa0b29ec2eed2867ec"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-bootstrap4/zipball/dce3d0421188cf8ff6d4ec79707e6e2effd02e05",
-                "reference": "dce3d0421188cf8ff6d4ec79707e6e2effd02e05",
+                "url": "https://api.github.com/repos/yiisoft/yii2-bootstrap4/zipball/9024a36278013047d45435aa0b29ec2eed2867ec",
+                "reference": "9024a36278013047d45435aa0b29ec2eed2867ec",
                 "shasum": ""
             },
             "require": {
-                "npm-asset/bootstrap": "^4.2",
+                "npm-asset/bootstrap": "^4.3",
                 "yiisoft/yii2": "~2.0"
             },
             "require-dev": {
@@ -873,7 +873,7 @@
                 "bootstrap4",
                 "yii2"
             ],
-            "time": "2019-06-04T12:50:33+00:00"
+            "time": "2019-06-11T12:21:55+00:00"
         },
         {
             "name": "yiisoft/yii2-composer",
