@@ -82,7 +82,8 @@ if (!\Yii::$app->user->can('brigadeWorker')) {
             echo ModalAjax::widget([
                 'id' => 'createUpdateRenovatingBrigade',
                 'bootstrapVersion' => ModalAjax::BOOTSTRAP_VERSION_4,
-                'selector' => '#createRenovatingBrigade, #gridRenovatingBrigade a[aria-label="Изменить"]',
+                'selector' => '#createRenovatingBrigade, ' .
+                    '#gridRenovatingBrigade a[aria-label="Изменить"]',
                 'pjaxContainer' => '#gridRenovatingBrigade-pjax',
                 'autoClose' => true,
             ]);

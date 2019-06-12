@@ -5,7 +5,10 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 
 $this->title = 'Форма создания выхода на объект';
-$this->params['breadcrumbs'][] = ['label' => 'Выходы на объекты', 'url' => ['table/exit-to-object/index']];
+$this->params['breadcrumbs'][] = [
+    'label' => 'Выходы на объекты',
+    'url' => ['table/exit-to-object/index']
+];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 

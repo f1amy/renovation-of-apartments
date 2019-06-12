@@ -120,7 +120,7 @@ $this->registerJs(
                     'd-inline-block" data-toggle="tooltip" data-placement="bottom" ' .
                     'title="При расчете учтены задачи с ед. изм. Комплект и ' .
                     'Штука, а так же Материалы и Расходуемое">' .
-                    FAS::icon('exclamation-circle') . ' Частичная стоимость</a>',
+                    FAS::icon('exclamation-circle') . ' Частичная сумма</a>',
             ],
 
             [

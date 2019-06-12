@@ -34,7 +34,13 @@ class Order extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['contract_date', 'period_of_execution', 'customer_id', 'work_object_id', 'status'], 'required'],
+            [[
+                'contract_date',
+                'period_of_execution',
+                'customer_id',
+                'work_object_id',
+                'status'
+            ], 'required'],
             [['contract_date', 'period_of_execution'], 'date', 'format' => 'php:Y-m-d'],
             [['customer_id', 'work_object_id'], 'integer', 'min' => 1],
             [['status'], 'string'],
@@ -49,8 +55,16 @@ class Order extends \yii\db\ActiveRecord
                 'skipOnError' => true, 'targetClass' => WorkObject::className(),
                 'targetAttribute' => ['work_object_id' => 'id']
             ],
-            ['period_of_execution', 'compare', 'compareAttribute' => 'contract_date', 'operator' => '>='],
-            [['contract_date', 'period_of_execution', 'customer_id', 'work_object_id', 'status'], 'trim'],
+            [
+                'period_of_execution',
+                'compare', 'compareAttribute' => 'contract_date',
+                'operator' => '>='
+            ],
+            [[
+                'contract_date',
+                'period_of_execution', 'customer_id',
+                'work_object_id', 'status'
+            ], 'trim'],
         ];
     }
 

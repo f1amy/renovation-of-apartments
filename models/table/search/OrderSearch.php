@@ -23,7 +23,11 @@ class OrderSearch extends Order
             [['id'], 'integer'],
             [['customer', 'workObject', 'status'], 'safe'],
             [['contract_date', 'period_of_execution'], 'date', 'format' => 'php:Y-m-d'],
-            [['id', 'contract_date', 'period_of_execution', 'customer', 'workObject', 'status'], 'trim'],
+            [[
+                'id', 'contract_date',
+                'period_of_execution', 'customer',
+                'workObject', 'status'
+            ], 'trim'],
         ];
     }
 

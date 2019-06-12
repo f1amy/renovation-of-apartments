@@ -88,15 +88,20 @@ use rmrevin\yii\fontawesome\FAS;
                     'placeholder' => 'ул. Такая-то, 43'
                 ]) ?>
 
-                <?= $form->field($workObject, 'apartment_number')->input('number', ['min' => 1, 'step' => 1]) ?>
+                <?= $form->field($workObject, 'apartment_number')
+                    ->input('number', ['min' => 1, 'step' => 1]) ?>
 
-                <?= $form->field($workObject, 'apartment_area')->input('number', ['min' => 1, 'step' => 1]) ?>
+                <?= $form->field($workObject, 'apartment_area')
+                    ->input('number', ['min' => 1, 'step' => 1]) ?>
 
-                <?= $form->field($workObject, 'number_of_rooms')->input('number', ['min' => 1, 'step' => 1]) ?>
+                <?= $form->field($workObject, 'number_of_rooms')
+                    ->input('number', ['min' => 1, 'step' => 1]) ?>
 
-                <?= $form->field($workObject, 'entrance_number')->input('number', ['min' => 1, 'step' => 1]) ?>
+                <?= $form->field($workObject, 'entrance_number')
+                    ->input('number', ['min' => 1, 'step' => 1]) ?>
 
-                <?= $form->field($workObject, 'floor_number')->input('number', ['min' => 1, 'step' => 1]) ?>
+                <?= $form->field($workObject, 'floor_number')
+                    ->input('number', ['min' => 1, 'step' => 1]) ?>
             </div>
         </div>
     </div>

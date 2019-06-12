@@ -33,9 +33,18 @@ class WorkObject extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['house_address', 'apartment_number', 'apartment_area', 'number_of_rooms'], 'required'],
+            [[
+                'house_address', 'apartment_number',
+                'apartment_area', 'number_of_rooms'
+            ], 'required'],
             [['entrance_number', 'floor_number'], 'default', 'value' => null],
-            [['apartment_number', 'apartment_area', 'number_of_rooms', 'entrance_number', 'floor_number'], 'integer', 'min' => 1],
+            [
+                [
+                    'apartment_number', 'apartment_area',
+                    'number_of_rooms', 'entrance_number', 'floor_number'
+                ],
+                'integer', 'min' => 1
+            ],
             [['house_address'], 'string', 'max' => 64],
             [
                 ['house_address', 'apartment_number'],
@@ -44,7 +53,11 @@ class WorkObject extends \yii\db\ActiveRecord
                     'apartment_number'
                 ]
             ],
-            [['house_address', 'apartment_number', 'apartment_area', 'number_of_rooms', 'entrance_number', 'floor_number'], 'trim'],
+            [[
+                'house_address', 'apartment_number',
+                'apartment_area', 'number_of_rooms',
+                'entrance_number', 'floor_number'
+            ], 'trim'],
         ];
     }
 
