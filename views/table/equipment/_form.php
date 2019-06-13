@@ -28,7 +28,7 @@ use app\models\table\ExitToObject;
             }
         ),
         'options' => ['prompt' => 'Выберите значение...'],
-    ])->label('Вещь') ?>
+    ])->label('Материал') ?>
 
     <?= $form->field($model, 'exit_to_object_id')->widget(Select2::classname(), [
         'data' => ArrayHelper::map(

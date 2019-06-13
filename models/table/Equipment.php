@@ -62,8 +62,8 @@ class Equipment extends \yii\db\ActiveRecord
     public function validateItemQuantity($attribute)
     {
         if ($this->item_quantity > $this->item->quantity) {
-            $this->addError($attribute, 'Значение «Количество вещей» ' .
-                'должно быть меньше или равно остатка вещи «' .
+            $this->addError($attribute, 'Значение «Количество материала» ' .
+                'должно быть меньше или равно остатка материала «' .
                 $this->item->name . '».');
         }
     }
@@ -74,14 +74,14 @@ class Equipment extends \yii\db\ActiveRecord
 
         if ($oldEquipment->item_id == $this->item_id) {
             if ($this->item_quantity > ($this->item->quantity + $oldEquipment->item_quantity)) {
-                $this->addError($attribute, 'Значение «Количество вещей» ' .
-                    'должно быть меньше или равно остатка вещи «' .
+                $this->addError($attribute, 'Значение «Количество материала» ' .
+                    'должно быть меньше или равно остатка материала «' .
                     $this->item->name . '».');
             }
         } else {
             if ($this->item_quantity > $this->item->quantity) {
-                $this->addError($attribute, 'Значение «Количество вещей» ' .
-                    'должно быть меньше или равно остатка вещи «' .
+                $this->addError($attribute, 'Значение «Количество материала» ' .
+                    'должно быть меньше или равно остатка материала «' .
                     $this->item->name . '».');
             }
         }
@@ -94,8 +94,8 @@ class Equipment extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'Код',
-            'item_id' => 'Код вещи',
-            'item_quantity' => 'Количество вещей',
+            'item_id' => 'Код материала',
+            'item_quantity' => 'Количество материала',
             'exit_to_object_id' => 'Код выхода на объект',
         ];
     }

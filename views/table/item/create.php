@@ -5,8 +5,8 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\table\Item */
 
-$this->title = 'Создать вещь';
-$this->params['breadcrumbs'][] = ['label' => 'Вещи', 'url' => ['index']];
+$this->title = 'Создать материал';
+$this->params['breadcrumbs'][] = ['label' => 'Материалы', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 

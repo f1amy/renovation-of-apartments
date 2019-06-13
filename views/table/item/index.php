@@ -10,7 +10,7 @@ use lo\widgets\modal\ModalAjax;
 /* @var $searchModel app\models\table\search\ItemSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Вещи на складах';
+$this->title = 'Материалы';
 ?>
 
 <div class="item-index">
@@ -19,7 +19,7 @@ $this->title = 'Вещи на складах';
 
     <div>
         <?= Html::a(FAS::icon('plus') .
-            ' Создать вещь', ['create'], [
+            ' Создать материал', ['create'], [
             'id' => 'createItem',
             'class' => 'btn btn-success mb-3',
         ]) ?>

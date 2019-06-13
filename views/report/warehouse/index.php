@@ -69,7 +69,7 @@ $this->registerJs("
             ],
             'yAxis' => [
                 'title' => [
-                    'text' => 'Количество вещи на складе'
+                    'text' => 'Количество материала'
                 ]
             ],
             'series' => array_values(

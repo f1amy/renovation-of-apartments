@@ -46,7 +46,7 @@ use rmrevin\yii\fontawesome\FAS;
 <section class="list-group list-group-flush">
     <?= renderSideNavLinks([
         ['label' => FAS::icon('boxes') . ' ' .
-            'Вещи на складах', 'link' => Url::to(['table/item'])],
+            'Материалы', 'link' => Url::to(['table/item'])],
         ['label' => FAS::icon('warehouse') . ' ' .
             'Склады', 'link' => Url::to(['table/warehouse'])],
         ['label' => FAS::icon('tasks') . ' ' .

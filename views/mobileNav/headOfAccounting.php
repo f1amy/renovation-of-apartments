@@ -26,7 +26,7 @@ function getHeadOfAccountingMobileNavItems()
             'Рабочие задачи', 'url' => Url::to(['table/work-task'])],
         '<div class="dropdown-divider"></div>',
         ['label' => FAS::icon('boxes') . ' ' .
-            'Вещи на складах', 'url' => Url::to(['table/item'])],
+            'Материалы', 'url' => Url::to(['table/item'])],
         ['label' => FAS::icon('warehouse') . ' ' .
             'Склады', 'url' => Url::to(['table/warehouse'])],
         ['label' => FAS::icon('tasks') . ' ' .

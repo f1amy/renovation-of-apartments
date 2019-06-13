@@ -18,7 +18,7 @@ $gridViewColumns = [
     [
         'attribute' => 'item',
         'value' => 'item.name',
-        'label' => 'Наименование вещи',
+        'label' => 'Наименование материала',
     ],
     'item_quantity',
     [
