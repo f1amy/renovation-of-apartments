@@ -41,7 +41,7 @@ use rmrevin\yii\fontawesome\FAS;
 
     <?= $form->field($model, 'cost_per_unit')->input(
         'number',
-        ['min' => '0', 'step' => '0.01'],
+        ['min' => '0', 'step' => '0.01']
     )->label('Стоимость за единицу, руб.') ?>
 
     <div class="form-group">

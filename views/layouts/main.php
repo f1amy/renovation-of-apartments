@@ -61,7 +61,7 @@ if (!Yii::$app->user->isGuest) {
             'label' => 'Навигация',
             'options' => ['class' => 'd-sm-none'],
             'items' => []
-        ],
+        ]
     );
 
     if (Yii::$app->user->can('headOfAccounting')) {
