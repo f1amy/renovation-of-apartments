@@ -1,233 +1,111 @@
-<p align="center">
-    <a href="https://github.com/yiisoft" target="_blank">
-        <img src="https://avatars0.githubusercontent.com/u/993323" height="100px">
-    </a>
-    <h1 align="center">Yii 2 Basic Project Template</h1>
-    <br>
-</p>
+# Yii 2 CRUD application example project
 
-Yii 2 Basic Project Template is a skeleton [Yii 2](http://www.yiiframework.com/) application best for
-rapidly creating small projects.
+This is example project implementing CRUD application created to help people learn Yii 2.0. It was created during my graduation project performed in Yekaterinburg, Russia. So application language is only Russian. The project showing how to deal with Gii, grids, filtering and other Yii 2.0 usage. It may contain bugs and etc.
 
-The template contains the basic features including user login/logout and a contact page.
-It includes all commonly used configurations that would allow you to focus on adding new
-features to your application.
+It is built on top of basic Yii 2.0 template.
 
-[![Latest Stable Version](https://img.shields.io/packagist/v/yiisoft/yii2-app-basic.svg)](https://packagist.org/packages/yiisoft/yii2-app-basic)
-[![Total Downloads](https://img.shields.io/packagist/dt/yiisoft/yii2-app-basic.svg)](https://packagist.org/packages/yiisoft/yii2-app-basic)
-[![Build Status](https://travis-ci.org/yiisoft/yii2-app-basic.svg?branch=master)](https://travis-ci.org/yiisoft/yii2-app-basic)
+## Directory structure
 
-DIRECTORY STRUCTURE
--------------------
+```none
+    .vscode/            VSCode debug and task files
+    assets/             Assets definition
+    commands/           Console commands (controllers)
+    config/             Application configurations
+    controllers/        Web controller classes
+    docker/             Docker related files
+    models/             Model classes
+    runtime/            Files generated during runtime
+    views/              View files for the Web application
+    web/                The entry script and Web resources
+    widgets/            Custom user created widgets
+```
 
-      assets/             contains assets definition
-      commands/           contains console commands (controllers)
-      config/             contains application configurations
-      controllers/        contains Web controller classes
-      mail/               contains view files for e-mails
-      models/             contains model classes
-      runtime/            contains files generated during runtime
-      tests/              contains various tests for the basic application
-      vendor/             contains dependent 3rd-party packages
-      views/              contains view files for the Web application
-      web/                contains the entry script and Web resources
+## Notice
 
+Please notice that the application is currently running in development mode.
 
+That can slow down the performance on Windows (because of xdebug).
 
-REQUIREMENTS
-------------
+## Requirements
 
-The minimum requirement by this project template that your Web server supports PHP 5.4.0.
+Docker (Desktop) and Docker compose.
 
+You can install Docker Desktop on [Windows](https://docs.docker.com/docker-for-windows/install/) and [MacOS](https://docs.docker.com/docker-for-mac/install/), or Docker CE on [Linux](https://docs.docker.com/install/linux/docker-ce/ubuntu/), but on Linux you must also install [Docker Compose](https://docs.docker.com/compose/install/).
 
-INSTALLATION
-------------
+## Installation
 
 ### Install via Composer
 
-If you do not have [Composer](http://getcomposer.org/), you may install it by following the instructions
-at [getcomposer.org](http://getcomposer.org/doc/00-intro.md#installation-nix).
+The following commands will be using Composer trough Docker.
 
-You can then install this project template using the following command:
+You can then install the application using the following command:
 
-~~~
-php composer.phar create-project --prefer-dist --stability=dev yiisoft/yii2-app-basic basic
-~~~
-
-Now you should be able to access the application through the following URL, assuming `basic` is the directory
-directly under the Web root.
-
-~~~
-http://localhost/basic/web/
-~~~
-
-### Install from an Archive File
-
-Extract the archive file downloaded from [yiiframework.com](http://www.yiiframework.com/download/) to
-a directory named `basic` that is directly under the Web root.
-
-Set cookie validation key in `config/web.php` file to some random secret string:
-
-```php
-'request' => [
-    // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
-    'cookieValidationKey' => '<secret random string goes here>',
-],
+```none
+git clone https://github.com/f1amy/renovation-of-apartments.git
+docker run --rm -it -v ${PWD}:/app -v composer-cache:/tmp composer:1.8 install
 ```
 
-You can then access the application through the following URL:
+## Getting started
 
-~~~
-http://localhost/basic/web/
-~~~
+### The application
 
+After you install the application, you have to conduct the following steps to initialize
+the installed application. You only need to do these once for all.
 
-### Install with Docker
-
-Update your vendor packages
-
-    docker-compose run --rm php composer update --prefer-dist
-    
-Run the installation triggers (creating cookie validation code)
-
-    docker-compose run --rm php composer install    
-    
-Start the container
-
-    docker-compose up -d
-    
-You can then access the application through the following URL:
-
-    http://127.0.0.1:8000
-
-**NOTES:** 
-- Minimum required Docker engine version `17.04` for development (see [Performance tuning for volume mounts](https://docs.docker.com/docker-for-mac/osxfs-caching/))
-- The default configuration uses a host-volume in your home directory `.docker-composer` for composer caches
-
-
-CONFIGURATION
--------------
+1. Run command `docker-compose build` to build PHP service with necessary extensions.
+2. Run command `docker-compose up -d` to launch the application in detached console mode.
 
 ### Database
 
-Edit the file `config/db.php` with real data, for example:
+The next step is to load database using scripts in `docker/mysql/scripts` directory. You can do that using Adminer:
 
-```php
-return [
-    'class' => 'yii\db\Connection',
-    'dsn' => 'mysql:host=localhost;dbname=yii2basic',
-    'username' => 'root',
-    'password' => '1234',
-    'charset' => 'utf8',
-];
+```none
+docker run --rm -it -p 8080:8080 --network="reofap-net" -e ADMINER_DEFAULT_SERVER=mysql adminer:4.7
 ```
 
-**NOTES:**
-- Yii won't create the database for you, this has to be done manually before you can access it.
-- Check and edit the other files in the `config/` directory to customize your application as required.
-- Refer to the README in the `tests` directory for information specific to basic application tests.
+Then Adminer will be available at `localhost:8080`.
 
+Use the following data to login:
 
-TESTING
--------
+1. Login: mysql.
+2. Password: 157266.
+3. Database: renovation_of_apartments.
 
-Tests are located in `tests` directory. They are developed with [Codeception PHP Testing Framework](http://codeception.com/).
-By default there are 3 test suites:
+Click at `SQL-command` button on the top left.
 
-- `unit`
-- `functional`
-- `acceptance`
+Put there text firstly from `create tables.sql`, then `test values.sql`.
 
-Tests can be executed by running
+### RBAC
 
-```
-vendor/bin/codecept run
+And finally we must initialize RBAC using the following command:
+
+```none
+docker exec -it php-fpm bash docker/mysql/rbac-init.sh
 ```
 
-The command above will execute unit and functional tests. Unit tests are testing the system components, while functional
-tests are for testing user interaction. Acceptance tests are disabled by default as they require additional setup since
-they perform testing in real browser. 
+Answer `yes` and the application will be available at `localhost`.
 
+## Using the application
 
-### Running  acceptance tests
+To login into the application, you should use the following credentials:
 
-To execute acceptance tests do the following:  
-
-1. Rename `tests/acceptance.suite.yml.example` to `tests/acceptance.suite.yml` to enable suite configuration
-
-2. Replace `codeception/base` package in `composer.json` with `codeception/codeception` to install full featured
-   version of Codeception
-
-3. Update dependencies with Composer 
-
-    ```
-    composer update  
-    ```
-
-4. Download [Selenium Server](http://www.seleniumhq.org/download/) and launch it:
-
-    ```
-    java -jar ~/selenium-server-standalone-x.xx.x.jar
-    ```
-
-    In case of using Selenium Server 3.0 with Firefox browser since v48 or Google Chrome since v53 you must download [GeckoDriver](https://github.com/mozilla/geckodriver/releases) or [ChromeDriver](https://sites.google.com/a/chromium.org/chromedriver/downloads) and launch Selenium with it:
-
-    ```
-    # for Firefox
-    java -jar -Dwebdriver.gecko.driver=~/geckodriver ~/selenium-server-standalone-3.xx.x.jar
-    
-    # for Google Chrome
-    java -jar -Dwebdriver.chrome.driver=~/chromedriver ~/selenium-server-standalone-3.xx.x.jar
-    ``` 
-    
-    As an alternative way you can use already configured Docker container with older versions of Selenium and Firefox:
-    
-    ```
-    docker run --net=host selenium/standalone-firefox:2.53.0
-    ```
-
-5. (Optional) Create `yii2_basic_tests` database and update it by applying migrations if you have them.
-
-   ```
-   tests/bin/yii migrate
-   ```
-
-   The database configuration can be found at `config/test_db.php`.
-
-
-6. Start web server:
-
-    ```
-    tests/bin/yii serve
-    ```
-
-7. Now you can run all available tests
-
-   ```
-   # run all available tests
-   vendor/bin/codecept run
-
-   # run acceptance tests
-   vendor/bin/codecept run acceptance
-
-   # run only unit and functional tests
-   vendor/bin/codecept run unit,functional
-   ```
-
-### Code coverage support
-
-By default, code coverage is disabled in `codeception.yml` configuration file, you should uncomment needed rows to be able
-to collect code coverage. You can run your tests and collect coverage with the following command:
-
-```
-#collect coverage for all tests
-vendor/bin/codecept run -- --coverage-html --coverage-xml
-
-#collect coverage only for unit tests
-vendor/bin/codecept run unit -- --coverage-html --coverage-xml
-
-#collect coverage for unit and functional tests
-vendor/bin/codecept run functional,unit -- --coverage-html --coverage-xml
+```none
+LOGIN                 PASSWORD
+head-of-accounting    acc0unt
+brigadier             ch1ef
+brigade-worker-1      work-1
+brigade-worker-2      work-2
+brigade-worker-3      work-3
+brigade-worker-4      work-4
+brigade-worker-5      work-5
 ```
 
-You can see code coverage output under the `tests/_output` directory.
+The users are having different rights:
+
+1. head-of-accounting role has all rights to the application.
+2. brigadier role can't create records to many tables.
+3. brigade-worker can only view some tables.
+
+You can stop application using command `docker-compose down`.
+
+And launch again using `docker-compose up`.
