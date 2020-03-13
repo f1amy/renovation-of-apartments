@@ -44,6 +44,8 @@ services:
       MYSQL_DATABASE: renovation_of_apartments
       MYSQL_USER: mysql
       MYSQL_PASSWORD: 157266
+    ports:
+      - '127.0.0.1:3306:3306'
 
 networks:
   default:
