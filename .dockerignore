@@ -1,7 +1,0 @@
-.vscode
-docker/nginx/log
-runtime
-!runtime/.gitignore
-web/assets
-!web/assets/.gitignore
-vendor

@@ -7,7 +7,6 @@ It is built on top of basic Yii 2.0 template.
 ## Directory structure
 
 ```none
-    .vscode/            VSCode debug and task files
     assets/             Assets definition
     commands/           Console commands (controllers)
     config/             Application configurations

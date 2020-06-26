@@ -1,34 +1,34 @@
-version: '3.7'
+version: '3.8'
 
 services:
   nginx:
-    image: nginx:1.17
+    image: nginx:1.19-alpine
     container_name: nginx
     depends_on:
       - php-fpm
     volumes:
       - ./:/var/www/html
-      - ./docker/nginx/config:/etc/nginx/conf.d
-      - ./docker/nginx/log:/var/log/nginx
+      - ./.docker/nginx/config:/etc/nginx/conf.d
+      - ./.docker/nginx/log:/var/log/nginx
     ports:
-      - '127.0.0.1:80:80'
+      - '80:80'
 
   php-fpm:
     build:
-      context: ./
-      dockerfile: php-fpm.dev.dockerfile
+      context: .docker/php-fpm
     image: reofap-php-fpm
     container_name: php-fpm
     depends_on:
       - mysql
     volumes:
       - ./:/var/www/html
-      - ./docker/php-fpm/config/general.ini:/usr/local/etc/php/conf.d/general.ini
-      - ./docker/php-fpm/config/xdebug.ini:/usr/local/etc/php/conf.d/xdebug.ini
-    #  - ./docker/php-fpm/xdebug/log/remote.log:/var/log/xdebug/remote.log
+      - ./.docker/php-fpm/config/general.ini:/usr/local/etc/php/conf.d/general.ini
+      - ./.docker/php-fpm/config/xdebug.ini:/usr/local/etc/php/conf.d/xdebug.ini
+    environment:
+      PHP_IDE_CONFIG: "serverName=reofap.test"
 
   memcached:
-    image: memcached:1.5
+    image: memcached:1.6-alpine
     container_name: memcached
     depends_on:
       - nginx
