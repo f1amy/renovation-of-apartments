@@ -9,7 +9,6 @@ services:
     volumes:
       - ./:/var/www/html
       - ./.docker/nginx/config:/etc/nginx/conf.d
-      - ./.docker/nginx/log:/var/log/nginx
     ports:
       - '80:80'
 

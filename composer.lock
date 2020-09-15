@@ -538,16 +538,16 @@
         },
         {
             "name": "kartik-v/yii2-widget-select2",
-            "version": "v2.1.7",
+            "version": "v2.1.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/kartik-v/yii2-widget-select2.git",
-                "reference": "b8cdb76b8dcc363e1e25b8f04f69aeabe98c6be3"
+                "reference": "78efbcd1ae87b87803f9beb5e692acf790106cfb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kartik-v/yii2-widget-select2/zipball/b8cdb76b8dcc363e1e25b8f04f69aeabe98c6be3",
-                "reference": "b8cdb76b8dcc363e1e25b8f04f69aeabe98c6be3",
+                "url": "https://api.github.com/repos/kartik-v/yii2-widget-select2/zipball/78efbcd1ae87b87803f9beb5e692acf790106cfb",
+                "reference": "78efbcd1ae87b87803f9beb5e692acf790106cfb",
                 "shasum": ""
             },
             "require": {
@@ -588,7 +588,13 @@
                 "widget",
                 "yii2"
             ],
-            "time": "2019-11-15T16:16:16+00:00"
+            "funding": [
+                {
+                    "url": "https://opencollective.com/yii2-widget-select2",
+                    "type": "open_collective"
+                }
+            ],
+            "time": "2020-07-22T10:40:59+00:00"
         },
         {
             "name": "loveorigami/yii2-modal-ajax",
@@ -638,10 +644,10 @@
         },
         {
             "name": "npm-asset/bootstrap",
-            "version": "4.5.0",
+            "version": "4.5.2",
             "dist": {
                 "type": "tar",
-                "url": "https://registry.npmjs.org/bootstrap/-/bootstrap-4.5.0.tgz"
+                "url": "https://registry.npmjs.org/bootstrap/-/bootstrap-4.5.2.tgz"
             },
             "type": "npm-asset",
             "license": [
@@ -1013,16 +1019,16 @@
     "packages-dev": [
         {
             "name": "opis/closure",
-            "version": "3.5.5",
+            "version": "3.5.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/opis/closure.git",
-                "reference": "dec9fc5ecfca93f45cd6121f8e6f14457dff372c"
+                "reference": "4531e53afe2fc660403e76fb7644e95998bff7bf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/opis/closure/zipball/dec9fc5ecfca93f45cd6121f8e6f14457dff372c",
-                "reference": "dec9fc5ecfca93f45cd6121f8e6f14457dff372c",
+                "url": "https://api.github.com/repos/opis/closure/zipball/4531e53afe2fc660403e76fb7644e95998bff7bf",
+                "reference": "4531e53afe2fc660403e76fb7644e95998bff7bf",
                 "shasum": ""
             },
             "require": {
@@ -1070,7 +1076,7 @@
                 "serialization",
                 "serialize"
             ],
-            "time": "2020-06-17T14:59:55+00:00"
+            "time": "2020-09-06T17:02:15+00:00"
         },
         {
             "name": "phpspec/php-diff",
