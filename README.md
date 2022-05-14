@@ -39,7 +39,7 @@ The following commands will be using Composer trough Docker.
 
 You can then install the application using the following command:
 
-```none
+```sh
 git clone https://github.com/f1amy/renovation-of-apartments.git
 docker run --rm -it -v ${PWD}:/app -v composer-cache:/tmp composer:1.8 install
 ```
@@ -58,7 +58,7 @@ the installed application. You only need to do these once for all.
 
 The next step is to load database using scripts in `docker/mysql/scripts` directory. You can do that using Adminer:
 
-```none
+```sh
 docker run --rm -it -p 8080:8080 --network="reofap-net" -e ADMINER_DEFAULT_SERVER=mysql adminer:4.7
 ```
 
@@ -78,8 +78,8 @@ Put there text firstly from `create tables.sql`, then `test values.sql`.
 
 And finally we must initialize RBAC using the following command:
 
-```none
-docker exec -it php-fpm bash docker/mysql/rbac-init.sh
+```sh
+docker exec -it php-fpm ash .docker/mysql/rbac-init.sh
 ```
 
 Answer `yes` and the application will be available at `localhost`.
