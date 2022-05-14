@@ -37,7 +37,10 @@
         },
         "optimize-autoloader": true,
         "preferred-install": "dist",
-        "sort-packages": true
+        "sort-packages": true,
+        "allow-plugins": {
+            "yiisoft/yii2-composer": true
+        }
     },
     "scripts": {
         "post-install-cmd": [
